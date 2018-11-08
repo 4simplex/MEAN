@@ -1,0 +1,4 @@
+# Node and related ecosystem
+# ==========================
+.nodemonignore
+node_modules/
