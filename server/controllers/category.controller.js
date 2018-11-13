@@ -6,7 +6,7 @@ Category.Create = async (req, res) => {
         name: req.body.name
     })
     await newCategory.save();
-    res.json({status: "ok"})
+    res.json({status: "Category saved successfuly"})
 }
 
 Category.Read = async (req, res) => {
