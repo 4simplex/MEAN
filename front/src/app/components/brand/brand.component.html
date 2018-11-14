@@ -1,0 +1,24 @@
+<div class="row">
+    <h4>Marcas</h4>
+  </div>
+  <div class="row">
+    <div class="card col s5">
+      <form #f="ngForm" (ngSubmit)="addNewBrand(f)">
+        <h5>Crear Marca</h5>
+        <div class="input-field col s12">
+            <input required ngModel name="name" #name = "ngModel" placeholder="Nombre" id="brand_name" type="text">
+            <p *ngIf="name.touched && !name.valid">
+              Debe escribir una marca válida
+            </p>
+          </div>
+        <div class="input-field col s12">
+          <button class="btn waves-effect waves-light" type="submit" [disabled]="!f.valid">Crear</button>
+        </div>
+      </form>
+    </div>
+    <div class="card col s6 offset-s1">
+          <h5>Marcas Creadas</h5>
+          <ul>
+            <li *ngFor='let brand of Brands'>{{ brand.name }}</li>
+          </ul>
+  </div>
