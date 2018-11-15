@@ -1,0 +1,23 @@
+<div class="row">
+  <h4>Productos</h4>
+</div>
+<div class="row">
+  <div class="card col s5">
+    <form [formGroup]="productForm">
+      <h5>Crear Producto</h5>
+      <div class="input-field col s12">
+        <input type="text" formControlName='name'>
+        <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
+          <p *ngIf="!productForm.get('name').errors.valid">Debe escribir un nombre</p>
+        </div>
+      </div>
+      <div class="innput-field col s12">
+        <input type="text" formControlName='providerPrice'>
+        <div *ngIf="productForm.get('providerPrice').touched && productForm.get('providerPrice').invalid">
+          <p *ngIf="!productForm.get('providerPrice').errors.valid">Debe escribir un precio</p>
+          <p *ngIf="productForm.get('providerPrice').errors.cannotContainsEmptySpace">No puede incluir espacio</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
