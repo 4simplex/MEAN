@@ -8,7 +8,6 @@ const PORT = 3000;
 
 app.set('port', process.env.PORT || PORT);
 
-app.use(morgan('dev'));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors({origin: 'http://localhost:4200'}));
