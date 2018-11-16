@@ -17,10 +17,14 @@ export class ProductComponent implements OnInit {
     name: new FormControl('', [
       Validators.required
     ]),
+    /*code: new FormControl(''),
+    customerPrice:  new FormControl(''),
     providerPrice: new FormControl('', [
       Validators.required,
       CustomValidators.cannotContainsEmptySpace
-    ])
+    ]),
+    stockQuantity: new FormControl('')*/
+    
   })
   
   ngOnInit() {
@@ -28,6 +32,9 @@ export class ProductComponent implements OnInit {
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('select');
       var instances = M.FormSelect.init(elems, options);
+
+      var datapicker = document.querySelectorAll('.datepicker');
+      var datep = M.Datepicker.init(datapicker, options);
     });
   }
 
