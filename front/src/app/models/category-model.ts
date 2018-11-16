@@ -1,7 +1,4 @@
-export class CategoryModel {
-    constructor(name = '') {
-        this.name = name;
-    }
-
+export class Category {
+    _id: string;
     name: string;
 }
