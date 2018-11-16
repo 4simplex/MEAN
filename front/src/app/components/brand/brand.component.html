@@ -1,24 +1,48 @@
-<div class="row">
-    <h4>Marcas</h4>
-  </div>
-  <div class="row">
-    <div class="card col s5">
-      <form #f="ngForm" (ngSubmit)="addNewBrand(f)">
-        <h5>Crear Marca</h5>
-        <div class="input-field col s12">
-            <input required ngModel name="name" #name = "ngModel" placeholder="Nombre" id="brand_name" type="text">
-            <p *ngIf="name.touched && !name.valid">
-              Debe escribir una marca válida
-            </p>
+<div class="container">
+    <div class="row">
+      <div class="col s5">
+        <div class="card">
+          <div class="card-content">
+            <form #brandForm="ngForm" (ngSubmit)="addBrand(brandForm)">
+              <h5>Crear Marca</h5>
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="brandService.selectedBrand._id">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input required type="text" name="name" #name="ngModel" [(ngModel)]="brandService.selectedBrand.name" placeholder="Nombre">
+                    <p *ngIf="name.touched && !name.valid">
+                      Debe escribir una Marca válida
+                    </p>
+                </div>
+                <div class="card-action">
+                  <div class="input-field col s12">
+                    <button class="btn right waves-effect waves-light" style="margin-left: 2px;" (click)="resetForm(brandForm)">Limpiar</button>
+                    <button class="btn right waves-effect waves-light" [disabled]="!brandForm.valid">Crear</button>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
-        <div class="input-field col s12">
-          <button class="btn waves-effect waves-light" type="submit" [disabled]="!f.valid">Crear</button>
         </div>
-      </form>
+      </div>
+      <div class="col s7 card">
+        <table>
+          <thead>
+            <th><h5>Marcas Creadas</h5></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let brand of brandService.brands">
+              <td>{{ brand.name }}</td>
+              <td>
+                <a (click)="editBrand(brand)">
+                  <i class="material-icons">edit</i>  
+                </a>
+                <a (click)="deleteBrand(brand._id)">
+                  <i class="material-icons">delete</i>  
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="card col s6 offset-s1">
-          <h5>Marcas Creadas</h5>
-          <ul>
-            <li *ngFor='let brand of Brands'>{{ brand.name }}</li>
-          </ul>
   </div>

@@ -1,7 +1,4 @@
-export class BrandModel {
-    constructor(name = '') {
-        this.name = name;
-    }
-
+export class Brand {
+    _id: string;
     name: string;
 }

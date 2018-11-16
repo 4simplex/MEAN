@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { BrandService } from '../../services/brand.service';
-import { BrandModel } from '../../models/brand-model';
+import { NgForm } from '@angular/forms';
+import { Brand } from 'src/app/models/brand-model';
+
+declare var M: any;
 
 @Component({
   selector: 'app-brand',
@@ -9,25 +11,58 @@ import { BrandModel } from '../../models/brand-model';
   styleUrls: ['./brand.component.css']
 })
 export class BrandComponent implements OnInit {
-  Brands = [];
-  constructor(private BrandService: BrandService) { }
+
+  constructor(private brandService: BrandService) { }
+
   ngOnInit() {
-    this.getAllBrands();
+    this.getBrands();
   }
 
-  getAllBrands() {
-    this.BrandService.getBrand()
-    .subscribe(res => {
-      this.Brands = res as BrandModel[];
-    });
+  addBrand(form: NgForm){
+    if(form.value._id){
+      this.brandService.putBrand(form.value)
+      .subscribe(res => {
+        this.resetForm(form);
+        M.toast({html: 'Updated successfuly'});
+        this.getBrands();
+      })
+    }else{
+      this.brandService.postBrand(form.value)
+      .subscribe(res => {
+        this.resetForm(form);
+        M.toast({html: 'Save successfuly'});
+        this.getBrands();
+      });
+    }
   }
 
-  addNewBrand(form: NgForm) {
-    this.BrandService.postBrand(form.value)
-    .subscribe(res => {
-      console.log(res);
-      this.getAllBrands();
-    });
+  getBrands(){
+    this.brandService.getBrands()
+      .subscribe(res => {
+        this.brandService.brands = res as Brand[];
+        console.log(res);
+      });
+  }
+
+  editBrand(brand: Brand){
+    this.brandService.selectedBrand = brand;
+  }
+
+  deleteBrand(_id: string){
+    if(confirm('Are you sure you want to delete it?')){
+      this.brandService.deleteBrand(_id)
+        .subscribe(res => {
+          M.toast({html: 'Deleted successfuly'});
+          this.getBrands();
+        });
+    }
+  }
+
+  resetForm(form?: NgForm){
+    if(form){
+      form.reset();
+      this.brandService.selectedBrand = new Brand();
+    }
   }
 
 }
