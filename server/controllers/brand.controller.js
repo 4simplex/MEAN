@@ -1,30 +1,36 @@
-const BrandModel = require('../models/brand');
-const Brand = {};
+const Brand = require('../models/brand');
+const brandCtrl = {};
 
-Brand.Create = async (req, res) => {
-    const newBrand = new BrandModel({
-        name: req.body.name
-    })
-    await newBrand.save();
-    res.json({status: "Brand saved successfuly"})
+
+brandCtrl.getBrands = async (req, res) => {
+    const brands = await Brand.find();
+    res.json(brands);
 }
 
-Brand.Read = async (req, res) => {
-    const allBrands = await BrandModel.find();
-    res.json(allBrands);
+brandCtrl.createBrand =  async (req, res) => {
+    console.log(req.body);
+    const brand = new Brand(req.body);
+    await brand.save();
+    res.json({'status': 'Brand Saved' });
 }
 
-Brand.Update = async (req, res) => {
+brandCtrl.getBrand = async (req, res) => {
+    console.log(req.params);
+    const brand = await Brand.findById(req.params.id);
+    res.json(brand);
+}
+
+brandCtrl.editBrand = async (req, res) => {
     const brand = {
         name: req.body.name
     };
-    await BrandModel.findByIdAndUpdate(req.params.id, {$set:brand});
-    res.json({status: "Brand updated successfuly"});
+    await Brand.findByIdAndUpdate(req.params.id, {$set:brand});
+    res.json({status: 'Brand updated'});
 }
 
-Brand.Delete = async (req, res) => {
-    await BrandModel.findByIdAndDelete(req.params.id);
-    res.json({status: 'Brand deleted successfuly'});
+brandCtrl.deleteBrand = async (req, res) => {
+    await Brand.findByIdAndRemove(req.params.id);
+    res.json({status: 'Brand deleted'});
 }
 
-module.exports = Brand;
+module.exports = brandCtrl;

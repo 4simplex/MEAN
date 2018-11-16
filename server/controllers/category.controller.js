@@ -1,17 +1,36 @@
-const CategoryModel = require('../models/category');
-const Category = {};
+const Category = require('../models/category');
+const categoryCtrl = {};
 
-Category.Create = async (req, res) => {
-    const newCategory = new CategoryModel({
+
+categoryCtrl.getCategories = async (req, res) => {
+    const categories = await Category.find();
+    res.json(categories);
+}
+
+categoryCtrl.createCategory =  async (req, res) => {
+    console.log(req.body);
+    const category = new Category(req.body);
+    await category.save();
+    res.json({'status': 'Category Saved' });
+}
+
+categoryCtrl.getCategory = async (req, res) => {
+    console.log(req.params);
+    const category = await Category.findById(req.params.id);
+    res.json(category);
+}
+
+categoryCtrl.editCategory = async (req, res) => {
+    const category = {
         name: req.body.name
-    })
-    await newCategory.save();
-    res.json({status: "Category saved successfuly"})
+    };
+    await Category.findByIdAndUpdate(req.params.id, {$set:category});
+    res.json({status: 'Category updated'});
 }
 
-Category.Read = async (req, res) => {
-    const allCategories = await CategoryModel.find();
-    res.json(allCategories);
+categoryCtrl.deleteCategory = async (req, res) => {
+    await Category.findByIdAndRemove(req.params.id);
+    res.json({status: 'Category deleted'});
 }
 
-module.exports = Category;
+module.exports = categoryCtrl;
