@@ -8,13 +8,17 @@ import { CategoryComponent } from './components/category/category.component';
 import { CategoryService} from './services/category.service';
 import { HttpClientModule} from '@angular/common/http';
 import { ProductComponent } from './components/product/product.component';
+import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
+import { BrandSelectorComponent } from './components/brand-selector/brand-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BrandComponent,
     CategoryComponent,
-    ProductComponent
+    ProductComponent,
+    CategorySelectorComponent,
+    BrandSelectorComponent
   ],
   
   imports: [

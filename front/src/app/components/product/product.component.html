@@ -3,36 +3,18 @@
 </div>
 <div class="row">
   <div class="card col s8">
-    <form [formGroup]="productForm">
+    <form [formGroup]="productForm" (ngSubmit)="newProduct()">
       <h5>Crear Producto</h5>
       <div class="col s6">
+      <app-category-selector [productGroup]="productForm"></app-category-selector>
+      <app-brand-selector></app-brand-selector>
       <div class="input-field col s12">
-        <select>
-          <option value="" disabled selected>Seleccionar Categoría</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-        <label>Categoría</label>
-      </div>
-      <div class="input-field col s12">
-        <select>
-          <option value="" disabled selected>Seleccionar Marca</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-        <label>Marca</label>
-      </div>
-      <div class="input-field col s12">
-        <input type="text" formControlName='name' placeholder="Nombre" id="name">
+        <input type="text" formControlName='name' placeholder="Nombre">
         <label for="name">Nombre</label>
         <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
           <p *ngIf="!productForm.get('name').errors.valid">Debe escribir un nombre</p>
         </div>
       </div>
-      
-      
     </div>
     <div class="col s6"> 
       <div class="input-field col s12">
@@ -58,40 +40,3 @@
     </form>
   </div>
 </div>
-
-<!-- para stock 
-  <div class="input-field col s12">
-        <input type="text" formControlName='code' placeholder="Código de producto aleatorio" id="code">
-        <label for="code">Código de Producto</label>
-      </div>
-  <div class="input-field col s12">
-            <select>
-              <option value="" disabled selected>Seleccionar Proveedor</option>
-              <option value="1">Icarus</option>
-              <option value="2">Sony</option>
-              <option value="3">Distribuidora noa</option>
-            </select>
-            <label>Proveedor</label>
-          </div>
-      <div class="input-field col s12">
-          <input type="text" class="datepicker" id="datepicker">
-          <label for="datepicker">Fecha de compra al proveedor del stock</label>
-      </div>
-    
-    <div class="input-field col s12">
-        <input type="text" formControlName='providerPrice' placeholder="Precio de Compra" id="providerPrice">
-        <label for="providerPrice">Precio de Compra x U</label>
-        <div *ngIf="productForm.get('providerPrice').touched && productForm.get('providerPrice').invalid">
-          <p *ngIf="!productForm.get('providerPrice').errors.valid">Debe escribir un precio</p>
-          <p *ngIf="productForm.get('providerPrice').errors.cannotContainsEmptySpace">No puede incluir espacio</p>
-        </div>
-      </div>
-      
-      <div class="input-field col s12">
-        <input type="text" formControlName='customerPrice' placeholder="Precio de Venta" id="customerPrice">
-        <label for="customerPrice">Precio de Venta x U</label>
-      </div>
-      <div class="input-field col s12">
-        <input type="number" min="0" step="1" formControlName='stockQuantity' placeholder="Cantidad de Unidades" id="stockQuantity">
-        <label for="stockQuantity">Cantidad de unidades a ingresar</label>
-      </div>-->

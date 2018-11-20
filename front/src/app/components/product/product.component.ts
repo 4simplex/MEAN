@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/customValidators';
-
-declare var M:any;
 
 @Component({
   selector: 'app-product',
@@ -10,32 +8,29 @@ declare var M:any;
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  
-  constructor() { }
+  constructor() {
+
+  }
 
   productForm = new FormGroup({
     name: new FormControl('', [
       Validators.required
     ]),
-    /*code: new FormControl(''),
-    customerPrice:  new FormControl(''),
-    providerPrice: new FormControl('', [
-      Validators.required,
-      CustomValidators.cannotContainsEmptySpace
-    ]),
-    stockQuantity: new FormControl('')*/
-    
-  })
-  
+    description: new FormControl(),
+    photo: new FormControl()
+  });
+
   ngOnInit() {
-    var options = {};
-    document.addEventListener('DOMContentLoaded', function() {
+   /* document.addEventListener('DOMContentLoaded', function() {
+      var options= {};
       var elems = document.querySelectorAll('select');
       var instances = M.FormSelect.init(elems, options);
-
       var datapicker = document.querySelectorAll('.datepicker');
       var datep = M.Datepicker.init(datapicker, options);
-    });
+    });*/
   }
 
+  newProduct() {
+    console.log(this.productForm);
+  }
 }

@@ -1,0 +1,6 @@
+<div class="input-field col s12" [formGroup]="productForm">
+  <select id="#category-selector" formControlName="category">
+    <option *ngFor='let item of httpCategory.categories'>{{ item.name }}</option>
+  </select>
+  <label>Categoría</label>
+</div>
