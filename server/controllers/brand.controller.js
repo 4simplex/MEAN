@@ -1,7 +1,6 @@
 const Brand = require('../models/brand');
 const brandCtrl = {};
 
-
 brandCtrl.getBrands = async (req, res) => {
     const brands = await Brand.find();
     res.json(brands);

@@ -10,6 +10,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { ProviderComponent } from './components/provider/provider.component';
 import { ProviderService } from './services/provider.service';
 import { StockComponent } from './components/stock/stock.component';
+import { StockService } from './services/stock.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { StockComponent } from './components/stock/stock.component';
   providers: [
     BrandService, 
     CategoryService, 
-    ProviderService
+    ProviderService,
+    StockService
   ],
 
   bootstrap: [AppComponent]
