@@ -7,12 +7,17 @@ import { AppComponent } from './app.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryService} from './services/category.service';
 import { HttpClientModule} from '@angular/common/http';
+import { ProviderComponent } from './components/provider/provider.component';
+import { ProviderService } from './services/provider.service';
+import { StockComponent } from './components/stock/stock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BrandComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProviderComponent,
+    StockComponent
   ],
   
   imports: [
@@ -21,7 +26,11 @@ import { HttpClientModule} from '@angular/common/http';
     HttpClientModule
   ],
 
-  providers: [BrandService, CategoryService],
+  providers: [
+    BrandService, 
+    CategoryService, 
+    ProviderService
+  ],
 
   bootstrap: [AppComponent]
 })

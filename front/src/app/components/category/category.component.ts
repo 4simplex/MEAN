@@ -49,7 +49,7 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteCategory(_id: string){
-    if(confirm('Are you sure you want to delete it?')){
+    if(confirm('Está seguro de querer eliminarlo?')){
       this.categoryService.deleteCategory(_id)
         .subscribe(res => {
           M.toast({html: 'Deleted successfuly'});
