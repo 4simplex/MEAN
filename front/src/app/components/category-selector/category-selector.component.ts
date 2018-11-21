@@ -9,15 +9,17 @@ declare var M: any;
   styleUrls: ['./category-selector.component.css'],
 })
 export class CategorySelectorComponent implements OnInit {
+  @Input('parentForm')
+  public parentForm: FormGroup;
 
   constructor(private httpCategory: CategoryService) {}
 
   ngOnInit() {
-    document.addEventListener('DOMContentLoaded', function() {
+    /*document.addEventListener('DOMContentLoaded', function() {
       var options= {};
-      var elem = document.querySelector('select');
+      var elem = document.querySelector('#category-selector');
       var instances = M.FormSelect.init(elem, options);
-    });
+    });*/
     this.getCategories();
   }
 

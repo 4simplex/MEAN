@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators, NgForm, FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/customValidators';
+
+declare var M: any;
 
 @Component({
   selector: 'app-product',
@@ -8,26 +10,43 @@ import { CustomValidators } from 'src/app/helpers/customValidators';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  constructor() {
-
+  productForm: FormGroup;
+  B: any;
+  photo: File;
+  constructor(private fb: FormBuilder) {
+    this.productForm = fb.group({
+      'name': [''],
+      'category': fb.group({
+        'name': ['']
+      }),
+      'brand': fb.group({
+        'name': ['']
+      }),
+      'photo' : ['']
+    })
   }
 
-  productForm = new FormGroup({
+  /*productForm = new FormGroup({
     name: new FormControl('', [
       Validators.required
     ]),
     description: new FormControl(),
     photo: new FormControl()
-  });
+  });*/
 
   ngOnInit() {
-   /* document.addEventListener('DOMContentLoaded', function() {
+   document.addEventListener('DOMContentLoaded', function() {
       var options= {};
       var elems = document.querySelectorAll('select');
       var instances = M.FormSelect.init(elems, options);
       var datapicker = document.querySelectorAll('.datepicker');
       var datep = M.Datepicker.init(datapicker, options);
-    });*/
+    });
+    
+  }
+
+  log(event){
+    this.photo = event.target.files[0];
   }
 
   newProduct() {
