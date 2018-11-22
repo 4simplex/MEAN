@@ -10,6 +10,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { ProductComponent } from './components/product/product.component';
 import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
 import { BrandSelectorComponent } from './components/brand-selector/brand-selector.component';
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BrandSelectorComponent } from './components/brand-selector/brand-select
     CategoryComponent,
     ProductComponent,
     CategorySelectorComponent,
-    BrandSelectorComponent
+    BrandSelectorComponent,
+    UploadImageComponent
   ],
   
   imports: [

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm, FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/customValidators';
-import {DomSanitizer} from '@angular/platform-browser';
 
 declare var M: any;
 
@@ -15,7 +14,7 @@ export class ProductComponent implements OnInit {
   B: any;
   url;
 
-  constructor(private fb: FormBuilder, private _DomSanitizationService: DomSanitizer) {
+  constructor(private fb: FormBuilder) {
     this.productForm = fb.group({
       'name': [''],
       'category': fb.group({
@@ -24,7 +23,9 @@ export class ProductComponent implements OnInit {
       'brand': fb.group({
         'name': ['']
       }),
-      'photo': ['']
+      'photo': fb.group({
+        'name': ['']
+      })
     });
   }
 
@@ -44,16 +45,6 @@ export class ProductComponent implements OnInit {
       var datapicker = document.querySelectorAll('.datepicker');
       var datep = M.Datepicker.init(datapicker, options);
     });
-  }
-
-  readUrl(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event: ProgressEvent) => {
-        this.url = (<FileReader>event.target).result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
   }
 
   newProduct() {

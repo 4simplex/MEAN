@@ -1,0 +1,12 @@
+<div class="file-field input-field col s12" [formGroup]="parentForm">
+    <div class="btn">
+      <span>Subir Foto</span>
+      <input type="file" (change)="readImgUrl($event)" formControlName="name">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+    <div *ngIf="imgUrl">
+        <img [src]="imgUrl" [ngStyle]="{'width': '100%', 'margin-top': '20px'}"  />
+    </div>
+  </div>
