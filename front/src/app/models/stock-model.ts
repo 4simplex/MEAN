@@ -4,6 +4,6 @@ export class Stock {
     provider: { Provider };
     purchasePrice: number;
     salePrice: number;
-    stockUnits: number;
+    stockQty: number;
     stockCode: string;
 }
