@@ -49,7 +49,7 @@ export class BrandComponent implements OnInit {
   }
 
   deleteBrand(_id: string){
-    if(confirm('Are you sure you want to delete it?')){
+    if(confirm('Está seguro de querer eliminarlo?')){
       this.brandService.deleteBrand(_id)
         .subscribe(res => {
           M.toast({html: 'Deleted successfuly'});

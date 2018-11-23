@@ -11,6 +11,10 @@ import { ProductComponent } from './components/product/product.component';
 import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
 import { BrandSelectorComponent } from './components/brand-selector/brand-selector.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { ProviderComponent } from './components/provider/provider.component';
+import { ProviderService } from './services/provider.service';
+import { StockComponent } from './components/stock/stock.component';
+import { StockService } from './services/stock.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ProductComponent,
     CategorySelectorComponent,
     BrandSelectorComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    ProviderComponent,
+    StockComponent
   ],
   
   imports: [
@@ -30,7 +36,12 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     ReactiveFormsModule
   ],
 
-  providers: [BrandService, CategoryService],
+  providers: [
+    BrandService, 
+    CategoryService, 
+    ProviderService,
+    StockService
+  ],
 
   bootstrap: [AppComponent]
 })
