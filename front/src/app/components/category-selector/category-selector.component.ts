@@ -15,11 +15,11 @@ export class CategorySelectorComponent implements OnInit {
   constructor(private httpCategory: CategoryService) {}
 
   ngOnInit() {
-    /*document.addEventListener('DOMContentLoaded', function() {
-      var options= {};
+    document.addEventListener('DOMContentLoaded', function() {
+      /*var options= {};
       var elem = document.querySelector('#category-selector');
-      var instances = M.FormSelect.init(elem, options);
-    });*/
+      var instances = M.FormSelect.init(elem, options);*/
+    });
     this.getCategories();
   }
 

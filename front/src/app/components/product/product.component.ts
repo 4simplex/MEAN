@@ -11,12 +11,10 @@ declare var M: any;
 })
 export class ProductComponent implements OnInit {
   productForm: FormGroup;
-  B: any;
-  url;
 
   constructor(private fb: FormBuilder) {
     this.productForm = fb.group({
-      'name': [''],
+      'name': ['', Validators.required],
       'category': fb.group({
         'name': ['']
       }),
@@ -39,11 +37,11 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
    document.addEventListener('DOMContentLoaded', function() {
-      var options= {};
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems, options);
+      var opt= {};
+      var ele = document.querySelectorAll('select');
+      var ins = M.FormSelect.init(ele, opt);
       var datapicker = document.querySelectorAll('.datepicker');
-      var datep = M.Datepicker.init(datapicker, options);
+      var datep = M.Datepicker.init(datapicker, opt);
     });
   }
 
