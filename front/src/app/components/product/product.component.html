@@ -1,0 +1,37 @@
+<div class="row">
+  <h4>Productos</h4>
+</div>
+<div class="row">
+  <div class="card col s8">
+    <form [formGroup]="productForm" (ngSubmit)="newProduct()">
+      <h5>Crear Producto</h5>
+      <div class="col s6">
+      <app-category-selector [parentForm]= "productForm.get('category')"></app-category-selector>
+      <app-brand-selector [parentForm]="productForm.get('brand')"></app-brand-selector>
+      <div class="input-field col s12">
+        <input type="text" formControlName='name' placeholder="Nombre">
+        <label for="name">Nombre</label>
+        <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
+          <p *ngIf="!productForm.get('name').errors.valid">Debe escribir un nombre</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s6"> 
+      <div class="input-field col s12">
+        <textarea id="decription" class="materialize-textarea"></textarea>
+        <label for="description">Descripción (Presione enter para saltar lineas)</label>
+      </div>
+
+      <app-upload-image [parentForm]="productForm.get('photo')"></app-upload-image>
+
+    {{productForm.value | json}}
+
+    <div class="input-field col s12">
+      <button class="btn right waves-effect waves-light" style="margin-left: 2px;">Limpiar</button>
+      <button class="btn right waves-effect waves-light" [disabled]="!productForm.valid">Crear</button>
+    </div>
+  </div>
+    </form>
+   
+  </div>
+</div>

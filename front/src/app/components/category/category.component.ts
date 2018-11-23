@@ -40,7 +40,6 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(res => {
         this.categoryService.categories = res as Category[];
-        console.log(res);
       });
   }
 
