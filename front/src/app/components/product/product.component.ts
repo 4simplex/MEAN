@@ -27,14 +27,6 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  /*productForm = new FormGroup({
-    name: new FormControl('', [
-      Validators.required
-    ]),
-    description: new FormControl(),
-    photo: new FormControl()
-  });*/
-
   ngOnInit() {
    document.addEventListener('DOMContentLoaded', function() {
       var opt= {};
@@ -43,9 +35,5 @@ export class ProductComponent implements OnInit {
       var datapicker = document.querySelectorAll('.datepicker');
       var datep = M.Datepicker.init(datapicker, opt);
     });
-  }
-
-  newProduct() {
-    console.log(this.productForm);
   }
 }
