@@ -15,6 +15,7 @@ import { ProviderComponent } from './components/provider/provider.component';
 import { ProviderService } from './services/provider.service';
 import { StockComponent } from './components/stock/stock.component';
 import { StockService } from './services/stock.service';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StockService } from './services/stock.service';
     BrandSelectorComponent,
     UploadImageComponent,
     ProviderComponent,
-    StockComponent
+    StockComponent,
+    NavigationComponent
   ],
   
   imports: [

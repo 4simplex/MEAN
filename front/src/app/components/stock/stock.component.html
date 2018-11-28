@@ -7,12 +7,24 @@
             <h5>Stock</h5>
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="stockService.selectedStock._id">
             <div class="row">
+
               <div class="input-field col s12">
-                <input type="text" name="purchasePrice" #purchasePrice="ngModel" [(ngModel)]="stockService.selectedStock.purchasePrice" placeholder="Precio de compra por unidad">
+                <input type="number" name="purchasePrice" #purchasePrice="ngModel" 
+                  [(ngModel)]="stockService.selectedStock.purchasePrice" placeholder="Precio de compra por unidad">
               </div>
+
+              <div class="input-field col s12">
+                <input type="number" name="salePrice" #salePrice="ngModel" 
+                  [(ngModel)]="stockService.selectedStock.salePrice" placeholder="Precio de venta por unidad">
+              </div>
+
+              <div class="input-field col s12">
+                  <input type="number" name="stockQty" #stockQty="ngModel" 
+                    [(ngModel)]="stockService.selectedStock.stockQty" placeholder="Cantidad de unidades">
+                </div>
+
               <div class="card-action">
                 <div class="input-field col s12">
-                  <button class="btn right waves-effect waves-light" style="margin-left: 2px;" (click)="resetForm(stockForm)">Cancelar</button>
                   <button class="btn right waves-effect waves-light" [disabled]="!stockForm.valid">Guardar</button>
                 </div>
               </div>
@@ -21,6 +33,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="col s7 card">
       <table>
         <thead>
@@ -29,6 +43,8 @@
         <tbody>
           <tr *ngFor="let stock of stockService.stockLst">
             <td>{{ stock.purchasePrice }}</td>
+            <td>{{ stock.salePrice }}</td>
+            <td>{{ stock.stockQty }}</td>
             <td>
               <a (click)="editStock(stock)">
                 <i class="material-icons">edit</i>  
@@ -41,5 +57,7 @@
         </tbody>
       </table>
     </div>
+
+
   </div>
 </div>
