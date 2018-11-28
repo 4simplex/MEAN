@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm, FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/customValidators';
+import { ProductService } from '../../services/product.service';
 
 declare var M: any;
 
@@ -12,7 +13,7 @@ declare var M: any;
 export class ProductComponent implements OnInit {
   productForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = fb.group({
       'name': ['', Validators.required],
       'category': fb.group({
@@ -35,5 +36,10 @@ export class ProductComponent implements OnInit {
       var datapicker = document.querySelectorAll('.datepicker');
       var datep = M.Datepicker.init(datapicker, opt);
     });
+  }
+
+  addNewProduct(){
+    //this.productService.postProduct(this.productForm.value);
+    console.log(this.productForm.value)
   }
 }

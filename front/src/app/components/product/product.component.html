@@ -3,7 +3,7 @@
 </div>
 <div class="row">
   <div class="card col s8">
-    <form [formGroup]="productForm" (ngSubmit)="newProduct()">
+    <form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
       <h5>Crear Producto</h5>
       <div class="col s6">
       <app-category-selector [parentForm]= "productForm.get('category')"></app-category-selector>
