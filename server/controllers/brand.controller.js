@@ -7,10 +7,12 @@ brandCtrl.getBrands = async (req, res) => {
 }
 
 brandCtrl.createBrand =  async (req, res) => {
+    console.log('--createBrand--');
     console.log(req.body);
     const brand = new Brand(req.body);
     await brand.save();
-    res.json({'status': 'Brand Saved' });
+    res.json(brand);
+    console.log('--createBrand exit--');
 }
 
 brandCtrl.getBrand = async (req, res) => {
@@ -23,7 +25,7 @@ brandCtrl.editBrand = async (req, res) => {
     const brand = {
         name: req.body.name
     };
-    await Brand.findByIdAndUpdate(req.params.id, {$set:brand});
+    await Brand.findByIdAndUpdate(req.body._id, {$set:brand});
     res.json({status: 'Brand updated'});
 }
 

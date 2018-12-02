@@ -1,0 +1,6 @@
+<div class="input-field col s12" id="provider-selector" [formGroup]="parentForm">
+  <select formControlName="name">
+    <option *ngFor='let item of httpProvider.providers'>{{ item.name }}</option>
+  </select>
+  <label>Proveedor</label>
+</div>

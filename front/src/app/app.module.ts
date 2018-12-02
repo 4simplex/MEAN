@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrandService } from './services/brand.service';
-import { BrandComponent } from './components/brand/brand.component';
 import { AppComponent } from './app.component';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryService} from './services/category.service';
@@ -16,11 +15,14 @@ import { ProviderService } from './services/provider.service';
 import { StockComponent } from './components/stock/stock.component';
 import { StockService } from './services/stock.service';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { ProviderSelectorComponent } from './components/provider-selector/provider-selector.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { BrandsComponent } from './components/brands/brands.component';
+import { BrandDetailComponent } from './components/brand-detail/brand-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BrandComponent,
     CategoryComponent,
     ProductComponent,
     CategorySelectorComponent,
@@ -28,14 +30,18 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     UploadImageComponent,
     ProviderComponent,
     StockComponent,
-    NavigationComponent
+    NavigationComponent,
+    ProviderSelectorComponent,
+    BrandsComponent,
+    BrandDetailComponent
   ],
   
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
 
   providers: [

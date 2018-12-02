@@ -1,63 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col s5">
-      <div class="card">
-        <div class="card-content">
-          <form #stockForm="ngForm" (ngSubmit)="addStock(stockForm)">
-            <h5>Stock</h5>
-            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="stockService.selectedStock._id">
-            <div class="row">
+<div class="row">
+  <h4>Stock</h4>
+</div>
 
-              <div class="input-field col s12">
-                <input type="number" name="purchasePrice" #purchasePrice="ngModel" 
-                  [(ngModel)]="stockService.selectedStock.purchasePrice" placeholder="Precio de compra por unidad">
-              </div>
+<div class="row">
+  <div class="card col s8">
 
-              <div class="input-field col s12">
-                <input type="number" name="salePrice" #salePrice="ngModel" 
-                  [(ngModel)]="stockService.selectedStock.salePrice" placeholder="Precio de venta por unidad">
-              </div>
+    <form [formGroup]="stockForm" (ngSubmit)="newStock()">
 
-              <div class="input-field col s12">
-                  <input type="number" name="stockQty" #stockQty="ngModel" 
-                    [(ngModel)]="stockService.selectedStock.stockQty" placeholder="Cantidad de unidades">
-                </div>
-
-              <div class="card-action">
-                <div class="input-field col s12">
-                  <button class="btn right waves-effect waves-light" [disabled]="!stockForm.valid">Guardar</button>
-                </div>
-              </div>
-            </div>
-          </form>
+      <h5>Agregar producto al stock</h5>
+      
+      <div class="col s6">
+        <app-provider-selector [parentForm]= "stockForm.get('provider')"></app-provider-selector>
+        
+        <div class="input-field col s12">
+          <input type="number" formControlName='purchasePrice' placeholder="Precio de compra por unidad">
+          <label for="purchasePrice">Precio de compra</label>
+          <div *ngIf="stockForm.get('purchasePrice').touched && stockForm.get('purchasePrice').invalid">
+            <p *ngIf="!stockForm.get('purchasePrice').errors.valid">Debe proporcionar un precio de compra</p>
+          </div>
         </div>
+
+        <button class="btn right waves-effect waves-light" [disabled]="!stockForm.valid">Crear</button>
       </div>
+
+    </form>
+     
     </div>
-
-
-    <div class="col s7 card">
-      <table>
-        <thead>
-          <th><h5>Stock Actual</h5></th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let stock of stockService.stockLst">
-            <td>{{ stock.purchasePrice }}</td>
-            <td>{{ stock.salePrice }}</td>
-            <td>{{ stock.stockQty }}</td>
-            <td>
-              <a (click)="editStock(stock)">
-                <i class="material-icons">edit</i>  
-              </a>
-              <a (click)="deleteStock(stock._id)">
-                <i class="material-icons">delete</i>  
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-  </div>
 </div>

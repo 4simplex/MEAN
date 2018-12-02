@@ -22,15 +22,15 @@ export class BrandSelectorComponent implements OnInit {
       var brandSelector = document.querySelector('#brand-selector');
       var instancesBrand = M.FormSelect.init(brandSelector, optionsBrand);
     });*/
-    this.getBrands();
+    // this.getBrands();
   }
 
-  getBrands() {
-    this.httpBrand.getBrands()
-      .subscribe(res => {
-        this.httpBrand.brands = res as Brand[];
-        M.AutoInit()
-      });
-  }
+  // getBrands() {
+  //   this.httpBrand.getBrands()
+  //     .subscribe(res => {
+  //       this.httpBrand.brands = res as Brand[];
+  //       M.AutoInit()
+  //     });
+  // }
 
 }
