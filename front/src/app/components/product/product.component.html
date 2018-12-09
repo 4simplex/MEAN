@@ -2,14 +2,14 @@
   <h4>Productos</h4>
 </div>
 <div class="row">
-  <div class="card col s8">
+  <div class="card col s6">
     <form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
       <h5>Crear Producto</h5>
       <div class="col s6">
       <app-category-selector [parentForm]= "productForm.get('category')"></app-category-selector>
       <app-brand-selector [parentForm]="productForm.get('brand')"></app-brand-selector>
       <div class="input-field col s12">
-        <input type="text" formControlName='name' placeholder="Nombre">
+        <input type="text" formControlName='name' placeholder="Nombre" >
         <label for="name">Nombre</label>
         <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
           <p *ngIf="!productForm.get('name').errors.valid">Debe escribir un nombre</p>
@@ -18,13 +18,11 @@
     </div>
     <div class="col s6"> 
       <div class="input-field col s12">
-        <textarea id="decription" class="materialize-textarea"></textarea>
-        <label for="description">Descripción (Presione enter para saltar lineas)</label>
+        <textarea id="description" class="materialize-textarea" formControlName="description"></textarea>
+        <label for="description">Descripción</label>
       </div>
 
-      <app-upload-image [parentForm]="productForm.get('photo')"></app-upload-image>
-
-    {{productForm.value | json}}
+      <app-upload-image *ngIf="loadComponent" [parentForm]="productForm.get('photo')" (valueChange)='displayCounter($event)'></app-upload-image>
 
     <div class="input-field col s12">
       <button class="btn right waves-effect waves-light" style="margin-left: 2px;">Limpiar</button>
@@ -32,6 +30,28 @@
     </div>
   </div>
     </form>
-   
+  </div>
+  <div class="card col s5 offset-s1">
+      <div class="col s12" *ngFor="let product of productService.products">
+          
+          <div class="card horizontal">
+            <div class="card-image">
+                <img [src]="'data:image/jpg;base64,'+product.fileImg" style="width:300px" />
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <h5>{{ product.name }}</h5>
+                <p>Marca: {{ product.brand.name }}</p>
+                <p>Categoria: {{ product.category.name }}</p>
+                <br>
+                <p>{{ product.description }}</p>
+              </div>
+              <div class="card-action">
+                  <a (click)="editProduct(product)"><i class="material-icons">edit</i></a>
+                  <a (click)="deleteProduct(product._id)"><i class="material-icons">delete</i></a>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </div>

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm, FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/customValidators';
 import { ProductService } from '../../services/product.service';
+import { ProductModel } from 'src/app/models/product-model';
+import { UploadImageComponent } from '../upload-image/upload-image.component';
 
 declare var M: any;
 
@@ -12,6 +14,8 @@ declare var M: any;
 })
 export class ProductComponent implements OnInit {
   productForm: FormGroup;
+  @ViewChild(UploadImageComponent)
+  private myChild: UploadImageComponent;
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = fb.group({
@@ -24,22 +28,60 @@ export class ProductComponent implements OnInit {
       }),
       'photo': fb.group({
         'name': ['']
-      })
+      }),
+      'fileImg': [''],
+      'description': ['']
     });
   }
 
   ngOnInit() {
-   document.addEventListener('DOMContentLoaded', function() {
-      var opt= {};
-      var ele = document.querySelectorAll('select');
-      var ins = M.FormSelect.init(ele, opt);
-      var datapicker = document.querySelectorAll('.datepicker');
-      var datep = M.Datepicker.init(datapicker, opt);
-    });
+    this.getAllProducts();
+  }
+
+  openTab(){		
+    this.myChild.showPage("sdfsdfsdf");  
+   }
+
+  displayCounter(count) {
+    this.productForm.get('fileImg').setValue(count);
   }
 
   addNewProduct(){
+    
+    //const uploadData = new FormData();
+    //uploadData.append('name', this.productForm.get('name').value);
+    //uploadData.append('file', this.productForm.get('file').value);
+    
+  
     //this.productService.postProduct(this.productForm.value);
-    console.log(this.productForm.value)
+   console.log(this.productForm.value)
+   //this.productForm.get('photo').get('name').nativeElement.value = null;
+    //this.productForm.reset();
+    this.openTab();
+ 
+   
+    //console.log(this.productForm.value)
+  }
+
+  getAllProducts(){
+    this.productService.getProduct()
+    .subscribe(res => {
+      this.productService.products = res as ProductModel[];
+      this.getAllProducts();
+    });;
+  }
+
+  deleteProduct(_id){
+    if(confirm("Desea eliminar el producto?")){
+      this.productService.deleteProduct(_id)
+      .subscribe(res => {
+        M.toast({html: 'Deleted successfuly'});
+        this.getAllProducts();
+      })
+    }
+  }
+
+  editProduct(product){
+    this.productService.selectedProduct = product;
   }
 }
