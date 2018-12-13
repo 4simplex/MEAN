@@ -1,6 +1,6 @@
-<div class="input-field col s12" id="brand-selector" [formGroup]="parentForm">
-  <select formControlName="name">
+<div class="input-field col s12" [formGroup]="parentForm">
+  <select formControlName="name" id="brand-selector" class="browser-default">
+      <option value="" disabled selected>Seleccione Marca</option>
     <option *ngFor='let item of httpBrand.brands'>{{ item.name }}</option>
   </select>
-  <label>Marca</label>
 </div>

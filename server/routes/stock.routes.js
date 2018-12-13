@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const stockCtrl = require('../controllers/Stock.controller');
+const stockCtrl = require('../controllers/stock.controller');
 
 router.get('/', stockCtrl.getStockLst);
 router.post('/', stockCtrl.createStock);

@@ -3,8 +3,6 @@ import { BrandService } from '../../services/brand.service';
 import { Brand } from '../../models/brand-model';
 import { FormGroup } from '@angular/forms';
 
-declare var M: any;
-
 @Component({
   selector: 'app-brand-selector',
   templateUrl: './brand-selector.component.html',
@@ -31,6 +29,7 @@ export class BrandSelectorComponent implements OnInit {
   //       this.httpBrand.brands = res as Brand[];
   //       M.AutoInit()
   //     });
-  // }
+  // 
+  }
 
 }

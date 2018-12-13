@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,23 +7,44 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./upload-image.component.css']
 })
 export class UploadImageComponent implements OnInit {
-  imgUrl;
+
   @Input('parentForm')
   public parentForm: FormGroup;
 
-  constructor() { }
+  @Output() valueChange = new EventEmitter();
+  fileImg;
+
+  constructor() { 
+
+  }
 
   ngOnInit() {
+
+  }
+
+  showImgPrev(){
+    this.fileImg = '';
+    this.valueChange.emit(this.fileImg);
   }
 
   readImgUrl(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (event: ProgressEvent) => {
-        this.imgUrl = (<FileReader>event.target).result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = this._handleReaderLoaded.bind(this);//() => {
+        //this.imgUrl = (<FileReader>event.target).result;
+        
+        
+      //};
+      reader.readAsBinaryString(event.target.files[0]);
     }
   }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.fileImg = btoa(binaryString);  // Converting binary string data.
+    //this.fileImg = event.target.files[0];
+    this.valueChange.emit(this.fileImg)
+    //console.log(this.fileImg);
+}
 
 }
