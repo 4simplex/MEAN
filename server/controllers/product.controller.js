@@ -1,7 +1,3 @@
-const multer = require('multer');
-var DIR = './uploads';
-
-var upload = multer({dest: DIR}).single('photo');
 const productCTRL = {};
 const Product = require('../models/product');
 

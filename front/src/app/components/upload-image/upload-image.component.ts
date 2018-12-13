@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./upload-image.component.css']
 })
 export class UploadImageComponent implements OnInit {
-  
+
   @Input('parentForm')
   public parentForm: FormGroup;
 
@@ -19,11 +19,10 @@ export class UploadImageComponent implements OnInit {
   }
 
   ngOnInit() {
-;
+
   }
 
-  showPage(la){
-    console.log(la);
+  showImgPrev(){
     this.fileImg = '';
     this.valueChange.emit(this.fileImg);
   }
