@@ -1,51 +1,33 @@
-<div class="row">
-  <h4>Productos</h4>
+<h4>Productos</h4>
+<div>
+  <form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
+    <h5>Crear Producto</h5>
+    <app-category-selector [parentForm]= "productForm.get('category')"></app-category-selector>
+    <app-brand-selector [parentForm]="productForm.get('brand')"></app-brand-selector>
+    <input type="text" formControlName='name' placeholder="Nombre">
+    <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
+      <p *ngIf="!productForm.get('name').errors.valid">Debe escribir un nombre</p>
+    </div>
+    <textarea placeholder="Descripción" id="description" formControlName="description"></textarea>
+    <app-upload-image [parentForm]="productForm.get('photo')" (valueChange)='displayCounter($event)'></app-upload-image>
+
+    <button>Limpiar</button>
+    <button [disabled]="!productForm.valid">Crear</button>
+  </form>
 </div>
-<div class="row">
-  <div class="card col s6">
-    <form [formGroup]="productForm" (ngSubmit)="addNewProduct()">
-      <h5>Crear Producto</h5>
-      <div class="col s6">
-      <app-category-selector [parentForm]= "productForm.get('category')"></app-category-selector>
-      <app-brand-selector [parentForm]="productForm.get('brand')"></app-brand-selector>
-      <div class="input-field col s12">
-        <input type="text" formControlName='name' placeholder="Nombre" >
-        <label for="name">Nombre</label>
-        <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
-          <p *ngIf="!productForm.get('name').errors.valid">Debe escribir un nombre</p>
-        </div>
+
+<div>
+  <ul *ngFor="let product of productService.products">
+    <li>
+      <img [src]="'data:image/jpg;base64,'+product.fileImg"/>
+      <p>{{ product.name }}</p>
+      <p>Marca: {{ product.brand.name }} <br>
+        Categoria: {{ product.category.name }}
+      </p>
+      <div>
+        <a (click)="editProduct(product)">Editar</a> 
+        <a (click)="deleteProduct(product._id)">Eliminar</a>
       </div>
-    </div>
-    <div class="col s6"> 
-      <div class="input-field col s12">
-        <textarea id="description" class="materialize-textarea" formControlName="description"></textarea>
-        <label for="description">Descripción</label>
-      </div>
-
-      <app-upload-image [parentForm]="productForm.get('photo')" (valueChange)='displayCounter($event)'></app-upload-image>
-
-    <div class="input-field col s12">
-      <button class="btn right waves-effect waves-light" style="margin-left: 2px;">Limpiar</button>
-      <button class="btn right waves-effect waves-light" [disabled]="!productForm.valid">Crear</button>
-    </div>
-  </div>
-    </form>
-  </div>
-  <div class="col s5 offset-s1">
-     
-
-        <ul class="collection col s12" *ngFor="let product of productService.products">
-          <li class="collection-item avatar">
-              <img [src]="'data:image/jpg;base64,'+product.fileImg" class="circle" />
-            <span class="title" style="font-weight: 700">{{ product.name }}</span>
-            <p>Marca: {{ product.brand.name }} <br>
-              Categoria: {{ product.category.name }}
-            </p>
-            <div class="secondary-content">
-                <a (click)="editProduct(product)"><i class="material-icons">edit</i></a> - 
-                <a (click)="deleteProduct(product._id)"><i class="material-icons">delete</i></a>
-            </div>
-          </li>
-        </ul>
-  </div>
+    </li>
+  </ul>
 </div>

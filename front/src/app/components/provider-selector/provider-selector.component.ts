@@ -3,8 +3,6 @@ import { ProviderService } from '../../services/provider.service';
 import { Provider } from '../../models/provider-model';
 import { FormGroup } from '@angular/forms';
 
-declare var M: any;
-
 @Component({
   selector: 'app-provider-selector',
   templateUrl: './provider-selector.component.html',
@@ -24,7 +22,6 @@ export class ProviderSelectorComponent implements OnInit {
     this.httpProvider.getProviders()
       .subscribe(res => {
         this.httpProvider.providers = res as Provider[];
-        M.AutoInit()
       });
   }
 

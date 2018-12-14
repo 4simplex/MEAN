@@ -7,6 +7,7 @@ import { BrandDetailComponent } from './components/brand-detail/brand-detail.com
 import { CategoryComponent } from './components/category/category.component';
 import { ProviderComponent } from './components/provider/provider.component';
 import { StockComponent } from './components/stock/stock.component';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/brands', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoryComponent },
   { path: 'providers', component: ProviderComponent },
   { path: 'stock', component: StockComponent },
+  { path: 'products', component: ProductComponent },
 ];
 
 @NgModule({

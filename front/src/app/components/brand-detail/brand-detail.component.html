@@ -1,22 +1,6 @@
-<div class="container">
-  <div class="row">
-    <div class="col s12 m6" *ngIf="brand">
-      <div class="card">
-        <div class="card-content">
-          <h5>{{ brand.name | uppercase}} Detalles</h5>
-          <div class="row">
-            <div class="input-field col s12">
-              <input [(ngModel)]="brand.name">
-            </div>
-            <div class="card-action">
-              <div class="input-field col s12">
-                <button (click)="goBack()" class="btn right waves-effect waves-light">Volver</button>
-                <button (click)="save()" class="btn right waves-effect waves-light">Guardar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="col s12 m6" *ngIf="brand">
+  <h5>{{ brand.name | uppercase}} Detalles</h5>
+  <input [(ngModel)]="brand.name">
+  <button (click)="goBack()">Volver</button>
+  <button (click)="save()">Guardar</button>
 </div>

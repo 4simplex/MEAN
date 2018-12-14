@@ -3,8 +3,6 @@ import { CategoryService } from '../../services/category.service';
 import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/models/category-model';
 
-declare var M: any;
-
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -23,14 +21,12 @@ export class CategoryComponent implements OnInit {
       this.categoryService.putCategory(form.value)
       .subscribe(res => {
         this.resetForm(form);
-        M.toast({html: 'Updated successfuly'});
         this.getCategories();
       })
     }else{
       this.categoryService.postCategory(form.value)
       .subscribe(res => {
         this.resetForm(form);
-        M.toast({html: 'Save successfuly'});
         this.getCategories();
       });
     }
@@ -51,7 +47,6 @@ export class CategoryComponent implements OnInit {
     if(confirm('Está seguro de querer eliminarlo?')){
       this.categoryService.deleteCategory(_id)
         .subscribe(res => {
-          M.toast({html: 'Deleted successfuly'});
           this.getCategories();
         });
     }

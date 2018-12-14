@@ -3,8 +3,6 @@ import { ProviderService } from '../../services/provider.service';
 import { NgForm } from '@angular/forms';
 import { Provider } from 'src/app/models/provider-model';
 
-declare var M: any;
-
 @Component({
   selector: 'app-provider',
   templateUrl: './provider.component.html',
@@ -23,14 +21,12 @@ export class ProviderComponent implements OnInit {
       this.providerService.putProvider(form.value)
       .subscribe(res => {
         this.resetForm(form);
-        M.toast({html: 'Updated successfuly'});
         this.getProviders();
       })
     }else{
       this.providerService.postProvider(form.value)
       .subscribe(res => {
         this.resetForm(form);
-        M.toast({html: 'Save successfuly'});
         this.getProviders();
       });
     }
@@ -52,7 +48,6 @@ export class ProviderComponent implements OnInit {
     if(confirm('Está seguro de querer eliminarlo?')){
       this.providerService.deleteProvider(_id)
         .subscribe(res => {
-          M.toast({html: 'Deleted successfuly'});
           this.getProviders();
         });
     }

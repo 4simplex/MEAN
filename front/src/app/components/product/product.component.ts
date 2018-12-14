@@ -5,8 +5,6 @@ import { ProductService } from '../../services/product.service';
 import { ProductModel } from 'src/app/models/product-model';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 
-declare var M: any;
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -16,8 +14,6 @@ export class ProductComponent implements OnInit {
   productForm: FormGroup;
   @ViewChild(UploadImageComponent)
   private uploadChild: UploadImageComponent;
-
-  
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = fb.group({
@@ -78,7 +74,6 @@ export class ProductComponent implements OnInit {
     if(confirm("Desea eliminar el producto?")){
       this.productService.deleteProduct(_id)
       .subscribe(res => {
-        M.toast({html: 'Deleted successfuly'});
         this.getAllProducts();
       })
     }
