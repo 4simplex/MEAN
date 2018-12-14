@@ -29,7 +29,6 @@ export class BrandSelectorComponent implements OnInit {
   //       this.httpBrand.brands = res as Brand[];
   //       M.AutoInit()
   //     });
-  // 
-  }
+  // }
 
 }
