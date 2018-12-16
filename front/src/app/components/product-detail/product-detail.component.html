@@ -30,41 +30,9 @@
           </div>
           <app-upload-image [parentForm]="productForm.get('photo')" (valueChange)="displayCounter($event)"></app-upload-image>
 
-          <button [disabled]="!productForm.valid" class="btn btn-primary">Crear</button>
+
         </div>
       </div>
     </div>
   </form>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row mb-3 mt-2">
-        <div class="col-md-12">
-          <h5>Productos registrados</h5>
-        </div>
-      </div>
-      <div class="row align-items-center product-row" *ngFor="let product of productService.products">
-        <div class="col-md-1">
-          <img [src]="'data:image/jpg;base64,'+product.fileImg" class="img-fluid" />
-        </div>
-        <div class="col-md-5">
-          <h4>{{ product.name }}</h4>
-        </div>
-        <div class="col-md-2">
-          <p><strong>Marca:</strong><br> {{ product.brand.name }}</p>
-
-        </div>
-        <div class="col-md-2">
-          <p><strong>Categoria:</strong><br> {{ product.category.name }}</p>
-        </div>
-        <div class="col-md-1">
-          <a routerLink="/products/{{product._id}}" class="btn btn-primary">Editar</a>
-        </div>
-        <div class="col-md-1">
-          <a (click)="deleteProduct(product._id)" class="btn btn-danger">Eliminar</a>
-        </div>
-
-      </div>
-    </div>
-  </div>
 </div>

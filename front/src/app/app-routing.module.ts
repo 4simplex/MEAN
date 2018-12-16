@@ -8,6 +8,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProviderComponent } from './components/provider/provider.component';
 import { StockComponent } from './components/stock/stock.component';
 import { ProductComponent } from './components/product/product.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/brands', pathMatch: 'full' },
@@ -17,10 +18,11 @@ const routes: Routes = [
   { path: 'providers', component: ProviderComponent },
   { path: 'stock', component: StockComponent },
   { path: 'products', component: ProductComponent },
+  { path: 'products/:id', component: ProductDetailComponent }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

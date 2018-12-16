@@ -12,18 +12,15 @@ export class ProductService {
 
   constructor(private productService: HttpClient) { }
 
-  getProduct(){
+  getProduct() {
     return this.productService.get(this.URL_API)
   }
 
-  postProduct(product){
-    this.productService.post(this.URL_API, product)
-    .subscribe(res => {
-      console.log(res)
-    })
+  postProduct(product) {
+    return this.productService.post(this.URL_API, product)
   }
 
-  deleteProduct(_id){
+  deleteProduct(_id) {
     return this.productService.delete(this.URL_API, _id);
   }
 }

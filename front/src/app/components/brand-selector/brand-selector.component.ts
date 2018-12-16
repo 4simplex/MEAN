@@ -11,24 +11,18 @@ import { FormGroup } from '@angular/forms';
 export class BrandSelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
-  
+
   constructor(private httpBrand: BrandService) { }
 
   ngOnInit() {
-    /*document.addEventListener('DOMContentLoaded', function() {
-      var optionsBrand= {};
-      var brandSelector = document.querySelector('#brand-selector');
-      var instancesBrand = M.FormSelect.init(brandSelector, optionsBrand);
-    });*/
-    // this.getBrands();
+    this.getBrands();
   }
 
-  // getBrands() {
-  //   this.httpBrand.getBrands()
-  //     .subscribe(res => {
-  //       this.httpBrand.brands = res as Brand[];
-  //       M.AutoInit()
-  //     });
-  // }
+  getBrands() {
+    this.httpBrand.getBrands()
+      .subscribe(res => {
+        this.httpBrand.brands = res as Brand[];
+      });
+  }
 
 }

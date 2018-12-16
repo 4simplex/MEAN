@@ -12,13 +12,13 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class BrandService {
-
-  private URL_API = 'http://localhost:3000/api/brand';  
+  brands: Brand[];
+  private URL_API = 'http://localhost:3000/api/brand';
 
   constructor(private http: HttpClient) { }
 
   /** GET brands from the server */
-  getBrands (): Observable<Brand[]> {
+  getBrands(): Observable<Brand[]> {
     return this.http.get<Brand[]>(this.URL_API)
       .pipe(
         // tap(_ => console.info('Fetched brands')),
@@ -64,7 +64,7 @@ export class BrandService {
   //////// Save methods //////////
 
   /** POST: add a new brand to the server */
-  addBrand (brand: Brand): Observable<Brand> {
+  addBrand(brand: Brand): Observable<Brand> {
     return this.http.post<Brand>(this.URL_API, brand, httpOptions).pipe(
       // tap((brand: Brand) => console.info(`Added brand w/ id=${brand._id}`)),
       catchError(this.handleError<Brand>('addBrand'))
@@ -72,7 +72,7 @@ export class BrandService {
   }
 
   /** DELETE: delete the brand from the server */
-  deleteBrand (brand: Brand | string): Observable<Brand> {
+  deleteBrand(brand: Brand | string): Observable<Brand> {
     const id = typeof brand === 'string' ? brand : brand._id;
     const url = `${this.URL_API}/${id}`;
 
@@ -83,7 +83,7 @@ export class BrandService {
   }
 
   /** PUT: update the brand on the server */
-  updateBrand (brand: Brand): Observable<any> {
+  updateBrand(brand: Brand): Observable<any> {
     return this.http.put(this.URL_API, brand, httpOptions).pipe(
       // tap(_ => console.info(`Updated brand id=${brand._id}`)),
       catchError(this.handleError<any>('updateBrand'))
@@ -96,13 +96,13 @@ export class BrandService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.info('LOG ERROR BEGIN');
       console.error(`${operation} failed: ${error.message}`);
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-      console.info('LOG ERROR END'); 
+      console.info('LOG ERROR END');
 
       // TODO: better job of transforming error for user consumption
       // this.log(`${operation} failed: ${error.message}`);
@@ -110,5 +110,5 @@ export class BrandService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }  
+  }
 }

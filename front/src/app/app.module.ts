@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrandService } from './services/brand.service';
 import { AppComponent } from './app.component';
 import { CategoryComponent } from './components/category/category.component';
-import { CategoryService} from './services/category.service';
-import { HttpClientModule} from '@angular/common/http';
+import { CategoryService } from './services/category.service';
+import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './components/product/product.component';
 import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
 import { BrandSelectorComponent } from './components/brand-selector/brand-selector.component';
@@ -19,6 +19,7 @@ import { ProviderSelectorComponent } from './components/provider-selector/provid
 import { AppRoutingModule } from './/app-routing.module';
 import { BrandsComponent } from './components/brands/brands.component';
 import { BrandDetailComponent } from './components/brand-detail/brand-detail.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import { BrandDetailComponent } from './components/brand-detail/brand-detail.com
     NavigationComponent,
     ProviderSelectorComponent,
     BrandsComponent,
-    BrandDetailComponent
+    BrandDetailComponent,
+    ProductDetailComponent
   ],
-  
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -45,8 +47,8 @@ import { BrandDetailComponent } from './components/brand-detail/brand-detail.com
   ],
 
   providers: [
-    BrandService, 
-    CategoryService, 
+    BrandService,
+    CategoryService,
     ProviderService,
     StockService
   ],

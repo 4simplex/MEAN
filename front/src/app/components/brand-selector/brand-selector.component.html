@@ -1,5 +1,5 @@
-<div [formGroup]="parentForm">
-  <select formControlName="name" id="brand-selector">
+<div [formGroup]="parentForm" class="form-group">
+  <select formControlName="name" id="brand-selector" class="form-control">
     <option value="" disabled selected>Seleccione Marca</option>
     <option *ngFor='let item of httpBrand.brands'>{{ item.name }}</option>
   </select>

@@ -36,50 +36,41 @@ export class ProductComponent implements OnInit {
     this.getAllProducts();
   }
 
-  manageImgShow(){		
-    this.uploadChild.showImgPrev();  
-   }
+  manageImgShow() {
+    this.uploadChild.showImgPrev();
+  }
 
   displayCounter(count) {
     this.productForm.get('fileImg').setValue(count);
   }
 
-  addNewProduct(){
-    
-    //const uploadData = new FormData();
-    //uploadData.append('name', this.productForm.get('name').value);
-    //uploadData.append('file', this.productForm.get('file').value);
-    
-  
-    this.productService.postProduct(this.productForm.value);
-   //console.log(this.productForm.value)
-   //this.productForm.get('photo').get('name').nativeElement.value = null;
-    this.productForm.reset();
-    this.manageImgShow();
-    console.log(this.productForm)
- 
-   
-    //console.log(this.productForm.value)
-  }
-
-  getAllProducts(){
-    this.productService.getProduct()
-    .subscribe(res => {
-      this.productService.products = res as ProductModel[];
-      this.getAllProducts();
-    });;
-  }
-
-  deleteProduct(_id: string){
-    if(confirm("Desea eliminar el producto?")){
-      this.productService.deleteProduct(_id)
+  addNewProduct() {
+    this.productService.postProduct(this.productForm.value)
       .subscribe(res => {
+        this.productForm.reset();
+        this.manageImgShow();
         this.getAllProducts();
-      })
+      });
+  }
+
+  getAllProducts() {
+    this.productService.getProduct()
+      .subscribe(res => {
+        this.productService.products = res as ProductModel[];
+        //this.getAllProducts();
+      });
+  }
+
+  deleteProduct(_id: string) {
+    if (confirm('Desea eliminar el producto?')) {
+      this.productService.deleteProduct(_id)
+        .subscribe(res => {
+          this.getAllProducts();
+        });
     }
   }
 
-  editProduct(product){
+  editProduct(product) {
     this.productService.selectedProduct = product;
   }
 }

@@ -1,5 +1,5 @@
-<div [formGroup]="parentForm">
-  <select id="category-selector" formControlName='name'>
+<div [formGroup]="parentForm" class="form-group">
+  <select id="category-selector" formControlName='name' class="form-control">
     <option value="" disabled selected>Seleccione Categoría</option>
     <option *ngFor='let item of httpCategory.categories'>{{ item.name }}</option>
   </select>
