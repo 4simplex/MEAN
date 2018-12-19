@@ -20,6 +20,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BrandsComponent } from './components/brands/brands.component';
 import { BrandDetailComponent } from './components/brand-detail/brand-detail.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     ProviderSelectorComponent,
     BrandsComponent,
     BrandDetailComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductSelectorComponent
   ],
 
   imports: [

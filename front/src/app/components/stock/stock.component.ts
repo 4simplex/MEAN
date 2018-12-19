@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
-declare var M: any;
-
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
@@ -29,11 +27,11 @@ export class StockComponent implements OnInit {
     document.addEventListener('DOMContentLoaded', function(){
       var opt = {};
       var ele = document.querySelectorAll('select');
-      var ins = M.FormSelect.init(ele, opt);
     });
   }
 
   newStock() {
     console.log(this.stockForm);
   }
+
 }

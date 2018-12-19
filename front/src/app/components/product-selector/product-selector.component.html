@@ -1,0 +1,6 @@
+<div [formGroup]="parentForm" class="form-group">
+  <select id="product-selector" formControlName='name' class="form-control" (change)="onChange($event.target.value)">
+    <option value="" disabled selected>Seleccione Producto</option>
+    <option [value]="product._id" *ngFor='let product of productService.products'>{{ product.brand.name }} - {{ product.name }} - {{ product.category.name }}</option>
+  </select>
+</div>

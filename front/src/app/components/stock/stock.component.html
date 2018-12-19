@@ -1,29 +1,23 @@
-<div class="row">
-  <h4>Stock</h4>
-</div>
-
-<div class="row">
-  <div class="card col s8">
-
-    <form [formGroup]="stockForm" (ngSubmit)="newStock()">
-
-      <h5>Agregar producto al stock</h5>
-      
-      <div class="col s6">
-        <app-provider-selector [parentForm]= "stockForm.get('provider')"></app-provider-selector>
-        
-        <div class="input-field col s12">
-          <input type="number" formControlName='purchasePrice' placeholder="Precio de compra por unidad">
-          <label for="purchasePrice">Precio de compra</label>
-          <div *ngIf="stockForm.get('purchasePrice').touched && stockForm.get('purchasePrice').invalid">
-            <p *ngIf="!stockForm.get('purchasePrice').errors.valid">Debe proporcionar un precio de compra</p>
-          </div>
-        </div>
-
-        <button class="btn right waves-effect waves-light" [disabled]="!stockForm.valid">Crear</button>
-      </div>
-
-    </form>
-     
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h2>Stock</h2>
     </div>
+  </div>
+  <form [formGroup]="stockForm" (ngSubmit)="addStock()" class="row">
+    <div class="col-md-12">
+      <div class="row mb-3 mt-2">
+        <h5>Agregar producto al Stock</h5>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <app-provider-selector [parentForm]="stockForm.get('provider')"></app-provider-selector>
+          <app-product-selector [parentForm]="stockForm.get('product')"></app-product-selector>
+          <!-- <div class="col-md-1">
+            <img [src]="'data:image/jpg;base64,'+product.fileImg" class="img-fluid" />
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </form>    
 </div>
