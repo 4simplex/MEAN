@@ -1,6 +1,6 @@
-<div id="provider-selector" [formGroup]="parentForm">
-  <select formControlName="name">
+<div [formGroup]="parentForm" class="form-group">
+  <select id="provider-selector" formControlName='name' class="form-control">
+    <option value="" disabled selected>Seleccione Proveedor</option>
     <option *ngFor='let item of httpProvider.providers'>{{ item.name }}</option>
   </select>
-  <label>Proveedor</label>
 </div>
