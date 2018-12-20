@@ -1,6 +1,7 @@
 <div [formGroup]="parentForm" class="form-group">
-  <select formControlName="name" id="brand-selector" class="form-control">
+  <select formControlName="name" id="brand-selector" class="form-control" (change)="setBrandId($event)">
     <option value="" disabled selected>Seleccione Marca</option>
-    <option *ngFor='let item of httpBrand.brands'>{{ item.name }}</option>
+    <option *ngFor='let item of httpBrand.brands' [value]="item.name" [id]="item._id">{{ item.name }}
+    </option>
   </select>
 </div>

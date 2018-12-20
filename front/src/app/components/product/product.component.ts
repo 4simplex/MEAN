@@ -4,6 +4,7 @@ import { CustomValidators } from 'src/app/helpers/customValidators';
 import { ProductService } from '../../services/product.service';
 import { ProductModel } from 'src/app/models/product-model';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
+import { getNoImage } from '../../../assets/noimage';
 
 @Component({
   selector: 'app-product',
@@ -15,13 +16,17 @@ export class ProductComponent implements OnInit {
   @ViewChild(UploadImageComponent)
   private uploadChild: UploadImageComponent;
 
+  noImage = getNoImage();
+
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = fb.group({
       'name': ['', Validators.required],
       'category': fb.group({
+        '_id': [''],
         'name': ['']
       }),
       'brand': fb.group({
+        '_id': [''],
         'name': ['']
       }),
       'photo': fb.group({
@@ -57,7 +62,6 @@ export class ProductComponent implements OnInit {
     this.productService.getProduct()
       .subscribe(res => {
         this.productService.products = res as ProductModel[];
-        //this.getAllProducts();
       });
   }
 

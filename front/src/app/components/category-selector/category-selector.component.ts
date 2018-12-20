@@ -12,10 +12,10 @@ export class CategorySelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
 
-  constructor(private httpCategory: CategoryService) {}
+  constructor(private httpCategory: CategoryService) { }
 
   ngOnInit() {
-    
+
     this.getCategories();
   }
 
@@ -23,8 +23,12 @@ export class CategorySelectorComponent implements OnInit {
     this.httpCategory.getCategories()
       .subscribe(res => {
         this.httpCategory.categories = res as Category[];
-        
+
       });
+  }
+
+  setId(event) {
+    this.parentForm.get('_id').setValue(event.srcElement.selectedOptions[0].id);
   }
 
 }

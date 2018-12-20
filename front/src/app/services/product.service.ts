@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductModel } from '../models/product-model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,13 @@ export class ProductService {
 
   deleteProduct(_id) {
     return this.productService.delete(this.URL_API, _id);
+  }
+
+  getProductById(id): Observable<ProductModel> {
+    return this.productService.get<ProductModel>(this.URL_API + `/${id}`);
+  }
+
+  updateProduct(product) {
+    return this.productService.put(this.URL_API + `/${product._id}`, product);
   }
 }
