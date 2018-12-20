@@ -9,13 +9,26 @@
       <div class="row mb-3 mt-2">
         <h5>Agregar producto al Stock</h5>
       </div>
+      <app-product-selector [parentForm]="stockForm.get('product')"></app-product-selector>
       <div class="row">
         <div class="col-md-6">
           <app-provider-selector [parentForm]="stockForm.get('provider')"></app-provider-selector>
-          <app-product-selector [parentForm]="stockForm.get('product')"></app-product-selector>
-          <!-- <div class="col-md-1">
-            <img [src]="'data:image/jpg;base64,'+product.fileImg" class="img-fluid" />
-          </div> -->
+          <div class="form-group">
+            <input type="text" placeholder="Precio de Compra x Unidad" class="form-control" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Precio de Venta x Unidad" class="form-control" />
+          </div>
+          <div class="form-group">
+              <input type="text" placeholder="Cantidad de unidades" class="form-control" />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Código de Producto automático" class="form-control" />
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary mr-1">Grabar Producto</button>
+            <button class="btn btn-primary" (click)="goBack()">Cancelar</button>
+          </div>
         </div>
       </div>
     </div>

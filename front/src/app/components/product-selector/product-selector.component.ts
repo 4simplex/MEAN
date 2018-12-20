@@ -11,6 +11,7 @@ import { FormGroup } from '@angular/forms';
 export class ProductSelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
+  selectedProduct: ProductModel;
 
   constructor(private productService: ProductService) { }
 
@@ -25,8 +26,8 @@ export class ProductSelectorComponent implements OnInit {
       })
   }
 
-  onChange(productId) {
-    console.log(productId);
+  onChange(product) {
+    this.selectedProduct = product;
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-stock',
@@ -9,7 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class StockComponent implements OnInit {
   stockForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private location: Location) { 
     this.stockForm = fb.group({
       'purchasePrice': ['', Validators.required],
       'salePrice': ['', Validators.required],
@@ -30,8 +31,10 @@ export class StockComponent implements OnInit {
     });
   }
 
-  newStock() {
-    console.log(this.stockForm);
+  addStock() {
   }
-
+  
+  goBack(): void {
+    this.location.back();
+  }
 }
