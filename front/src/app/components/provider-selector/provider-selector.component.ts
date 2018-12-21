@@ -11,18 +11,21 @@ import { FormGroup } from '@angular/forms';
 export class ProviderSelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
-  
-  constructor(private httpProvider: ProviderService) { }
+
+  constructor(private providerService: ProviderService) { }
 
   ngOnInit() {
     this.getProviders();
   }
 
   getProviders() {
-    this.httpProvider.getProviders()
+    this.providerService.getProviders()
       .subscribe(res => {
-        this.httpProvider.providers = res as Provider[];
+        this.providerService.providers = res as Provider[];
       });
   }
 
+  setProviderId(event) {
+    this.parentForm.get('_id').setValue(event.srcElement.selectedOptions[0].id);
+  }
 }

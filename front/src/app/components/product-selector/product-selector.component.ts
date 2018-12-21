@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { ProductModel } from '../../models/product-model';
+import { Product } from '../../models/product-model';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,6 @@ import { FormGroup } from '@angular/forms';
 export class ProductSelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
-  selectedProduct: ProductModel;
 
   constructor(private productService: ProductService) { }
 
@@ -22,12 +21,12 @@ export class ProductSelectorComponent implements OnInit {
   getProducts(){
     this.productService.getProduct()
       .subscribe(res => {
-        this.productService.products = res as ProductModel[];
+        this.productService.products = res as Product[];
       })
   }
 
-  onChange(product) {
-    this.selectedProduct = product;
+  setProductId(event) {
+    this.parentForm.get('_id').setValue(event.srcElement.selectedOptions[0].id);
   }
 
 }

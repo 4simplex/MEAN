@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm, FormBuilder } from '@angular/forms';
 import { CustomValidators } from 'src/app/helpers/customValidators';
 import { ProductService } from '../../services/product.service';
-import { ProductModel } from 'src/app/models/product-model';
+import { Product } from 'src/app/models/product-model';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { getNoImage } from '../../../assets/noimage';
 
@@ -61,7 +61,7 @@ export class ProductComponent implements OnInit {
   getAllProducts() {
     this.productService.getProduct()
       .subscribe(res => {
-        this.productService.products = res as ProductModel[];
+        this.productService.products = res as Product[];
       });
   }
 

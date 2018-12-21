@@ -16,9 +16,11 @@ export class StockComponent implements OnInit {
       'salePrice': ['', Validators.required],
       'stockQty': ['', Validators.required],
       'provider': fb.group({
+        '_id': [''],
         'name': ['']
       }),
       'product': fb.group({
+        '_id': [''],
         'name': ['']
       })
     });

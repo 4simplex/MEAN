@@ -9,10 +9,12 @@
       <div class="row mb-3 mt-2">
         <h5>Agregar producto al Stock</h5>
       </div>
-      <app-product-selector [parentForm]="stockForm.get('product')"></app-product-selector>
       <div class="row">
         <div class="col-md-6">
+          <app-product-selector [parentForm]="stockForm.get('product')"></app-product-selector>
+
           <app-provider-selector [parentForm]="stockForm.get('provider')"></app-provider-selector>
+          
           <div class="form-group">
             <input type="text" placeholder="Precio de Compra x Unidad" class="form-control" />
           </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductModel } from '../models/product-model';
+import { Product } from '../models/product-model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -8,8 +8,8 @@ import { Observable, of } from 'rxjs';
 })
 export class ProductService {
   readonly URL_API = 'http://localhost:3000/api/product';
-  products: ProductModel[];
-  selectedProduct: ProductModel;
+  products: Product[];
+  selectedProduct: Product;
 
   constructor(private productService: HttpClient) { }
 
@@ -25,8 +25,8 @@ export class ProductService {
     return this.productService.delete(this.URL_API, _id);
   }
 
-  getProductById(id): Observable<ProductModel> {
-    return this.productService.get<ProductModel>(this.URL_API + `/${id}`);
+  getProductById(id): Observable<Product> {
+    return this.productService.get<Product>(this.URL_API + `/${id}`);
   }
 
   updateProduct(product) {
