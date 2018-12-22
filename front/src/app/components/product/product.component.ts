@@ -22,11 +22,11 @@ export class ProductComponent implements OnInit {
     this.productForm = fb.group({
       'name': ['', Validators.required],
       'category': fb.group({
-        '_id': [''],
+        '_id': ['', Validators.required],
         'name': ['']
       }),
       'brand': fb.group({
-        '_id': [''],
+        '_id': ['', Validators.required],
         'name': ['']
       }),
       'photo': fb.group({

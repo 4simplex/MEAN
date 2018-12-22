@@ -32,11 +32,11 @@ export class ProductDetailComponent implements OnInit {
       '_id': [''],
       'name': ['', Validators.required],
       'category': this.fb.group({
-        '_id': [''],
+        '_id': ['', Validators.required],
         'name': ['']
       }),
       'brand': this.fb.group({
-        '_id': [''],
+        '_id': ['', Validators.required],
         'name': ['']
       }),
       'photo': this.fb.group({
