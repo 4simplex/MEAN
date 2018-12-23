@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Location } from '@angular/common';
+import { getNoImage } from '../../../assets/noimage';
 
 @Component({
   selector: 'app-stock',
@@ -9,6 +10,9 @@ import { Location } from '@angular/common';
 })
 export class StockComponent implements OnInit {
   stockForm: FormGroup;
+  noImage = getNoImage();
+
+  productFileImage = "";
 
   constructor(private fb: FormBuilder, private location: Location) { 
     this.stockForm = fb.group({
@@ -36,7 +40,14 @@ export class StockComponent implements OnInit {
   addStock() {
   }
   
+  displayProductImage(product) {
+    if(product){
+      this.productFileImage = product.fileImg;
+    }
+  }
+  
   goBack(): void {
     this.location.back();
   }
+  
 }

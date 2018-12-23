@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product-model';
 import { FormGroup } from '@angular/forms';
@@ -11,6 +11,9 @@ import { FormGroup } from '@angular/forms';
 export class ProductSelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
+  @Output() productChange = new EventEmitter();
+  initProds = [{name: ""}];
+  selectedProduct = this.initProds[1];
 
   constructor(private productService: ProductService) { }
 
@@ -18,15 +21,16 @@ export class ProductSelectorComponent implements OnInit {
     this.getProducts();
   }
 
-  getProducts(){
+  getProducts() {
     this.productService.getProduct()
       .subscribe(res => {
         this.productService.products = res as Product[];
-      })
+      });
   }
-
-  setProductId(event) {
-    this.parentForm.get('_id').setValue(event.srcElement.selectedOptions[0].id);
+  
+  onChange(product) {
+    this.selectedProduct = product;
+    this.productChange.emit(this.selectedProduct);
   }
 
 }
