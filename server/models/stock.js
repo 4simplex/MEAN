@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 const StockSchema = new Schema({
     purchasePrice: { type: Number },
     salePrice: { type: Number },
-    stockQty: { type: Number },
+    stockQuantity: { type: Number },
+    productCode: { type: String },
 });
 
 module.exports = mongoose.model('Stock', StockSchema);
