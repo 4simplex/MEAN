@@ -6,6 +6,7 @@ import { Product } from 'src/app/models/product-model';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 
 @Component({
   selector: 'app-product-detail',
@@ -79,9 +80,24 @@ export class ProductDetailComponent implements OnInit {
   }
 
   modifyProduct(id: string) {
-    this.productService.updateProduct(this.productForm.value)
+    const name = this.productForm.get('name').value;
+    const nameWhithOneSpace = RemoveWhiteSpaces(name);
+    const localId = this.productForm.get('_id').value;
+
+    this.productService.getProductByName(nameWhithOneSpace, id)
       .subscribe(res => {
-        this.goBack();
+        if (res != null) {
+          if (localId === res._id) {
+            this.productForm.get('name').setValue(nameWhithOneSpace);
+
+            this.productService.updateProduct(this.productForm.value)
+              .subscribe(response => {
+                this.goBack();
+              });
+          } else {
+            alert('El producto ya existe');
+          }
+        }
       });
   }
 

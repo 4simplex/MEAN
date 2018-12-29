@@ -18,8 +18,19 @@ productCTRL.deleteProduct = async (req, res) => {
     res.json({ status: "Product deleted" })
 }
 
+productCTRL.getProductBy = async (req, res) => {
+    if (req.params.name != null || (req.params.id != "noId" && req.params.name != null)) {
+        console.log(req.params.name)
+        return Product.findOne({ name: { $regex: new RegExp("^" + req.params.name + "$", 'i') } });
+    }
+
+    if (req.params.id != "noId") {
+        return Product.findById(req.params.id);
+    }
+}
+
 productCTRL.getProductById = async (req, res) => {
-    const productById = await Product.findById(req.params.id);
+    const productById = await productCTRL.getProductBy(req, res);
     res.json(productById);
 }
 

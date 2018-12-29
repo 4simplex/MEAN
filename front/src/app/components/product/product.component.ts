@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/models/product-model';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { getNoImage } from '../../../assets/noimage';
+import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 
 @Component({
   selector: 'app-product',
@@ -50,11 +51,27 @@ export class ProductComponent implements OnInit {
   }
 
   addNewProduct() {
-    this.productService.postProduct(this.productForm.value)
+    const name = this.productForm.get('name').value;
+    const nameWhithOneSpace = RemoveWhiteSpaces(name);
+    const id = 'noId';
+
+    this.productService.getProductByName(nameWhithOneSpace, id)
       .subscribe(res => {
-        this.productForm.reset();
-        this.manageImgShow();
-        this.getAllProducts();
+        console.log(res);
+        if (res != null) {
+          if (nameWhithOneSpace.toLowerCase() === res.name.toLowerCase()) {
+            alert('El producto ya existe');
+          }
+        } else {
+          this.productForm.get('name').setValue(nameWhithOneSpace);
+
+          this.productService.postProduct(this.productForm.value)
+            .subscribe(response => {
+              this.productForm.reset();
+              this.manageImgShow();
+              this.getAllProducts();
+            });
+        }
       });
   }
 

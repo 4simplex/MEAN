@@ -29,6 +29,10 @@ export class ProductService {
     return this.productService.get<Product>(this.URL_API + `/${id}`);
   }
 
+  getProductByName(name, id): Observable<Product> {
+    return this.productService.get<Product>(this.URL_API + `/${id}` + `/${name}`);
+  }
+
   updateProduct(product) {
     return this.productService.put(this.URL_API + `/${product._id}`, product);
   }
