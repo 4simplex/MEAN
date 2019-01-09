@@ -1,6 +1,30 @@
-<div class="col s12 m6" *ngIf="brand">
-  <h5>{{ brand.name | uppercase}} Detalles</h5>
-  <input [(ngModel)]="brand.name">
-  <button (click)="goBack()">Volver</button>
-  <button (click)="save()">Guardar</button>
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h2>Marcas</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" *ngIf="brand">
+      <div class="row mb-3 mt-2">
+        <h5>{{ brand.name | uppercase}} Detalles</h5>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md-8">
+          <div class="form-group">
+            <input [(ngModel)]="brand.name" type="text" class="form-control mb-3" />
+            <button (click)="goBack()" class="mr-2 btn btn-primary">
+              Volver
+            </button>
+            <button (click)="save()" class="btn btn-primary">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>

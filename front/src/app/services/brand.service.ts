@@ -111,4 +111,8 @@ export class BrandService {
       return of(result as T);
     };
   }
+
+  getBrandByName(name, id): Observable<Brand> {
+    return this.http.get<Brand>(this.URL_API + `/${id}` + `/${name}`);
+  }
 }

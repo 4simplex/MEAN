@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Brand } from '../../models/brand-model';
-import { BrandService }  from '../../services/brand.service';
+import { BrandService } from '../../services/brand.service';
+import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 
 @Component({
   selector: 'app-brand-detail',
   templateUrl: './brand-detail.component.html',
-  styleUrls: [ './brand-detail.component.css' ]
+  styleUrls: ['./brand-detail.component.css']
 })
 export class BrandDetailComponent implements OnInit {
   @Input() brand: Brand;
@@ -17,7 +18,7 @@ export class BrandDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private brandService: BrandService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getBrand();
@@ -33,8 +34,21 @@ export class BrandDetailComponent implements OnInit {
     this.location.back();
   }
 
- save(): void {
-    this.brandService.updateBrand(this.brand)
-      .subscribe(() => this.goBack());
+  save(): void {
+    const name = this.brand.name;
+    const nameWithOneSpace = RemoveWhiteSpaces(name);
+    const localId = this.route.snapshot.paramMap.get('id');
+
+    this.brandService.getBrandByName(nameWithOneSpace, localId)
+      .subscribe(res => {
+        if (res != null) {
+          if (localId === res._id) {
+            this.brandService.updateBrand(this.brand)
+              .subscribe(() => this.goBack());
+          } else {
+            alert('El producto ya existe');
+          }
+        }
+      });
   }
 }

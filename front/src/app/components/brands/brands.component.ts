@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Brand } from '../../models/brand-model';
-import { BrandService }  from '../../services/brand.service';
+import { BrandService } from '../../services/brand.service';
+import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 
 @Component({
   selector: 'app-brands',
@@ -19,15 +20,29 @@ export class BrandsComponent implements OnInit {
 
   getBrands(): void {
     this.brandService.getBrands()
-    .subscribe(bs => this.brands = bs);
+      .subscribe(bs => this.brands = bs);
   }
 
   add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.brandService.addBrand({ name } as Brand)
-      .subscribe(brand => {
-        this.brands.push(brand);
+
+    //const name = this.productForm.get('name').value;
+    const nameWithOneSpace = RemoveWhiteSpaces(name);
+    const id = 'noId';
+
+    this.brandService.getBrandByName(nameWithOneSpace, id)
+      .subscribe(res => {
+        if (res != null) {
+          if (nameWithOneSpace.toLowerCase() === res.name.toLowerCase()) {
+            alert('El producto ya existe');
+          }
+        } else {
+          if (!nameWithOneSpace) { return; }
+          name = nameWithOneSpace;
+          this.brandService.addBrand({ name } as Brand)
+            .subscribe(brand => {
+              this.brands.push(brand);
+            });
+        }
       });
   }
 
