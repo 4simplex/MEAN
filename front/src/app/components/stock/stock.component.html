@@ -4,7 +4,7 @@
       <h2>Stock</h2>
     </div>
   </div>
-  <form [formGroup]="stockForm" (ngSubmit)="addStock()" class="row">
+  <form [formGroup]="stockForm" (ngSubmit)="addStock()" class="row stock-form">
     <div class="col-md-12">
       <div class="row mb-3 mt-2">
         <h5>Agregar producto al Stock</h5>
@@ -43,4 +43,59 @@
       </div>
     </div>
   </form>    
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row mb-3 mt-2">
+        <div class="col-md-12">
+          <h5>Stock registrado</h5>
+        </div>
+      </div>
+      
+      <div class="row align-items-center stock-row" *ngFor="let stock of stockService.stockLst">
+        
+        <div class="col-md-1">
+          <div *ngIf="stock.productForm.product.fileImg">
+            <img [src]="'data:image/jpg;base64,'+stock.productForm.product.fileImg" class="img-fluid" />
+          </div>
+          <div *ngIf="!stock.productForm.product.fileImg">
+            <img [src]="'data:image/jpg;base64,'+noImage" class="img-fluid" />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <h4>{{ stock.productForm.product.name }}</h4>
+        </div>
+
+        <div class="col-md-1">
+          <p><strong>Marca:</strong><br> {{ stock.productForm.product.brand.name }}</p>
+        </div>
+
+        <div class="col-md-2">
+          <p><strong>Proveedor:</strong><br> {{ stock.provider.name }}</p>
+        </div>
+
+        <div class="col-md-2">
+          <p><strong>Categoria:</strong><br> {{ stock.productForm.product.category.name }}</p>
+        </div>
+        
+        <div class="col-md-2">
+          <p><strong>Precio Compra:</strong><br> {{ stock.purchasePrice }}</p>
+        </div>
+        <div class="col-md-2">
+          <p><strong>Precio Venta:</strong><br> {{ stock.salePrice }}</p>
+        </div>
+
+
+        <!-- <div class="col-md-1">
+          <a routerLink="/product/{{product._id}}" class="btn btn-primary">Editar</a>
+        </div>
+        <div class="col-md-1">
+          <a (click)="deleteProduct(product._id)" class="btn btn-danger">Eliminar</a>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+
 </div>

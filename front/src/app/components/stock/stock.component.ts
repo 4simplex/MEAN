@@ -32,10 +32,7 @@ export class StockComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.addEventListener('DOMContentLoaded', function(){
-      var opt = {};
-      var ele = document.querySelectorAll('select');
-    });
+    this.getAllStockItems();
   }
 
   addStock() {
@@ -48,8 +45,16 @@ export class StockComponent implements OnInit {
       .subscribe(res => {
         let st = res as Stock;
         this.prodCode = st.productCode;
+        this.getAllStockItems();
       });
     console.log(this.stockForm.value);
+  }
+
+  getAllStockItems() {
+    this.stockService.getStockLst()
+      .subscribe(res => {
+        this.stockService.stockLst = res as Stock[];
+      });
   }
   
   displayProductImage(product) {
