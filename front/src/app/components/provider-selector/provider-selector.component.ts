@@ -26,7 +26,6 @@ export class ProviderSelectorComponent implements OnInit {
   }
 
   setProviderId(event) {
-    console.log(event);
     this.parentForm.get('_id').setValue(event.srcElement.selectedOptions[0].id);
   }
 }

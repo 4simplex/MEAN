@@ -22,7 +22,7 @@ stockCtrl.createStock = async (req, res) => {
     }
     stock.productCode = generatedCode;
     await stock.save();
-    res.json({status: 'Stock Saved' });
+    res.json(stock);
 }
 
 stockCtrl.getStock = async (req, res) => {
