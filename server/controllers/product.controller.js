@@ -14,13 +14,12 @@ productCTRL.createProduct = async (req, res) => {
 }
 
 productCTRL.deleteProduct = async (req, res) => {
-    await Product.findOneAndRemove(req.params.id);
+    await Product.findByIdAndRemove(req.params.id);
     res.json({ status: "Product deleted" })
 }
 
 productCTRL.getProductBy = async (req, res) => {
-    if (req.params.name != null || (req.params.id != "noId" && req.params.name != null)) {
-        console.log(req.params.name)
+    if ((req.params.id != "noId" && req.params.name != null) || req.params.name != null) {
         return Product.findOne({ name: { $regex: new RegExp("^" + req.params.name + "$", 'i') } });
     }
 

@@ -98,6 +98,13 @@ export class ProductDetailComponent implements OnInit {
             alert('El producto ya existe');
           }
         }
+
+        if (res == null) {
+          this.productService.updateProduct(this.productForm.value)
+            .subscribe(response => {
+              this.goBack();
+            });
+        }
       });
   }
 

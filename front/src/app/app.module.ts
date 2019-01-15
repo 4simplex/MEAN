@@ -21,6 +21,8 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { BrandDetailComponent } from './components/brand-detail/brand-detail.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
+import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
+import { ProviderDetailComponent } from './components/provider-detail/provider-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProductSelectorComponent } from './components/product-selector/product-
     BrandsComponent,
     BrandDetailComponent,
     ProductDetailComponent,
-    ProductSelectorComponent
+    ProductSelectorComponent,
+    CategoryDetailComponent,
+    ProviderDetailComponent
   ],
 
   imports: [

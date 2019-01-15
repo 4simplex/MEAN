@@ -2,32 +2,31 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Brand } from '../../models/brand-model';
-import { BrandService } from '../../services/brand.service';
+import { Category } from '../../models/category-model';
+import { CategoryService } from '../../services/category.service';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 
 @Component({
-  selector: 'app-brand-detail',
-  templateUrl: './brand-detail.component.html',
-  styleUrls: ['./brand-detail.component.css']
+  selector: 'app-category-detail',
+  templateUrl: './category-detail.component.html',
+  styleUrls: ['./category-detail.component.css']
 })
-export class BrandDetailComponent implements OnInit {
-  @Input() brand: Brand;
+export class CategoryDetailComponent implements OnInit {
+  @Input() category: Category;
 
-  constructor(
-    private route: ActivatedRoute,
-    private brandService: BrandService,
+  constructor(private route: ActivatedRoute,
+    private categoryService: CategoryService,
     private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.getBrand();
+    this.getCategory();
   }
 
-  getBrand(): void {
+  getCategory(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.brandService.getBrand(id)
-      .subscribe(b => this.brand = b);
+    this.categoryService.getCategory(id)
+      .subscribe(b => this.category = b);
   }
 
   goBack(): void {
@@ -35,15 +34,15 @@ export class BrandDetailComponent implements OnInit {
   }
 
   save(): void {
-    const name = this.brand.name;
+    const name = this.category.name;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     const localId = this.route.snapshot.paramMap.get('id');
 
-    this.brandService.getBrandByName(nameWithOneSpace, localId)
+    this.categoryService.getCategoryByName(nameWithOneSpace, localId)
       .subscribe(res => {
         if (res != null) {
           if (localId === res._id) {
-            this.brandService.updateBrand(this.brand)
+            this.categoryService.putCategory(this.category)
               .subscribe(() => this.goBack());
           } else {
             alert('El producto ya existe');
@@ -51,7 +50,7 @@ export class BrandDetailComponent implements OnInit {
         }
 
         if (res == null) {
-          this.brandService.updateBrand(this.brand)
+          this.categoryService.putCategory(this.category)
             .subscribe(() => this.goBack());
         }
       });
