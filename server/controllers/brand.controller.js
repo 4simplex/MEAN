@@ -34,13 +34,12 @@ brandCtrl.deleteBrand = async (req, res) => {
 }
 
 brandCtrl.getBrandBy = async (req, res) => {
+    if (req.params.id != "noId") {
+        return Brand.findById(req.params.id);
+    }
 
     if ((req.params.id != "noId" && req.params.name != null) || req.params.name != null) {
         return Brand.findOne({ name: { $regex: new RegExp("^" + req.params.name + "$", 'i') } });
-    }
-
-    if (req.params.id != "noId") {
-        return Brand.findById(req.params.id);
     }
 }
 

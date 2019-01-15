@@ -1,9 +1,8 @@
 export class Stock {
     _id: string;
-    product: { Product };
-    provider: { Provider };
+    productForm: { };
+    provider: { };
     purchasePrice: number;
     salePrice: number;
-    stockQty: number;
-    stockCode: string;
+    productCode: string;
 }
