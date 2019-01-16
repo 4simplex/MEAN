@@ -23,6 +23,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { ProviderDetailComponent } from './components/provider-detail/provider-detail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProviderDetailComponent } from './components/provider-detail/provider-d
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
 
   providers: [

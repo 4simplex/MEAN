@@ -31,48 +31,25 @@
               <h5>Proveedores Creados</h5>
             </div>
           </div>
-          <div class="row align-items-center provider-row" *ngFor="let provider of providers">
-            <div class="col-md-6">
+          <div class="row align-items-center provider-row" *ngFor="let provider of providers | paginate: {itemsPerPage:3, currentPage: actualPage}">
+            <div class="col-md-6 ">
               <h4>{{ provider.name }}</h4>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 ">
               <h4>{{ provider.info }}</h4>
             </div>
-            <div class="col-md-1">
-              <a routerLink="/providers/{{provider._id}}" class="btn btn-primary">Editar</a>
-              <!--<a (click)="editProvider(provider)">Editar</a>-->
+            <div class="col-md-1 ">
+              <a routerLink="/providers/{{provider._id}} " class="btn btn-primary ">Editar</a>
             </div>
-            <div class="col-md-1">
-              <a (click)="deleteProvider(provider._id)" class="btn btn-danger">Eliminar</a>
+            <div class="col-md-1 ">
+              <a (click)="deleteProvider(provider._id) " class="btn btn-danger ">Eliminar</a>
             </div>
-
+          </div>
+          <div class="row">
+            <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="Previa" nextLabel="Próxima"
+              screenReaderPaginationLabel="Paginación" screenReaderPageLabel="Página" screenReaderCurrentLabel="Estas en la página"></pagination-controls>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!--<form #providerForm="ngForm" (ngSubmit)="addProvider(providerForm)">
-  <h5>Crear Proveedor</h5>
-  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="providerService.selectedProvider._id">
-  <input required type="text" name="name" #name="ngModel" [(ngModel)]="providerService.selectedProvider.name" placeholder="Nombre">
-  <p *ngIf="name.touched && !name.valid">
-    Debe escribir un Proveedor válido
-  </p>
-  <input type="text" name="info" #info="ngModel" [(ngModel)]="providerService.selectedProvider.info" placeholder="Información del Proveedor">
-  <button [disabled]="!providerForm.valid">Guardar</button>
-</form>
-
-<h5>Proveedores Creados</h5>
-<table>
-  <tbody>
-    <tr *ngFor="let provider of providerService.providers">
-      <td>{{ provider.name }}</td>
-      <td>{{ provider.info }}</td>
-      <td>
-        <a (click)="editProvider(provider)">Editar</a>
-        <a (click)="deleteProvider(provider._id)">Eliminar</a>
-      </td>
-    </tr>
-  </tbody>
-</table>-->

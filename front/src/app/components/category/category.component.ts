@@ -12,6 +12,7 @@ import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 export class CategoryComponent implements OnInit {
   categories: Category[];
   selectedCategory: Category;
+  actualPage: Number = 1;
   constructor(private categoryService: CategoryService) {
     this.selectedCategory = new Category();
   }

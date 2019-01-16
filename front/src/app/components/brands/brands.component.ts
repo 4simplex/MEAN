@@ -11,6 +11,7 @@ import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 })
 export class BrandsComponent implements OnInit {
   brands: Brand[];
+  actualPage: Number = 1;
 
   constructor(private brandService: BrandService) { }
 
