@@ -57,7 +57,6 @@ export class ProductComponent implements OnInit {
 
     this.productService.getProductByName(nameWhithOneSpace, id)
       .subscribe(res => {
-        console.log(res);
         if (res != null) {
           if (nameWhithOneSpace.toLowerCase() === res.name.toLowerCase()) {
             alert('El producto ya existe');

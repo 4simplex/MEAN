@@ -36,4 +36,8 @@ export class ProductService {
   updateProduct(product) {
     return this.productService.put(this.URL_API + `/${product._id}`, product);
   }
+
+  brandHasProducts(id): Observable<Product> {
+    return this.productService.get<Product>(this.URL_API + `/brand/${id}`);
+  }
 }

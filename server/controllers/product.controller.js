@@ -39,4 +39,9 @@ productCTRL.updateProduct = async (req, res) => {
     res.json({ status: "product updated" })
 }
 
+productCTRL.hasProducts = async (req, res) => {
+    const productFind = await Product.findOne({ 'brand._id': req.params.id });
+    res.json(productFind);
+}
+
 module.exports = productCTRL;

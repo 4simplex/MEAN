@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Brand } from '../../models/brand-model';
 import { BrandService } from '../../services/brand.service';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-brands',
@@ -13,7 +14,7 @@ export class BrandsComponent implements OnInit {
   brands: Brand[];
   actualPage: Number = 1;
 
-  constructor(private brandService: BrandService) { }
+  constructor(private brandService: BrandService, private productService: ProductService) { }
 
   ngOnInit() {
     this.getBrands();
@@ -48,8 +49,17 @@ export class BrandsComponent implements OnInit {
   }
 
   delete(brand: Brand): void {
-    this.brands = this.brands.filter(b => b !== brand);
-    this.brandService.deleteBrand(brand).subscribe();
+    this.productService.brandHasProducts(brand._id)
+      .subscribe(res => {
+        if (res !== null) {
+          alert('No puede borrar la marca porque tiene productos existentes.');
+        } else {
+          if (confirm('Desea eliminar la marca?')) {
+            this.brands = this.brands.filter(b => b !== brand);
+            this.brandService.deleteBrand(brand).subscribe();
+          }
+        }
+      });
   }
 
 }
