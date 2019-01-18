@@ -12,13 +12,17 @@ import { StockDetailComponent } from './components/stock-detail/stock-detail.com
 
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
+import { ProviderDetailComponent } from './components/provider-detail/provider-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/brands', pathMatch: 'full' },
   { path: 'brand/:id', component: BrandDetailComponent },
   { path: 'brands', component: BrandsComponent },
   { path: 'categories', component: CategoryComponent },
+  { path: 'categories/:id', component: CategoryDetailComponent },
   { path: 'providers', component: ProviderComponent },
+  { path: 'providers/:id', component: ProviderDetailComponent },
   { path: 'stock', component: StockComponent },
   { path: 'stock/:id', component: StockDetailComponent },
   { path: 'products', component: ProductComponent },

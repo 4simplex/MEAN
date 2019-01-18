@@ -22,6 +22,9 @@ import { BrandDetailComponent } from './components/brand-detail/brand-detail.com
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductSelectorComponent } from './components/product-selector/product-selector.component';
 import { StockDetailComponent } from './components/stock-detail/stock-detail.component';
+import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
+import { ProviderDetailComponent } from './components/provider-detail/provider-detail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { StockDetailComponent } from './components/stock-detail/stock-detail.com
     ProductDetailComponent,
     ProductSelectorComponent,
     StockDetailComponent
+    CategoryDetailComponent,
+    ProviderDetailComponent
   ],
 
   imports: [
@@ -47,7 +52,8 @@ import { StockDetailComponent } from './components/stock-detail/stock-detail.com
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
 
   providers: [

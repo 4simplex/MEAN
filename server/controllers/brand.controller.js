@@ -38,7 +38,7 @@ brandCtrl.getBrandBy = async (req, res) => {
         return Brand.findById(req.params.id);
     }
 
-    if (req.params.name != null || (req.params.id != "noId" && req.params.name != null)) {
+    if ((req.params.id != "noId" && req.params.name != null) || req.params.name != null) {
         return Brand.findOne({ name: { $regex: new RegExp("^" + req.params.name + "$", 'i') } });
     }
 }

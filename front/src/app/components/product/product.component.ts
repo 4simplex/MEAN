@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
   productForm: FormGroup;
   @ViewChild(UploadImageComponent)
   private uploadChild: UploadImageComponent;
-
+  actualPage: Number = 1;
   noImage = getNoImage();
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
@@ -57,7 +57,6 @@ export class ProductComponent implements OnInit {
 
     this.productService.getProductByName(nameWhithOneSpace, id)
       .subscribe(res => {
-        console.log(res);
         if (res != null) {
           if (nameWhithOneSpace.toLowerCase() === res.name.toLowerCase()) {
             alert('El producto ya existe');
@@ -84,6 +83,7 @@ export class ProductComponent implements OnInit {
 
   deleteProduct(_id: string) {
     if (confirm('Desea eliminar el producto?')) {
+      console.log(_id);
       this.productService.deleteProduct(_id)
         .subscribe(res => {
           this.getAllProducts();

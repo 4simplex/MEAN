@@ -21,8 +21,8 @@ export class ProductService {
     return this.productService.post(this.URL_API, product)
   }
 
-  deleteProduct(_id) {
-    return this.productService.delete(this.URL_API, _id);
+  deleteProduct(_id: string) {
+    return this.productService.delete(this.URL_API + `/${_id}`);
   }
 
   getProductById(id): Observable<Product> {
@@ -35,5 +35,9 @@ export class ProductService {
 
   updateProduct(product) {
     return this.productService.put(this.URL_API + `/${product._id}`, product);
+  }
+
+  brandHasProducts(id): Observable<Product> {
+    return this.productService.get<Product>(this.URL_API + `/brand/${id}`);
   }
 }

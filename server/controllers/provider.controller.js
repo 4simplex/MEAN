@@ -7,16 +7,15 @@ providerCtrl.getProviders = async (req, res) => {
     res.json(providers);
 }
 
-providerCtrl.createProvider =  async (req, res) => {
+providerCtrl.createProvider = async (req, res) => {
     console.log(req.body);
     const provider = new Provider(req.body);
     await provider.save();
-    res.json({'status': 'Provider Saved' });
+    res.json(provider);
 }
 
 providerCtrl.getProvider = async (req, res) => {
-    console.log(req.params);
-    const provider = await Provider.findById(req.params.id);
+    const provider = await providerCtrl.getProviderBy(req, res);
     res.json(provider);
 }
 
@@ -25,13 +24,24 @@ providerCtrl.editProvider = async (req, res) => {
         name: req.body.name,
         info: req.body.info
     };
-    await Provider.findByIdAndUpdate(req.params.id, {$set:provider});
-    res.json({status: 'Provider updated'});
+    await Provider.findByIdAndUpdate(req.params.id, { $set: provider });
+    res.json({ status: 'Provider updated' });
 }
 
 providerCtrl.deleteProvider = async (req, res) => {
     await Provider.findByIdAndRemove(req.params.id);
-    res.json({status: 'Provider deleted'});
+    res.json({ status: 'Provider deleted' });
+}
+
+providerCtrl.getProviderBy = async (req, res) => {
+
+    if ((req.params.id != "noId" && req.params.name != null) || req.params.name != null) {
+        return Provider.findOne({ name: { $regex: new RegExp("^" + req.params.name + "$", 'i') } });
+    }
+
+    if (req.params.id != "noId") {
+        return Provider.findById(req.params.id);
+    }
 }
 
 module.exports = providerCtrl;

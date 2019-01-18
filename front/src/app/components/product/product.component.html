@@ -43,7 +43,7 @@
           <h5>Productos registrados</h5>
         </div>
       </div>
-      <div class="row align-items-center product-row" *ngFor="let product of productService.products">
+      <div class="row align-items-center product-row" *ngFor="let product of productService.products | paginate: {itemsPerPage:3, currentPage: actualPage}">
         <div class="col-md-1">
           <div *ngIf="product.fileImg">
             <img [src]="'data:image/jpg;base64,'+product.fileImg" class="img-fluid" />
@@ -69,6 +69,10 @@
           <a (click)="deleteProduct(product._id)" class="btn btn-danger">Eliminar</a>
         </div>
 
+      </div>
+      <div class="row">
+        <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="Previa" nextLabel="Próxima"
+          screenReaderPaginationLabel="Paginación" screenReaderPageLabel="Página" screenReaderCurrentLabel="Estas en la página"></pagination-controls>
       </div>
     </div>
   </div>

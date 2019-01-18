@@ -14,13 +14,12 @@ productCTRL.createProduct = async (req, res) => {
 }
 
 productCTRL.deleteProduct = async (req, res) => {
-    await Product.findOneAndRemove(req.params.id);
+    await Product.findByIdAndRemove(req.params.id);
     res.json({ status: "Product deleted" })
 }
 
 productCTRL.getProductBy = async (req, res) => {
-    if (req.params.name != null || (req.params.id != "noId" && req.params.name != null)) {
-        console.log(req.params.name)
+    if ((req.params.id != "noId" && req.params.name != null) || req.params.name != null) {
         return Product.findOne({ name: { $regex: new RegExp("^" + req.params.name + "$", 'i') } });
     }
 
@@ -38,6 +37,11 @@ productCTRL.updateProduct = async (req, res) => {
     const product = new Product(req.body);
     await Product.findByIdAndUpdate(req.params.id, { $set: product });
     res.json({ status: "product updated" })
+}
+
+productCTRL.hasProducts = async (req, res) => {
+    const productFind = await Product.findOne({ 'brand._id': req.params.id });
+    res.json(productFind);
 }
 
 module.exports = productCTRL;

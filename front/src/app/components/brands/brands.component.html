@@ -27,7 +27,7 @@
               <h5>Marcas registradas</h5>
             </div>
           </div>
-          <div class="row align-items-center brand-row" *ngFor="let brand of brands">
+          <div class="row align-items-center brand-row" *ngFor="let brand of brands | paginate: {itemsPerPage:3, currentPage: actualPage}">
             <div class="col-md-10">
               <h4>{{ brand.name }}</h4>
             </div>
@@ -38,6 +38,10 @@
               <a (click)="delete(brand)" class="btn btn-danger">Eliminar</a>
             </div>
 
+          </div>
+          <div class="row">
+            <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="Previa" nextLabel="Próxima"
+              screenReaderPaginationLabel="Paginación" screenReaderPageLabel="Página" screenReaderCurrentLabel="Estas en la página"></pagination-controls>
           </div>
         </div>
       </div>
