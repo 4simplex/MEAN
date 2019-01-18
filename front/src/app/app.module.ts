@@ -42,7 +42,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrandDetailComponent,
     ProductDetailComponent,
     ProductSelectorComponent,
-    StockDetailComponent
+    StockDetailComponent,
     CategoryDetailComponent,
     ProviderDetailComponent
   ],
