@@ -6,7 +6,10 @@ import { BrandDetailComponent } from './components/brand-detail/brand-detail.com
 
 import { CategoryComponent } from './components/category/category.component';
 import { ProviderComponent } from './components/provider/provider.component';
+
 import { StockComponent } from './components/stock/stock.component';
+import { StockDetailComponent } from './components/stock-detail/stock-detail.component';
+
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
@@ -17,6 +20,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoryComponent },
   { path: 'providers', component: ProviderComponent },
   { path: 'stock', component: StockComponent },
+  { path: 'stock/:id', component: StockDetailComponent },
   { path: 'products', component: ProductComponent },
   { path: 'product/:id', component: ProductDetailComponent }
 ];

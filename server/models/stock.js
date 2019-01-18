@@ -3,7 +3,10 @@ const { Schema } = mongoose;
 
 const StockSchema = new Schema({
     productForm: { },
-    provider: { },
+    provider: {
+		'_id': String,
+		'name': String
+	},
     purchasePrice: { type: Number },
     salePrice: { type: Number },
     productCode: { type: String },

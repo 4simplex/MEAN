@@ -15,7 +15,6 @@ export class CategorySelectorComponent implements OnInit {
   constructor(private httpCategory: CategoryService) { }
 
   ngOnInit() {
-
     this.getCategories();
   }
 

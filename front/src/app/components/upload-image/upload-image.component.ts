@@ -21,7 +21,6 @@ export class UploadImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.loadImg);
     if (!this.fileImg) {
       this.fileImg = getNoImage();
     }

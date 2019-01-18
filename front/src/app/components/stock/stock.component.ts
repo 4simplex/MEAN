@@ -17,17 +17,21 @@ export class StockComponent implements OnInit {
 
   productFileImage = "";
 
-  constructor(private fb: FormBuilder, private location: Location, private stockService: StockService) { 
+  constructor(
+    private fb: FormBuilder, 
+    private location: Location, 
+    private stockService: StockService
+    ) { 
     this.stockForm = fb.group({
-      'purchasePrice': ['', Validators.required],
-      'salePrice': ['', Validators.required],
+      'productForm': fb.group({
+        'product': ['']
+      }),
       'provider': fb.group({
         '_id': [''],
         'name': ['']
       }),
-      'productForm': fb.group({
-        'product': ['']
-      })
+      'purchasePrice': ['', Validators.required],
+      'salePrice': ['', Validators.required]
     });
   }
 
@@ -61,6 +65,11 @@ export class StockComponent implements OnInit {
     if(product){
       this.productFileImage = product.fileImg;
     }
+  }
+
+  deleteStock(stock: Stock): void {
+    this.stockService.stockLst = this.stockService.stockLst.filter(s => s !== stock);
+    this.stockService.deleteStock(stock).subscribe();
   }
   
   goBack(): void {

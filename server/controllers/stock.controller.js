@@ -32,10 +32,14 @@ stockCtrl.getStock = async (req, res) => {
 }
 
 stockCtrl.editStock = async (req, res) => {
+    console.log(req.body);
     const stock = {
         purchasePrice: req.body.purchasePrice,
         salePrice: req.body.salePrice,
-        stockQty: req.body.stockQty
+        provider: { 
+            _id: req.body.provider._id, 
+            name: req.body.provider.name 
+        }
     };
     await Stock.findByIdAndUpdate(req.params.id, {$set:stock});
     res.json({status: 'Stock updated'});

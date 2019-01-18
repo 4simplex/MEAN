@@ -50,7 +50,7 @@ export class BrandService {
   }
 
   /* GET brands whose name contains search term */
-  searchHeroes(term: string): Observable<Brand[]> {
+  searchBrands(term: string): Observable<Brand[]> {
     if (!term.trim()) {
       // if not search term, return empty brand array.
       return of([]);
