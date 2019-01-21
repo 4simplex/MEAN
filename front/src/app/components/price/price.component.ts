@@ -65,8 +65,10 @@ export class PriceComponent implements OnInit {
   }
 
   deletePrice(price: Price): void {
-    this.priceService.prices = this.priceService.prices.filter(s => s !== price);
-    this.priceService.deletePrice(price).subscribe();
+    if (confirm('Desea eliminar este item de Precios?')) {
+      this.priceService.prices = this.priceService.prices.filter(s => s !== price);
+      this.priceService.deletePrice(price).subscribe();
+    }
   }
   
 }
