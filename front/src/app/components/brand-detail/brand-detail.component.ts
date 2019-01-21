@@ -37,6 +37,8 @@ export class BrandDetailComponent implements OnInit {
   save(): void {
     const name = this.brand.name;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
+    this.brand.name = nameWithOneSpace;
+
     const localId = this.route.snapshot.paramMap.get('id');
 
     this.brandService.getBrandByName(nameWithOneSpace, localId)

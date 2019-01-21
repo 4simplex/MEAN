@@ -11,12 +11,10 @@
       </div>
       <div class="row mb-5">
         <div class="col-md-8">
-          <div class="form-group">
-            <input #brandName type="text" placeholder="Nombre" class="form-control mb-3" />
-            <button (click)="add(brandName.value); brandName.value=''" class="btn btn-primary">
-              Guardar
-            </button>
-          </div>
+          <form #brandForm="ngForm" (ngSubmit)="addBrand(brandForm)" class="form-group">
+            <input required type="text" name="name" #name [(ngModel)]="selectedBrand.name" placeholder="Nombre" class="form-control mb-3" />
+            <button [disabled]="!brandForm.valid" class="btn btn-primary">Guardar</button>
+          </form>
         </div>
       </div>
 

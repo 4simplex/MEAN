@@ -30,7 +30,7 @@ export class CategoryComponent implements OnInit {
       .subscribe(res => {
         if (res != null) {
           if (nameWithOneSpace.toLowerCase() === res.name.toLowerCase()) {
-            alert('El producto ya existe');
+            alert('La Categoría ya existe');
           }
         } else {
           if (!nameWithOneSpace) { return; }
