@@ -14,9 +14,6 @@
           <form #categoryForm="ngForm" (ngSubmit)="addCategory(categoryForm)" class="form-group">
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="selectedCategory._id">
             <input required type="text" name="name" #name [(ngModel)]="selectedCategory.name" placeholder="Nombre" class="form-control mb-3">
-            <p *ngIf="name.touched && !name.valid">
-              Debe escribir una Categoría válida
-            </p>
             <button [disabled]="!categoryForm.valid" class="btn btn-primary">Guardar</button>
           </form>
         </div>
