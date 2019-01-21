@@ -14,7 +14,7 @@
           <app-product-selector [parentForm]="priceForm.get('productForm')" (productChange)='displayProductImage($event)'></app-product-selector>
 
           <app-provider-selector [parentForm]="priceForm.get('provider')"></app-provider-selector>
-          
+
           <div class="form-group">
             <input type="text" formControlName="purchasePrice" placeholder="Precio de Compra x Unidad" class="form-control" />
           </div>
@@ -26,22 +26,22 @@
           <div class="form-group">
             <p>{{ prodCode }}</p>
           </div>
-          
+
           <div class="form-group">
             <button class="btn btn-primary mr-1">Grabar Producto</button>
           </div>
         </div>
         <div class="col-md-6">
           <div *ngIf="productFileImage">
-            <img [src]="'data:image/jpg;base64,'+productFileImage" [ngStyle]="{'width': '300px'}"/>
+            <img [src]="'data:image/jpg;base64,'+productFileImage" [ngStyle]="{'width': '300px'}" />
           </div>
           <div *ngIf="!productFileImage">
-            <img [src]="'data:image/jpg;base64,'+noImage" [ngStyle]="{'width': '300px'}"/>
+            <img [src]="'data:image/jpg;base64,'+noImage" [ngStyle]="{'width': '300px'}" />
           </div>
         </div>
       </div>
     </div>
-  </form>    
+  </form>
 
   <div class="row">
     <div class="col-md-12">
@@ -50,9 +50,9 @@
           <h5>Precios registrados</h5>
         </div>
       </div>
-      
-      <div class="row align-items-center price-row" *ngFor="let price of priceService.prices">
-        
+
+      <div class="row align-items-center price-row" *ngFor="let price of priceService.prices | paginate: {itemsPerPage:3, currentPage: actualPage}">
+
         <div class="col-md-1">
           <div *ngIf="price.productForm.product.fileImg">
             <img [src]="'data:image/jpg;base64,'+price.productForm.product.fileImg" class="img-fluid" />
@@ -77,7 +77,7 @@
         <div class="col-md-2">
           <p><strong>Categoria:</strong><br> {{ price.productForm.product.category.name }}</p>
         </div>
-        
+
         <div class="col-md-2">
           <p><strong>Precio Compra:</strong><br> {{ price.purchasePrice }}</p>
         </div>
@@ -93,6 +93,10 @@
           <a (click)="deletePrice(price)" class="btn btn-danger">Eliminar</a>
         </div>
 
+      </div>
+      <div class="row">
+        <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="Previa" nextLabel="Próxima"
+          screenReaderPaginationLabel="Paginación" screenReaderPageLabel="Página" screenReaderCurrentLabel="Estas en la página"></pagination-controls>
       </div>
     </div>
   </div>

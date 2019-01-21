@@ -44,4 +44,9 @@ productCTRL.hasProducts = async (req, res) => {
     res.json(productFind);
 }
 
+productCTRL.categoryhasProducts = async (req, res) => {
+    const productFind = await Product.findOne({ 'category._id': req.params.id });
+    res.json(productFind);
+}
+
 module.exports = productCTRL;

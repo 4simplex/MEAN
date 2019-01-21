@@ -40,4 +40,8 @@ export class ProductService {
   brandHasProducts(id): Observable<Product> {
     return this.productService.get<Product>(this.URL_API + `/brand/${id}`);
   }
+
+  categoryHasProducts(id): Observable<Product> {
+    return this.productService.get<Product>(this.URL_API + `/category/${id}`);
+  }
 }
