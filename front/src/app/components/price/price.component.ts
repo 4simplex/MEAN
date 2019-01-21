@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Location } from '@angular/common';
 import { getNoImage } from '../../../assets/noimage';
 import { PriceService } from '../../services/price.service';
 import { Price } from 'src/app/models/price-model';
@@ -13,13 +12,12 @@ import { Price } from 'src/app/models/price-model';
 export class PriceComponent implements OnInit {
   priceForm: FormGroup;
   noImage = getNoImage();
-  prodCode;
+  prodCode: string;
 
   productFileImage = "";
 
   constructor(
     private fb: FormBuilder, 
-    private location: Location, 
     private priceService: PriceService
     ) { 
     this.priceForm = fb.group({
@@ -69,10 +67,6 @@ export class PriceComponent implements OnInit {
   deletePrice(price: Price): void {
     this.priceService.prices = this.priceService.prices.filter(s => s !== price);
     this.priceService.deletePrice(price).subscribe();
-  }
-  
-  goBack(): void {
-    this.location.back();
   }
   
 }
