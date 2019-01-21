@@ -3,6 +3,7 @@ import { CategoryService } from '../../services/category.service';
 import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/models/category-model';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-category',
@@ -13,7 +14,7 @@ export class CategoryComponent implements OnInit {
   categories: Category[];
   selectedCategory: Category;
   actualPage: Number = 1;
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private productService: ProductService) {
     this.selectedCategory = new Category();
   }
 
@@ -56,13 +57,18 @@ export class CategoryComponent implements OnInit {
     this.categoryService.selectedCategory = category;
   }
 
-  deleteCategory(_id: string) {
-    if (confirm('Está seguro de querer eliminarlo?')) {
-      this.categoryService.deleteCategory(_id)
-        .subscribe(res => {
-          this.getCategories();
-        });
-    }
+  deleteCategory(category: Category): void {
+    this.productService.categoryHasProducts(category._id)
+      .subscribe(res => {
+        if (res !== null) {
+          alert('No puede borrar la categoría porque tiene productos existentes.');
+        } else {
+          if (confirm('Desea eliminar la categoría?')) {
+            this.categories = this.categories.filter(b => b !== category);
+            this.categoryService.deleteCategory(category._id).subscribe();
+          }
+        }
+      });
   }
 
   resetForm(form?: NgForm) {

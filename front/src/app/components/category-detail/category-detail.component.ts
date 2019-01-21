@@ -36,9 +36,11 @@ export class CategoryDetailComponent implements OnInit {
   save(): void {
     const name = this.category.name;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
+    this.category.name = nameWithOneSpace;
+
     const localId = this.route.snapshot.paramMap.get('id');
 
-    this.categoryService.getCategoryByName(nameWithOneSpace, localId)
+    this.categoryService.getCategoryByName(this.category.name, localId)
       .subscribe(res => {
         if (res != null) {
           if (localId === res._id) {

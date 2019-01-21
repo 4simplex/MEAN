@@ -13,13 +13,13 @@ export class PriceComponent implements OnInit {
   priceForm: FormGroup;
   noImage = getNoImage();
   prodCode: string;
-
+  actualPage: Number = 1;
   productFileImage = "";
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private priceService: PriceService
-    ) { 
+  ) {
     this.priceForm = fb.group({
       'productForm': fb.group({
         'product': ['']
@@ -40,7 +40,7 @@ export class PriceComponent implements OnInit {
   addPrice() {
     const purchasePrice = this.priceForm.get('purchasePrice').value;
     const salePrice = this.priceForm.get('salePrice').value;
-    if(!purchasePrice || !salePrice){
+    if (!purchasePrice || !salePrice) {
       return;
     }
     this.priceService.postPrice(this.priceForm.value)
@@ -57,9 +57,9 @@ export class PriceComponent implements OnInit {
         this.priceService.prices = res as Price[];
       });
   }
-  
+
   displayProductImage(product) {
-    if(product){
+    if (product) {
       this.productFileImage = product.fileImg;
     }
   }
@@ -70,5 +70,5 @@ export class PriceComponent implements OnInit {
       this.priceService.deletePrice(price).subscribe();
     }
   }
-  
+
 }
