@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Stock } from '../models/stock-model';
+import { Price } from '../models/price-model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,46 +11,46 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class StockService {
-  selectedStock: Stock;
-  stockLst: Stock[];
-  readonly URL_API = 'http://localhost:3000/api/stock'
+export class PriceService {
+  selectedPrice: Price;
+  prices: Price[];
+  readonly URL_API = 'http://localhost:3000/api/price'
 
   constructor(private http: HttpClient) { 
-    this.selectedStock = new Stock();
+    this.selectedPrice = new Price();
   }
 
-  getStockLst(){
+  getPriceLst(){
     return this.http.get(this.URL_API);
   }
 
-  getStockById(id: string): Observable<Stock> {
+  getPriceById(id: string): Observable<Price> {
     const url = `${this.URL_API}/${id}`;
-    return this.http.get<Stock>(url).pipe(
-      // tap(_ => console.info(`Fetched stock id=${id}`)),
-      catchError(this.handleError<Stock>(`getStock id=${id}`))
+    return this.http.get<Price>(url).pipe(
+      // tap(_ => console.info(`Fetched price id=${id}`)),
+      catchError(this.handleError<Price>(`getPrice id=${id}`))
     );
   }
 
-  postStock(stock: Stock){
-    return this.http.post(this.URL_API, stock);
+  postPrice(price: Price){
+    return this.http.post(this.URL_API, price);
   }
 
-  /** PUT: update the stock on the server */
-  updateStock(stock: Stock): Observable<any> {
-    return this.http.put(this.URL_API + `/${stock._id}`, stock, httpOptions).pipe(
+  /** PUT: update the price on the server */
+  updatePrice(price: Price): Observable<any> {
+    return this.http.put(this.URL_API + `/${price._id}`, price, httpOptions).pipe(
       // tap(_ => console.info(`Updated brand id=${brand._id}`)),
       catchError(this.handleError<any>('updateBrand'))
     );
   }
 
-  deleteStock(stock: Stock | string){
-    const id = typeof stock === 'string' ? stock : stock._id;
+  deletePrice(price: Price | string){
+    const id = typeof price === 'string' ? price : price._id;
     const url = `${this.URL_API}/${id}`;
 
-    return this.http.delete<Stock>(url, httpOptions).pipe(
-      tap(_ => console.info(`Deleted stock id=${id}`)),
-      catchError(this.handleError<Stock>('deleteStock'))
+    return this.http.delete<Price>(url, httpOptions).pipe(
+      tap(_ => console.info(`Deleted price id=${id}`)),
+      catchError(this.handleError<Price>('deletePrice'))
     );
   }
 

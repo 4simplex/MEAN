@@ -18,7 +18,7 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 app.use('/api/category', require('./routes/category.routes'));
 app.use('/api/brand', require('./routes/brand.routes'));
 app.use('/api/provider', require('./routes/provider.routes'));
-app.use('/api/stock', require('./routes/stock.routes'));
+app.use('/api/price', require('./routes/price.routes'));
 app.use('/api/product', require('./routes/product.routes'));
 
 app.listen(app.get('port'), () => {

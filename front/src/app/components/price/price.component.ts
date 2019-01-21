@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Location } from '@angular/common';
 import { getNoImage } from '../../../assets/noimage';
-import { StockService } from '../../services/stock.service';
-import { Stock } from 'src/app/models/stock-model';
+import { PriceService } from '../../services/price.service';
+import { Price } from 'src/app/models/price-model';
 
 @Component({
-  selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.css']
+  selector: 'app-price',
+  templateUrl: './price.component.html',
+  styleUrls: ['./price.component.css']
 })
-export class StockComponent implements OnInit {
-  stockForm: FormGroup;
+export class PriceComponent implements OnInit {
+  priceForm: FormGroup;
   noImage = getNoImage();
   prodCode;
 
@@ -20,9 +20,9 @@ export class StockComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private location: Location, 
-    private stockService: StockService
+    private priceService: PriceService
     ) { 
-    this.stockForm = fb.group({
+    this.priceForm = fb.group({
       'productForm': fb.group({
         'product': ['']
       }),
@@ -36,28 +36,28 @@ export class StockComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllStockItems();
+    this.getAllPriceItems();
   }
 
-  addStock() {
-    const purchasePrice = this.stockForm.get('purchasePrice').value;
-    const salePrice = this.stockForm.get('salePrice').value;
+  addPrice() {
+    const purchasePrice = this.priceForm.get('purchasePrice').value;
+    const salePrice = this.priceForm.get('salePrice').value;
     if(!purchasePrice || !salePrice){
       return;
     }
-    this.stockService.postStock(this.stockForm.value)
+    this.priceService.postPrice(this.priceForm.value)
       .subscribe(res => {
-        let st = res as Stock;
+        let st = res as Price;
         this.prodCode = st.productCode;
-        this.getAllStockItems();
+        this.getAllPriceItems();
       });
-    console.log(this.stockForm.value);
+    console.log(this.priceForm.value);
   }
 
-  getAllStockItems() {
-    this.stockService.getStockLst()
+  getAllPriceItems() {
+    this.priceService.getPriceLst()
       .subscribe(res => {
-        this.stockService.stockLst = res as Stock[];
+        this.priceService.prices = res as Price[];
       });
   }
   
@@ -67,9 +67,9 @@ export class StockComponent implements OnInit {
     }
   }
 
-  deleteStock(stock: Stock): void {
-    this.stockService.stockLst = this.stockService.stockLst.filter(s => s !== stock);
-    this.stockService.deleteStock(stock).subscribe();
+  deletePrice(price: Price): void {
+    this.priceService.prices = this.priceService.prices.filter(s => s !== price);
+    this.priceService.deletePrice(price).subscribe();
   }
   
   goBack(): void {

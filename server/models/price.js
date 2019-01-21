@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const StockSchema = new Schema({
+const PriceSchema = new Schema({
     productForm: { },
     provider: {
 		'_id': String,
@@ -12,4 +12,4 @@ const StockSchema = new Schema({
     productCode: { type: String },
 });
 
-module.exports = mongoose.model('Stock', StockSchema);
+module.exports = mongoose.model('Price', PriceSchema);

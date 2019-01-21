@@ -1,19 +1,19 @@
 <div class="container">
   <div class="row mb-3">
     <div class="col-md-12">
-      <h2>Stock</h2>
+      <h2>Precios</h2>
     </div>
   </div>
-  <form [formGroup]="stockForm" (ngSubmit)="addStock()" class="row stock-form">
+  <form [formGroup]="priceForm" (ngSubmit)="addPrice()" class="row price-form">
     <div class="col-md-12">
       <div class="row mb-3 mt-2">
-        <h5>Agregar producto al Stock</h5>
+        <h5>Agregar precios de producto</h5>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <app-product-selector [parentForm]="stockForm.get('productForm')" (productChange)='displayProductImage($event)'></app-product-selector>
+          <app-product-selector [parentForm]="priceForm.get('productForm')" (productChange)='displayProductImage($event)'></app-product-selector>
 
-          <app-provider-selector [parentForm]="stockForm.get('provider')"></app-provider-selector>
+          <app-provider-selector [parentForm]="priceForm.get('provider')"></app-provider-selector>
           
           <div class="form-group">
             <input type="text" formControlName="purchasePrice" placeholder="Precio de Compra x Unidad" class="form-control" />
@@ -48,50 +48,50 @@
     <div class="col-md-12">
       <div class="row mb-3 mt-2">
         <div class="col-md-12">
-          <h5>Stock registrado</h5>
+          <h5>Precios registrados</h5>
         </div>
       </div>
       
-      <div class="row align-items-center stock-row" *ngFor="let stock of stockService.stockLst">
+      <div class="row align-items-center price-row" *ngFor="let price of priceService.prices">
         
         <div class="col-md-1">
-          <div *ngIf="stock.productForm.product.fileImg">
-            <img [src]="'data:image/jpg;base64,'+stock.productForm.product.fileImg" class="img-fluid" />
+          <div *ngIf="price.productForm.product.fileImg">
+            <img [src]="'data:image/jpg;base64,'+price.productForm.product.fileImg" class="img-fluid" />
           </div>
-          <div *ngIf="!stock.productForm.product.fileImg">
+          <div *ngIf="!price.productForm.product.fileImg">
             <img [src]="'data:image/jpg;base64,'+noImage" class="img-fluid" />
           </div>
         </div>
 
         <div class="col-md-2">
-          <h4>{{ stock.productForm.product.name }}</h4>
+          <h4>{{ price.productForm.product.name }}</h4>
         </div>
 
         <div class="col-md-1">
-          <p><strong>Marca:</strong><br> {{ stock.productForm.product.brand.name }}</p>
+          <p><strong>Marca:</strong><br> {{ price.productForm.product.brand.name }}</p>
         </div>
 
         <div class="col-md-2">
-          <p><strong>Proveedor:</strong><br> {{ stock.provider.name }}</p>
+          <p><strong>Proveedor:</strong><br> {{ price.provider.name }}</p>
         </div>
 
         <div class="col-md-2">
-          <p><strong>Categoria:</strong><br> {{ stock.productForm.product.category.name }}</p>
+          <p><strong>Categoria:</strong><br> {{ price.productForm.product.category.name }}</p>
         </div>
         
         <div class="col-md-2">
-          <p><strong>Precio Compra:</strong><br> {{ stock.purchasePrice }}</p>
+          <p><strong>Precio Compra:</strong><br> {{ price.purchasePrice }}</p>
         </div>
         <div class="col-md-2">
-          <p><strong>Precio Venta:</strong><br> {{ stock.salePrice }}</p>
+          <p><strong>Precio Venta:</strong><br> {{ price.salePrice }}</p>
         </div>
 
 
         <div class="col-md-1">
-          <a routerLink="/stock/{{stock._id}}" class="btn btn-primary">Editar</a>
+          <a routerLink="/price/{{price._id}}" class="btn btn-primary">Editar</a>
         </div>
         <div class="col-md-1">
-          <a (click)="deleteStock(stock)" class="btn btn-danger">Eliminar</a>
+          <a (click)="deletePrice(price)" class="btn btn-danger">Eliminar</a>
         </div>
 
       </div>

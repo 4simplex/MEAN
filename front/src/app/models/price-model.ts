@@ -1,4 +1,4 @@
-export class Stock {
+export class Price {
     _id: string;
     productForm: { 
         product: {

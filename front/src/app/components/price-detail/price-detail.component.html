@@ -1,20 +1,20 @@
 <div class="container">
   <div class="row mb-3">
     <div class="col-md-12">
-      <h2>Stock</h2>
+      <h2>Precio</h2>
     </div>
   </div>
-  <form [formGroup]="stockForm" (ngSubmit)="save()" class="row stock-form">
+  <form [formGroup]="priceForm" (ngSubmit)="save()" class="row price-form">
     <div class="col-md-12">
       <div class="row mb-3 mt-2">
-        <h5>Actualizar stock item</h5>
+        <h5>Actualizar precio</h5>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
             <input type="text" formControlName="productLongName" class="form-control" disabled/>
           </div>
-          <app-provider-selector [parentForm]="stockForm.get('provider')"></app-provider-selector>
+          <app-provider-selector [parentForm]="priceForm.get('provider')"></app-provider-selector>
   
           <div class="form-group">
             <input type="text" formControlName="purchasePrice" placeholder="Precio de Compra x Unidad" class="form-control" />
