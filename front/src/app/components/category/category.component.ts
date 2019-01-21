@@ -37,7 +37,6 @@ export class CategoryComponent implements OnInit {
           name = nameWithOneSpace;
           this.categoryService.postCategory({ name } as Category)
             .subscribe(category => {
-              console.log(category);
               this.categories.push(category);
               this.selectedCategory.name = '';
               this.selectedCategory._id = '';

@@ -8,7 +8,6 @@ providerCtrl.getProviders = async (req, res) => {
 }
 
 providerCtrl.createProvider = async (req, res) => {
-    console.log(req.body);
     const provider = new Provider(req.body);
     await provider.save();
     res.json(provider);

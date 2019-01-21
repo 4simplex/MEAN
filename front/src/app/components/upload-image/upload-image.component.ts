@@ -24,17 +24,11 @@ export class UploadImageComponent implements OnInit {
     if (!this.fileImg) {
       this.fileImg = getNoImage();
     }
-
   }
 
   showImgPrev() {
     this.fileImg = '';
     this.valueChange.emit(this.fileImg);
-  }
-
-  initImgPrev() {
-    console.log(this.parentForm.get('fileImg').value);
-
   }
 
   readImgUrl(event: any) {
@@ -47,7 +41,7 @@ export class UploadImageComponent implements OnInit {
 
   _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
-    this.fileImg = btoa(binaryString);  // Converting binary string data.
+    this.fileImg = btoa(binaryString);
 
     this.valueChange.emit(this.fileImg);
   }

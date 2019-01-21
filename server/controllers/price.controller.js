@@ -10,8 +10,6 @@ priceCtrl.getPriceLst = async (req, res) => {
 }
 
 priceCtrl.createPrice = async (req, res) => {
-    console.log("Price item a insertar:");
-    console.log(req.body);
     const price = new Price(req.body);
 
     var generatedCode = codeGenerator.generateProductCode();
@@ -26,13 +24,11 @@ priceCtrl.createPrice = async (req, res) => {
 }
 
 priceCtrl.getPrice = async (req, res) => {
-    console.log(req.params);
     const price = await Price.findById(req.params.id);
     res.json(price);
 }
 
 priceCtrl.editPrice = async (req, res) => {
-    console.log(req.body);
     const price = {
         purchasePrice: req.body.purchasePrice,
         salePrice: req.body.salePrice,

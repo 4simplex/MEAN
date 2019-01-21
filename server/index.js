@@ -22,5 +22,5 @@ app.use('/api/price', require('./routes/price.routes'));
 app.use('/api/product', require('./routes/product.routes'));
 
 app.listen(app.get('port'), () => {
-    console.log('server on port', app.get('port'));
+    console.log('Server on port', app.get('port'));
 });

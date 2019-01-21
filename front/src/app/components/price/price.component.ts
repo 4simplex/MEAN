@@ -51,7 +51,6 @@ export class PriceComponent implements OnInit {
         this.prodCode = st.productCode;
         this.getAllPriceItems();
       });
-    console.log(this.priceForm.value);
   }
 
   getAllPriceItems() {

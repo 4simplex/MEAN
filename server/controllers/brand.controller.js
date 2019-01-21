@@ -7,12 +7,9 @@ brandCtrl.getBrands = async (req, res) => {
 }
 
 brandCtrl.createBrand = async (req, res) => {
-    console.log('--createBrand--');
-    console.log(req.body);
     const brand = new Brand(req.body);
     await brand.save();
     res.json(brand);
-    console.log('--createBrand exit--');
 }
 
 brandCtrl.getBrand = async (req, res) => {

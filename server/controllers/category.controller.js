@@ -8,7 +8,6 @@ categoryCtrl.getCategories = async (req, res) => {
 }
 
 categoryCtrl.createCategory = async (req, res) => {
-    console.log(req.body);
     const category = new Category(req.body);
     await category.save();
     res.json(category);

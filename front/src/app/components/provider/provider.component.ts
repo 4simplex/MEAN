@@ -37,34 +37,18 @@ export class ProviderComponent implements OnInit {
           name = nameWithOneSpace;
           this.providerService.postProvider({ name } as Provider)
             .subscribe(provider => {
-              console.log(provider);
               this.providers.push(provider);
               this.selectedProvider.name = '';
               this.selectedProvider._id = '';
             });
         }
       });
-
-    /*if(form.value._id){
-      this.providerService.putProvider(form.value)
-      .subscribe(res => {
-        this.resetForm(form);
-        this.getProviders();
-      })
-    }else{
-      this.providerService.postProvider(form.value)
-      .subscribe(res => {
-        this.resetForm(form);
-        this.getProviders();
-      });
-    }*/
   }
 
   getProviders() {
     this.providerService.getProviders()
       .subscribe(res => {
         this.providers = res as Provider[];
-        console.log(res);
       });
   }
 
