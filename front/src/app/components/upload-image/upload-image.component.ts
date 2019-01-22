@@ -33,9 +33,17 @@ export class UploadImageComponent implements OnInit {
 
   readImgUrl(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = this._handleReaderLoaded.bind(this);
-      reader.readAsBinaryString(event.target.files[0]);
+      const imageType = event.target.files[0].type;
+
+      if (imageType === 'image/jpeg' || imageType === 'image/png') {
+        console.log(event.target.files[0].type);
+        const reader = new FileReader();
+        reader.onload = this._handleReaderLoaded.bind(this);
+        reader.readAsBinaryString(event.target.files[0]);
+      } else {
+        alert('Archivo no válido. La imagen tiene que ser formato JPEG o PNG.');
+        this.fileImg = '';
+      }
     }
   }
 

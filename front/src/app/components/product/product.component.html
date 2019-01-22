@@ -28,7 +28,7 @@
           <div class="form-group">
             <textarea placeholder="Descripción" id="description" formControlName="description" class="form-control"></textarea>
           </div>
-          <app-upload-image [parentForm]="productForm.get('photo')" (valueChange)="displayCounter($event)"></app-upload-image>
+          <app-upload-image [parentForm]="productForm.get('photo')" (valueChange)="displayProductImage($event)"></app-upload-image>
 
           <button [disabled]="!productForm.valid" class="btn btn-primary">Crear</button>
         </div>
@@ -60,7 +60,7 @@
 
         </div>
         <div class="col-md-2">
-          <p><strong>Categoria:</strong><br> {{ product.category.name }}</p>
+          <p><strong>Categoría:</strong><br> {{ product.category.name }}</p>
         </div>
         <div class="col-md-1">
           <a routerLink="/product/{{product._id}}" class="btn btn-primary">Editar</a>

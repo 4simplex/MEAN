@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
     this.uploadChild.showImgPrev();
   }
 
-  displayCounter(count) {
+  displayProductImage(count) {
     this.productForm.get('fileImg').setValue(count);
   }
 
