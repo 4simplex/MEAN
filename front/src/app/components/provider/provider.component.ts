@@ -21,8 +21,8 @@ export class ProviderComponent implements OnInit {
     this.getProviders();
   }
 
-  addProvider(form: NgForm) {
-    let name = form.controls.name.value;
+  addProvider(providerForm: NgForm) {
+    let name = providerForm.controls.name.value;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     const id = 'noId';
 
@@ -30,16 +30,18 @@ export class ProviderComponent implements OnInit {
       .subscribe(res => {
         if (res != null) {
           if (nameWithOneSpace.toLowerCase() === res.name.toLowerCase()) {
-            alert('El producto ya existe');
+            alert('El Proveedor ya existe');
           }
         } else {
           if (!nameWithOneSpace) { return; }
           name = nameWithOneSpace;
-          this.providerService.postProvider({ name } as Provider)
+          let info = providerForm.controls.info.value;
+          this.providerService.postProvider({ name, info } as Provider)
             .subscribe(provider => {
               this.providers.push(provider);
-              this.selectedProvider.name = '';
               this.selectedProvider._id = '';
+              this.selectedProvider.name = '';
+              this.selectedProvider.info = '';
             });
         }
       });
