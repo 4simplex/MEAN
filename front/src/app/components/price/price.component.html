@@ -62,20 +62,10 @@
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-5">
           <h4>{{ price.productForm.product.name }}</h4>
-        </div>
-
-        <div class="col-md-1">
-          <p><strong>Marca:</strong><br> {{ price.productForm.product.brand.name }}</p>
-        </div>
-
-        <div class="col-md-2">
-          <p><strong>Proveedor:</strong><br> {{ price.provider.name }}</p>
-        </div>
-
-        <div class="col-md-2">
-          <p><strong>Categoria:</strong><br> {{ price.productForm.product.category.name }}</p>
+          <p><strong>Marca:</strong> {{ price.productForm.product.brand.name }} - <strong>Proveedor:</strong> {{ price.provider.name
+            }} - <strong>Categoría:</strong>{{ price.productForm.product.category.name }}</p>
         </div>
 
         <div class="col-md-2">

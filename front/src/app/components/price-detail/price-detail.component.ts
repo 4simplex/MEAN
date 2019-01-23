@@ -13,12 +13,12 @@ import { PriceService } from '../../services/price.service';
 })
 export class PriceDetailComponent implements OnInit {
   priceForm: FormGroup;
-  price: Price; 
+  price: Price;
   initImg: string;
   priceId: string;
   productLongNameProp: string;
   noImage = getNoImage();
-  
+
   constructor(
     private fb: FormBuilder,
     private priceService: PriceService,
@@ -31,15 +31,15 @@ export class PriceDetailComponent implements OnInit {
       '_id': [''],
       'purchasePrice': ['', Validators.required],
       'salePrice': ['', Validators.required],
-      'productCode': [''],
-      'productLongName': [''],
+      'productCode': [{ value: '', disabled: true }],
+      'productLongName': [{ value: '', disabled: true }],
       'provider': this.fb.group({
         '_id': [''],
         'name': ['']
       }),
       'productForm': this.fb.group({
         'product': this.fb.group({
-          '_id':[''],
+          '_id': [''],
           'category': this.fb.group({
             '_id': [''],
             'name': ['']
@@ -48,8 +48,8 @@ export class PriceDetailComponent implements OnInit {
             '_id': [''],
             'name': ['']
           }),
-          'name':[''],
-          'fileImg':['']
+          'name': [''],
+          'fileImg': ['']
         })
       })
     });
@@ -69,8 +69,8 @@ export class PriceDetailComponent implements OnInit {
         this.priceForm.get('_id').setValue(this.price._id);
         this.priceForm.get('productForm.product.brand.name').setValue(this.price.productForm.product.brand.name);
         this.priceForm.get('productForm.product.category.name').setValue(this.price.productForm.product.category.name);
-        this.productLongNameProp = this.priceForm.get('productForm.product.brand.name').value 
-          + ' - ' + this.priceForm.get('productForm.product.name').value 
+        this.productLongNameProp = this.priceForm.get('productForm.product.brand.name').value
+          + ' - ' + this.priceForm.get('productForm.product.name').value
           + ' - ' + this.priceForm.get('productForm.product.category.name').value;
         this.priceForm.get('productLongName').setValue(this.productLongNameProp);
       });

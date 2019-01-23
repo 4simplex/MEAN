@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormControl, Validators, NgForm, FormBuilder } from '@angular/forms';
-import { CustomValidators } from 'src/app/helpers/customValidators';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/models/product-model';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
