@@ -49,7 +49,7 @@ export class PriceService {
     const url = `${this.URL_API}/${id}`;
 
     return this.http.delete<Price>(url, httpOptions).pipe(
-      tap(_ => console.info(`Deleted price id=${id}`)),
+      // tap(_ => console.info(`Deleted price id=${id}`)),
       catchError(this.handleError<Price>('deletePrice'))
     );
   }

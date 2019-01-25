@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { NgForm } from '@angular/forms';
 import { Provider } from '../../models/provider-model';
 import { ProviderService } from '../../services/provider.service';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
@@ -13,6 +13,8 @@ import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 })
 export class ProviderDetailComponent implements OnInit {
   @Input() provider: Provider;
+  nameUnchanged: string;
+  infoUnchanged: string;
 
   constructor(private route: ActivatedRoute,
     private providerService: ProviderService,
@@ -26,7 +28,11 @@ export class ProviderDetailComponent implements OnInit {
   getProvider(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.providerService.getProvider(id)
-      .subscribe(b => this.provider = b);
+      .subscribe(b => {
+        this.provider = b;
+        this.nameUnchanged = this.provider.name;
+        this.infoUnchanged = this.provider.info;
+      });
   }
 
   goBack(): void {
@@ -40,16 +46,24 @@ export class ProviderDetailComponent implements OnInit {
       return;
     }
     const nameWithOneSpace = RemoveWhiteSpaces(name);
-    const localId = this.route.snapshot.paramMap.get('id');
+
+    if (nameWithOneSpace == this.nameUnchanged
+      && providerForm.controls.info.value == this.infoUnchanged) {
+      this.goBack();
+      return;
+    }
+    const localId = RemoveWhiteSpaces(this.route.snapshot.paramMap.get('id'));
 
     this.providerService.getProviderByName(nameWithOneSpace, localId)
       .subscribe(res => {
         if (res != null) {
           if (localId === res._id) {
+            this.provider.name = nameWithOneSpace;
+            this.provider.info = providerForm.controls.info.value;
             this.providerService.putProvider(this.provider)
               .subscribe(() => this.goBack());
           } else {
-            alert('El producto ya existe');
+            alert('El Proveedor ya existe');
           }
         }
 
