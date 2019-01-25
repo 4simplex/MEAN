@@ -52,6 +52,12 @@ export class ProductComponent implements OnInit {
 
   addNewProduct() {
     const name = this.productForm.get('name').value;
+
+    if (name.trim() === '') {
+      alert('Dato no válido. Debe escribir un nombre de producto.');
+      return;
+    }
+
     const nameWhithOneSpace = RemoveWhiteSpaces(name);
     const id = 'noId';
 

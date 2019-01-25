@@ -36,6 +36,12 @@ export class BrandDetailComponent implements OnInit {
 
   save(): void {
     const name = this.brand.name;
+
+    if (name.trim() === '') {
+      alert('Dato no válido. Debe escribir una marca');
+      return;
+    }
+
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     this.brand.name = nameWithOneSpace;
 

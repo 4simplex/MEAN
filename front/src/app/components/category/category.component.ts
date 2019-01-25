@@ -23,6 +23,11 @@ export class CategoryComponent implements OnInit {
   }
 
   addCategory(categoryForm: NgForm) {
+    if (categoryForm.controls.name.value.trim() === '') {
+      alert('Dato no válido. Debe escribir una categoría');
+      return;
+    }
+
     let name = categoryForm.controls.name.value;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     const id = 'noId';

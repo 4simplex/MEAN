@@ -4,6 +4,7 @@ import { Brand } from '../../models/brand-model';
 import { BrandService } from '../../services/brand.service';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 import { ProductService } from '../../services/product.service';
+import { appLiterals } from '../../resources/appLiterals';
 
 @Component({
   selector: 'app-brands',
@@ -14,9 +15,11 @@ export class BrandsComponent implements OnInit {
   brands: Brand[];
   selectedBrand: Brand;
   actualPage: Number = 1;
+  appLiterals;
 
-  constructor(private brandService: BrandService, private productService: ProductService) { 
+  constructor(private brandService: BrandService, private productService: ProductService) {
     this.selectedBrand = new Brand();
+    this.appLiterals = appLiterals();
   }
 
   ngOnInit() {
@@ -29,6 +32,10 @@ export class BrandsComponent implements OnInit {
   }
 
   addBrand(brandForm: NgForm): void {
+    if (brandForm.controls.name.value.trim() === '') {
+      alert(this.appLiterals.brands.invalidMsg);
+      return;
+    }
     let name = brandForm.controls.name.value;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     const id = 'noId';

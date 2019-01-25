@@ -35,6 +35,10 @@ export class ProviderDetailComponent implements OnInit {
 
   save(): void {
     const name = this.provider.name;
+    if (name.trim() === '') {
+      alert('Dato no válido. Debe escribir un proveedor');
+      return;
+    }
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     const localId = this.route.snapshot.paramMap.get('id');
 

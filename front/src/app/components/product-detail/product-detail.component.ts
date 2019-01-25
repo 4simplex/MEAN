@@ -80,6 +80,10 @@ export class ProductDetailComponent implements OnInit {
 
   modifyProduct(id: string) {
     const name = this.productForm.get('name').value;
+    if (name.trim() === '') {
+      alert('Dato no válido. Debe escribir un nombre de producto.');
+      return;
+    }
     const nameWhithOneSpace = RemoveWhiteSpaces(name);
     const localId = this.productForm.get('_id').value;
 

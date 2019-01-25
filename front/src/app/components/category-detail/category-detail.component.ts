@@ -35,6 +35,10 @@ export class CategoryDetailComponent implements OnInit {
 
   save(): void {
     const name = this.category.name;
+    if (name.trim() === '') {
+      alert('Dato no válido. Debe escribir una categoría');
+      return;
+    }
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     this.category.name = nameWithOneSpace;
 

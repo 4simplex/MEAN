@@ -22,6 +22,11 @@ export class ProviderComponent implements OnInit {
   }
 
   addProvider(form: NgForm) {
+    if (form.controls.name.value.trim() === '') {
+      alert('Dato no válido. Debe escribir un proveedor');
+      return;
+    }
+
     let name = form.controls.name.value;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
     const id = 'noId';
