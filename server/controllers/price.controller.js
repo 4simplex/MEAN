@@ -19,6 +19,7 @@ priceCtrl.createPrice = async (req, res) => {
         codeExists = productCodeCtrl.findProductCode(generatedCode);
     }
     price.productCode = generatedCode;
+    price.stock = 0;
     await price.save();
     res.json(price);
 }
