@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Brand } from '../../models/brand-model';
 import { BrandService } from '../../services/brand.service';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
+import { appLiterals } from '../../resources/appLiteral';
 
 @Component({
   selector: 'app-brand-detail',
@@ -13,12 +14,15 @@ import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 })
 export class BrandDetailComponent implements OnInit {
   @Input() brand: Brand;
+  appLiterals;
 
   constructor(
     private route: ActivatedRoute,
     private brandService: BrandService,
     private location: Location
-  ) { }
+  ) {
+    this.appLiterals = appLiterals;
+  }
 
   ngOnInit(): void {
     this.getBrand();
@@ -38,7 +42,7 @@ export class BrandDetailComponent implements OnInit {
     const name = this.brand.name;
 
     if (name.trim() === '') {
-      alert('Dato no válido. Debe escribir una marca');
+      alert(this.appLiterals.brands.dataNotValidMsg);
       return;
     }
 
@@ -54,7 +58,7 @@ export class BrandDetailComponent implements OnInit {
             this.brandService.updateBrand(this.brand)
               .subscribe(() => this.goBack());
           } else {
-            alert('El producto ya existe');
+            alert(this.appLiterals.brands.existingBrandMsg);
           }
         }
 

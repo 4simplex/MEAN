@@ -39,12 +39,8 @@ export class ProviderDetailComponent implements OnInit {
     this.location.back();
   }
 
-  save(): void {
-    const name = this.provider.name;
-    if (name.trim() === '') {
-      alert('Dato no válido. Debe escribir un proveedor');
-      return;
-    }
+  save(providerForm: NgForm): void {
+    const name = providerForm.controls.name.value;
     const nameWithOneSpace = RemoveWhiteSpaces(name);
 
     if (nameWithOneSpace == this.nameUnchanged

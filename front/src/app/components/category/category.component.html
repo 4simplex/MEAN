@@ -1,20 +1,20 @@
 <div class="container">
   <div class="row mb-3">
     <div class="col-md-12">
-      <h2>Categorías</h2>
+      <h2>{{ appLiterals.category.categories }}</h2>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="row mb-3 mt-2">
-        <h5>Crear Categoría</h5>
+        <h5>{{ appLiterals.category.createCategory }}</h5>
       </div>
       <div class="row mb-5">
         <div class="col-md-8">
           <form #categoryForm="ngForm" (ngSubmit)="addCategory(categoryForm)" class="form-group">
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="selectedCategory._id">
             <input required type="text" name="name" #name [(ngModel)]="selectedCategory.name" placeholder="Nombre" class="form-control mb-3">
-            <button [disabled]="!categoryForm.valid" class="btn btn-primary">Guardar</button>
+            <button [disabled]="!categoryForm.valid" class="btn btn-primary">{{ appLiterals.btnCreate }}</button>
           </form>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div class="col-md-12">
           <div class="row mb-3 mt-2">
             <div class="col-md-12">
-              <h5>Categorías Creadas</h5>
+              <h5>{{ appLiterals.category.registeredCategory }}</h5>
             </div>
           </div>
           <div class="row align-items-center category-row" *ngFor="let category of categories | paginate: {itemsPerPage:3, currentPage: actualPage}">
@@ -31,16 +31,17 @@
               <h4>{{ category.name }}</h4>
             </div>
             <div class="col-md-1">
-              <a routerLink="/categories/{{category._id}}" class="btn btn-primary">Editar</a>
+              <a routerLink="/categories/{{category._id}}" class="btn btn-primary">{{ appLiterals.btnEdit }}</a>
             </div>
             <div class="col-md-1">
-              <a (click)="deleteCategory(category)" class="btn btn-danger">Eliminar</a>
+              <a (click)="deleteCategory(category)" class="btn btn-danger">{{ appLiterals.btnDelete }}</a>
             </div>
 
           </div>
           <div class="row">
-            <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="Previa" nextLabel="Próxima"
-              screenReaderPaginationLabel="Paginación" screenReaderPageLabel="Página" screenReaderCurrentLabel="Estas en la página"></pagination-controls>
+            <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="{{appLiterals.paginationTexts.previous}}"
+              nextLabel="{{appLiterals.paginationTexts.next}}" screenReaderPaginationLabel="{{appLiterals.paginationTexts.pagination}}"
+              screenReaderPageLabel="{{appLiterals.paginationTexts.page}}" screenReaderCurrentLabel="{{appLiterals.paginationTexts.currentPage}}"></pagination-controls>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/models/category-model';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 import { ProductService } from '../../services/product.service';
+import { appLiterals } from '../../resources/appLiteral';
 
 @Component({
   selector: 'app-category',
@@ -14,8 +15,10 @@ export class CategoryComponent implements OnInit {
   categories: Category[];
   selectedCategory: Category;
   actualPage: Number = 1;
+  appLiterals;
   constructor(private categoryService: CategoryService, private productService: ProductService) {
     this.selectedCategory = new Category();
+    this.appLiterals = appLiterals;
   }
 
   ngOnInit() {
@@ -24,7 +27,7 @@ export class CategoryComponent implements OnInit {
 
   addCategory(categoryForm: NgForm) {
     if (categoryForm.controls.name.value.trim() === '') {
-      alert('Dato no válido. Debe escribir una categoría');
+      alert(this.appLiterals.category.dataNotValidMsg);
       return;
     }
 
@@ -36,7 +39,7 @@ export class CategoryComponent implements OnInit {
       .subscribe(res => {
         if (res != null) {
           if (nameWithOneSpace.toLowerCase() === res.name.toLowerCase()) {
-            alert('La Categoría ya existe');
+            alert(this.appLiterals.category.existingCategoryMsg);
           }
         } else {
           if (!nameWithOneSpace) { return; }
@@ -66,9 +69,9 @@ export class CategoryComponent implements OnInit {
     this.productService.categoryHasProducts(category._id)
       .subscribe(res => {
         if (res !== null) {
-          alert('No puede borrar la categoría porque tiene productos existentes.');
+          alert(this.appLiterals.category.cannotDeleteBCategoryMsg);
         } else {
-          if (confirm('Desea eliminar la categoría?')) {
+          if (confirm(this.appLiterals.category.deleteCategoryMsg)) {
             this.categories = this.categories.filter(b => b !== category);
             this.categoryService.deleteCategory(category._id).subscribe();
           }

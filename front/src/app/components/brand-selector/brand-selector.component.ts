@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BrandService } from '../../services/brand.service';
 import { Brand } from '../../models/brand-model';
 import { FormGroup } from '@angular/forms';
+import { appLiterals } from '../../resources/appLiteral';
 
 @Component({
   selector: 'app-brand-selector',
@@ -11,8 +12,10 @@ import { FormGroup } from '@angular/forms';
 export class BrandSelectorComponent implements OnInit {
   @Input('parentForm')
   public parentForm: FormGroup;
-
-  constructor(private httpBrand: BrandService) { }
+  appLiterals;
+  constructor(private httpBrand: BrandService) {
+    this.appLiterals = appLiterals;
+  }
 
   ngOnInit() {
     this.getBrands();

@@ -4,7 +4,7 @@ import { Brand } from '../../models/brand-model';
 import { BrandService } from '../../services/brand.service';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 import { ProductService } from '../../services/product.service';
-import { appLiterals } from '../../resources/appLiterals';
+import { appLiterals } from '../../resources/appLiteral';
 
 @Component({
   selector: 'app-brands',
@@ -19,7 +19,8 @@ export class BrandsComponent implements OnInit {
 
   constructor(private brandService: BrandService, private productService: ProductService) {
     this.selectedBrand = new Brand();
-    this.appLiterals = appLiterals();
+
+    this.appLiterals = appLiterals;
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class BrandsComponent implements OnInit {
 
   addBrand(brandForm: NgForm): void {
     if (brandForm.controls.name.value.trim() === '') {
-      alert(this.appLiterals.brands.invalidMsg);
+      alert(this.appLiterals.brands.dataNotValidMsg);
       return;
     }
     let name = brandForm.controls.name.value;
@@ -44,7 +45,7 @@ export class BrandsComponent implements OnInit {
       .subscribe(res => {
         if (res != null) {
           if (nameWithOneSpace.toLowerCase() === res.name.toLowerCase()) {
-            alert('La Marca ya existe');
+            alert(this.appLiterals.brands.existingBrandMsg);
           }
         } else {
           if (!nameWithOneSpace) { return; }
@@ -63,9 +64,9 @@ export class BrandsComponent implements OnInit {
     this.productService.brandHasProducts(brand._id)
       .subscribe(res => {
         if (res !== null) {
-          alert('No puede borrar la marca porque tiene productos existentes.');
+          alert(this.appLiterals.brands.cannotDeleteBrandMsg);
         } else {
-          if (confirm('Desea eliminar la marca?')) {
+          if (confirm(this.appLiterals.brands.deleteBrandMsg)) {
             this.brands = this.brands.filter(b => b !== brand);
             this.brandService.deleteBrand(brand).subscribe();
           }
