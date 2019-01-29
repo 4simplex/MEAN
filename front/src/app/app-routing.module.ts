@@ -6,6 +6,7 @@ import { BrandDetailComponent } from './components/brand-detail/brand-detail.com
 
 import { CategoryComponent } from './components/category/category.component';
 import { ProviderComponent } from './components/provider/provider.component';
+import { StockComponent } from './components/stock/stock.component';
 
 import { PriceComponent } from './components/price/price.component';
 import { PriceDetailComponent } from './components/price-detail/price-detail.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'price', component: PriceComponent },
   { path: 'price/:id', component: PriceDetailComponent },
   { path: 'products', component: ProductComponent },
-  { path: 'product/:id', component: ProductDetailComponent }
+  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'stock', component: StockComponent }
 ];
 
 @NgModule({

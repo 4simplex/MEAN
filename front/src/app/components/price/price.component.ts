@@ -38,32 +38,14 @@ export class PriceComponent implements OnInit {
   }
 
   addPrice() {
-    let purchasePrice = this.priceForm.get('purchasePrice').value;
-    let salePrice = this.priceForm.get('salePrice').value;
-
-    if (!purchasePrice || !salePrice) {
-      alert("Debe ingresar valores para Precio de Compra y Precio de Venta");
+    if(!this.makeValidations()){
       return;
     }
 
-    let currencyPurchasePrice = this.getFormattedPrice(purchasePrice);
-    if(currencyPurchasePrice == '$ NaN'){
-      alert("Precio de Compra, valor incorreto");
-      return;
-    }
-    purchasePrice = currencyPurchasePrice;
-    
-    let currencySalePrice = this.getFormattedPrice(salePrice);
-    if(currencySalePrice == '$ NaN'){
-      alert("Precio de Venta, valor incorreto");
-      return;
-    }
-    salePrice = currencySalePrice;
-    
     this.priceService.postPrice(this.priceForm.value)
       .subscribe(res => {
-        let st = res as Price;
-        this.prodCode = st.productCode;
+        let price = res as Price;
+        this.prodCode = price.productCode;
         this.getAllPriceItems();
       });
   }
@@ -89,7 +71,40 @@ export class PriceComponent implements OnInit {
   }
 
   getFormattedPrice(price: number) {
-    return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
+    let currencyPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
+    return currencyPrice;
+  }
+
+  makeValidations(): Boolean {
+    if(!this.priceForm.get('productForm').value.product){
+      alert("Debe ingresar un Producto");
+      return false;
+    }
+
+    if(!this.priceForm.get('provider').value._id){
+      alert("Debe ingresar un Proveedor");
+      return false;
+    }
+
+    let purchasePrice = this.priceForm.get('purchasePrice').value;
+    let salePrice = this.priceForm.get('salePrice').value;
+
+    if (!purchasePrice || !salePrice) {
+      alert("Debe ingresar valores para Precio de Compra y Precio de Venta");
+      return false;
+    }
+
+    if(this.getFormattedPrice(purchasePrice) == '$ NaN'){
+      alert("Precio de Compra, valor incorreto");
+      return false;
+    }
+    
+    if(this.getFormattedPrice(salePrice) == '$ NaN'){
+      alert("Precio de Venta, valor incorreto");
+      return false;
+    }
+
+    return true;
   }
 
 }
