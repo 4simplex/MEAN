@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h2>Ventas</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row mb-3 mt-2">
+        <h5>Realizar Ventas</h5>
+        <h6>Buscar Producto</h6>
+        <input type="text">
+      </div>
+      <div class="row mb-5">
+        <div class="col-md-8">
+          <div class="card" *ngFor="let price of priceService.prices" style="width: 18rem;">
+            <div *ngIf="price.productForm.product.fileImg">
+              <img [src]="'data:image/jpg;base64,'+price.productForm.product.fileImg" class="card-img-top" />
+            </div>
+            <div *ngIf="!price.productForm.product.fileImg">
+              <img [src]="'data:image/jpg;base64,'+noImage" class="card-img-top" />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ price.productForm.product.name }}</h5>
+              <p class="card-text"><strong>Código:</strong> {{ price.productCode }}<br> <strong>Stock:</strong> {{ price.stock
+                }}
+                <br> <strong>Precio:</strong> {{ price.salePrice | currency }}
+              </p>
+              <p class="card-text">Cantidad a vender: <input type="text" style="width: 50px">
+              </p>
+              <a href="#" class="btn btn-primary">Agregar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <h6>Productos agregados al carrito</h6>
+    </div>
+  </div>
+</div>

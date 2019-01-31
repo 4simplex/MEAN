@@ -16,6 +16,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { ProviderDetailComponent } from './components/provider-detail/provider-detail.component';
 
+import { SaleComponent } from './components/sale/sale.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/brands', pathMatch: 'full' },
   { path: 'brand/:id', component: BrandDetailComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
   { path: 'price/:id', component: PriceDetailComponent },
   { path: 'products', component: ProductComponent },
   { path: 'product/:id', component: ProductDetailComponent },
-  { path: 'stock', component: StockComponent }
+  { path: 'stock', component: StockComponent },
+  { path: 'sale', component: SaleComponent }
 ];
 
 @NgModule({

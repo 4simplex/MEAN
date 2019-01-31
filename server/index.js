@@ -20,6 +20,7 @@ app.use('/api/brand', require('./routes/brand.routes'));
 app.use('/api/provider', require('./routes/provider.routes'));
 app.use('/api/price', require('./routes/price.routes'));
 app.use('/api/product', require('./routes/product.routes'));
+app.use('/api/sale', require('./routes/sale.routes'));
 
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
