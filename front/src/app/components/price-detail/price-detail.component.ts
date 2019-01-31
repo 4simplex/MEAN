@@ -31,6 +31,7 @@ export class PriceDetailComponent implements OnInit {
       '_id': [''],
       'purchasePrice': ['', Validators.required],
       'salePrice': ['', Validators.required],
+      'stock': [''],
       'productCode': [{ value: '', disabled: true }],
       'productLongName': [{ value: '', disabled: true }],
       'provider': this.fb.group({
@@ -58,6 +59,7 @@ export class PriceDetailComponent implements OnInit {
       .subscribe(res => {
         this.price = res;
         this.priceForm.get('purchasePrice').setValue(this.price.purchasePrice);
+        this.priceForm.get('stock').setValue(this.price.stock);
         this.priceForm.get('salePrice').setValue(this.price.salePrice);
         this.priceForm.get('productCode').setValue(this.price.productCode);
         this.priceForm.get('productForm.product._id').setValue(this.price.productForm.product._id);

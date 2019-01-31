@@ -36,7 +36,8 @@ priceCtrl.editPrice = async (req, res) => {
         provider: { 
             _id: req.body.provider._id, 
             name: req.body.provider.name 
-        }
+        },
+        stock: req.body.stock
     };
     await Price.findByIdAndUpdate(req.params.id, {$set:price});
     res.json({status: 'Price updated'});
