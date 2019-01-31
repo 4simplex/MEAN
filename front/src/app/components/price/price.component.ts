@@ -14,7 +14,7 @@ export class PriceComponent implements OnInit {
   noImage = getNoImage();
   prodCode: string;
   actualPage: Number = 1;
-  productFileImage = "";
+  productFileImage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -38,13 +38,13 @@ export class PriceComponent implements OnInit {
   }
 
   addPrice() {
-    if(!this.makeValidations()){
+    if (!this.makeValidations()) {
       return;
     }
 
     this.priceService.postPrice(this.priceForm.value)
       .subscribe(res => {
-        let price = res as Price;
+        const price = res as Price;
         this.prodCode = price.productCode;
         this.getAllPriceItems();
       });
@@ -71,36 +71,36 @@ export class PriceComponent implements OnInit {
   }
 
   getFormattedPrice(price: number) {
-    let currencyPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
+    const currencyPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
     return currencyPrice;
   }
 
   makeValidations(): Boolean {
-    if(!this.priceForm.get('productForm').value.product){
-      alert("Debe ingresar un Producto");
+    if (!this.priceForm.get('productForm').value.product) {
+      alert('Debe ingresar un Producto');
       return false;
     }
 
-    if(!this.priceForm.get('provider').value._id){
-      alert("Debe ingresar un Proveedor");
+    if (!this.priceForm.get('provider').value._id) {
+      alert('Debe ingresar un Proveedor');
       return false;
     }
 
-    let purchasePrice = this.priceForm.get('purchasePrice').value;
-    let salePrice = this.priceForm.get('salePrice').value;
+    const purchasePrice = this.priceForm.get('purchasePrice').value;
+    const salePrice = this.priceForm.get('salePrice').value;
 
     if (!purchasePrice || !salePrice) {
-      alert("Debe ingresar valores para Precio de Compra y Precio de Venta");
+      alert('Debe ingresar valores para Precio de Compra y Precio de Venta');
       return false;
     }
 
-    if(this.getFormattedPrice(purchasePrice) == '$ NaN'){
-      alert("Precio de Compra, valor incorreto");
+    if (this.getFormattedPrice(purchasePrice) === '$ NaN') {
+      alert('Precio de Compra, valor incorreto');
       return false;
     }
-    
-    if(this.getFormattedPrice(salePrice) == '$ NaN'){
-      alert("Precio de Venta, valor incorreto");
+
+    if (this.getFormattedPrice(salePrice) === '$ NaN') {
+      alert('Precio de Venta, valor incorreto');
       return false;
     }
 

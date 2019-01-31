@@ -1,15 +1,15 @@
 export class Price {
     _id: string;
-    productForm: { 
+    productForm: {
         product: {
             _id: string;
-            category: { 
-                _id: string, 
-                name: string 
+            category: {
+                _id: string,
+                name: string
             };
-            brand: { 
-                _id: string, 
-                name: string 
+            brand: {
+                _id: string,
+                name: string
             };
             name: string;
             description: string;
@@ -18,10 +18,11 @@ export class Price {
         }
     };
     provider: {
-        _id: string, 
-        name: string 
+        _id: string,
+        name: string
     };
     purchasePrice: number;
     salePrice: number;
     productCode: string;
+    stock: number;
 }
