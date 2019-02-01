@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getNoImage } from '../../../assets/noimage';
 import { PriceService } from '../../services/price.service';
 import { Price } from 'src/app/models/price-model';
+import { appLiterals } from '../../resources/appLiteral';
 
 @Component({
   selector: 'app-stock',
@@ -10,8 +11,11 @@ import { Price } from 'src/app/models/price-model';
 })
 export class StockComponent implements OnInit {
   noImage = getNoImage();
+  appLiterals;
 
-  constructor(private priceService: PriceService) { }
+  constructor(private priceService: PriceService) {
+    this.appLiterals = appLiterals;
+  }
 
   ngOnInit() {
     this.getAllPriceItems();

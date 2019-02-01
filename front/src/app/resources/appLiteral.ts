@@ -26,6 +26,7 @@ export const appLiterals = {
     },
     category: {
         categories: 'Categorías',
+        category: 'Categoría:',
         createCategory: 'Crear Categoría',
         registeredCategory: 'Categorías registradas',
         dataNotValidMsg: 'Dato no válido. Debe escribir una categoría.',
@@ -58,7 +59,14 @@ export const appLiterals = {
         mustInsertPricesMsg: 'Debe ingresar valores para Precio de Compra y Precio de Venta',
         buyPriceIncorrectMsg: 'Precio de Compra, valor incorrecto.',
         salePriceIncorrectMsg: 'Precio de Venta, valor incorrecto.',
-        deletePriceMsg: 'Desea eliminar el precio?'
+        deletePriceMsg: 'Desea eliminar el precio?',
+        purchasePriceShort: 'Compra:',
+        salePriceShort: 'Venta:'
+    },
+    stock: {
+        stock: 'Stock',
+        stockTitle: 'Inventario',
+        registeredStock: 'Stock registrado'
     },
     paginationTexts: {
         previous: 'Previa',
