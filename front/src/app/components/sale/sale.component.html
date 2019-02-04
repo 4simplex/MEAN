@@ -7,28 +7,32 @@
   <div class="row">
     <div class="col-md-4">
       <div class="row mb-3 mt-2">
-        <h5>Realizar Ventas</h5>
-        <h6>Buscar Producto</h6>
-        <input type="text">
+        <h5>Buscar Producto:</h5><br>
+        <input type="text" class="form-control" (keyup)="searchProduct($event)" capitalize />
+        <ul *ngIf="prices" class="searchResult">
+          <li *ngFor="let price of prices"><a href="" (click)="addSearchResult(price, $event)">{{ price.productCode }} -
+              {{ price.productForm.product.name }} - {{ price.salePrice | currency }}</a></li>
+        </ul>
       </div>
       <div class="row mb-5">
-        <div class="col-md-8">
-          <div class="card" *ngFor="let price of priceService.prices" style="width: 18rem;">
-            <div *ngIf="price.productForm.product.fileImg">
-              <img [src]="'data:image/jpg;base64,'+price.productForm.product.fileImg" class="card-img-top" />
+        <div class="col-md-8" *ngIf="priceFound">
+          <div class="card" style="width: 18rem;">
+            <div *ngIf="priceFound.productForm.product.fileImg">
+              <img [src]="'data:image/jpg;base64,'+priceFound.productForm.product.fileImg" class="card-img-top" />
             </div>
-            <div *ngIf="!price.productForm.product.fileImg">
+            <div *ngIf="!priceFound.productForm.product.fileImg">
               <img [src]="'data:image/jpg;base64,'+noImage" class="card-img-top" />
             </div>
             <div class="card-body">
-              <h5 class="card-title">{{ price.productForm.product.name }}</h5>
-              <p class="card-text"><strong>Código:</strong> {{ price.productCode }}<br> <strong>Stock:</strong> {{ price.stock
+              <h5 class="card-title">{{ priceFound.productForm.product.name }}</h5>
+              <p class="card-text"><strong>Código:</strong> {{ priceFound.productCode }}<br> <strong>Stock:</strong> {{ priceFound.stock
                 }}
-                <br> <strong>Precio:</strong> {{ price.salePrice | currency }}
+                <br> <strong>Precio:</strong> {{ priceFound.salePrice | currency }}
               </p>
-              <p class="card-text">Cantidad a vender: <input type="text" style="width: 50px">
+              <p class="card-text">Cantidad a vender: <input type="text" [(ngModel)]="units" style="width: 50px" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                  (keyup)="changeUnits(priceFound.stock)">
               </p>
-              <a href="#" class="btn btn-primary">Agregar</a>
+              <button type="button" class="btn btn-primary" (click)="addProduct(priceFound)">Agregar</button>
             </div>
           </div>
         </div>
@@ -36,6 +40,44 @@
     </div>
     <div class="col-md-7">
       <h6>Productos agregados al carrito</h6>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row" *ngFor="let product of products">
+            <div class="col-md-1">
+              <div *ngIf="product.productForm.product.fileImg">
+                <img [src]="'data:image/jpg;base64,'+product.productForm.product.fileImg" class="card-img-top" />
+              </div>
+              <div *ngIf="!product.productForm.product.fileImg">
+                <img [src]="'data:image/jpg;base64,'+noImage" class="card-img-top" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <h4>{{ product.productForm.product.name }}</h4>
+              <p><strong>Precio x U.:</strong>{{ product.salePrice | currency }} <br><strong>Categoría:</strong> {{ product.productForm.product.category.name
+                }} <br><strong>Stock:</strong> {{ product.stock }} </p>
+            </div>
+
+            <div class="col-md-2">
+              <p>Unidades: <input type="text" style="width: 50px" [value]="product.units" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                  (keyup)="modifyProduct(product, $event)"></p>
+            </div>
+            <div class="col-md-2">
+              <p><strong>Precio:</strong><br> {{ product.priceForUnits | currency }}</p>
+            </div>
+
+            <div class="col-md-1">
+              <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-5" *ngIf="products.length > 0">
+
+          <h4 class="text-right">Total: {{this.total | currency}}</h4>
+          <button type="button" class="btn btn-primary float-right" (click)="sell()">Realizar Venta</button>
+          <button class="btn btn-default float-right mr-3" (click)="cancelSell()">Cancelar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

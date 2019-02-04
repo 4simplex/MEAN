@@ -20,7 +20,7 @@ export class PriceService {
     this.selectedPrice = new Price();
   }
 
-  getPriceLst(){
+  getPriceLst() {
     return this.http.get(this.URL_API);
   }
 
@@ -32,7 +32,7 @@ export class PriceService {
     );
   }
 
-  postPrice(price: Price){
+  postPrice(price: Price) {
     return this.http.post(this.URL_API, price);
   }
 
@@ -44,7 +44,7 @@ export class PriceService {
     );
   }
 
-  deletePrice(price: Price | string){
+  deletePrice(price: Price | string) {
     const id = typeof price === 'string' ? price : price._id;
     const url = `${this.URL_API}/${id}`;
 
@@ -52,6 +52,10 @@ export class PriceService {
       // tap(_ => console.info(`Deleted price id=${id}`)),
       catchError(this.handleError<Price>('deletePrice'))
     );
+  }
+
+  getPriceByName(name): Observable<Price> {
+    return this.http.get<Price>(this.URL_API + `/getprice/${name}`);
   }
 
   /**

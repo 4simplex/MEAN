@@ -25,4 +25,6 @@ export class Price {
     salePrice: number;
     productCode: string;
     stock: number;
+    units: number;
+    priceForUnits: number;
 }

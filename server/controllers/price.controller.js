@@ -29,23 +29,29 @@ priceCtrl.getPrice = async (req, res) => {
     res.json(price);
 }
 
+priceCtrl.getPriceByName = async (req, res) => {
+    const price = await Price.find({ "productCode": { "$regex": req.params.productCode, "$options": "i" } });
+    console.log(price);
+    res.json(price);
+}
+
 priceCtrl.editPrice = async (req, res) => {
     const price = {
         purchasePrice: req.body.purchasePrice,
         salePrice: req.body.salePrice,
-        provider: { 
-            _id: req.body.provider._id, 
-            name: req.body.provider.name 
+        provider: {
+            _id: req.body.provider._id,
+            name: req.body.provider.name
         },
         stock: req.body.stock
     };
-    await Price.findByIdAndUpdate(req.params.id, {$set:price});
-    res.json({status: 'Price updated'});
+    await Price.findByIdAndUpdate(req.params.id, { $set: price });
+    res.json({ status: 'Price updated' });
 }
 
 priceCtrl.deletePrice = async (req, res) => {
     await Price.findByIdAndRemove(req.params.id);
-    res.json({status: 'Price deleted'});
+    res.json({ status: 'Price deleted' });
 }
 
 module.exports = priceCtrl;
