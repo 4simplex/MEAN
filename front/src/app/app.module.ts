@@ -27,6 +27,7 @@ import { ProviderDetailComponent } from './components/provider-detail/provider-d
 import { NgxPaginationModule } from 'ngx-pagination';
 import { StockComponent } from './components/stock/stock.component';
 import { SaleComponent } from './components/sale/sale.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { SaleComponent } from './components/sale/sale.component';
     CategoryDetailComponent,
     ProviderDetailComponent,
     StockComponent,
-    SaleComponent
+    SaleComponent,
+    SpinnerComponent
   ],
 
   imports: [

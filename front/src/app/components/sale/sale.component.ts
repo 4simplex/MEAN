@@ -17,6 +17,7 @@ export class SaleComponent implements OnInit {
   sale: Sale;
   prices;
   priceFound;
+  loading = false;
 
   constructor(
     private priceService: PriceService,
@@ -27,17 +28,22 @@ export class SaleComponent implements OnInit {
 
   searchProduct(event) {
     const searchValue = event.target.value;
-    if (searchValue.trim() === '') {
-      alert('Dato no válido. Debe escribir un nombre de producto.');
-      this.prices = '';
-      return;
-    }
+    if (searchValue !== '') {
+      if (searchValue.trim() === '') {
+        alert('Dato no válido. Debe escribir un nombre de producto.');
+        this.prices = '';
+        return;
+      }
 
-    const searchWhithOneSpace = RemoveWhiteSpaces(searchValue);
-    this.priceService.getPriceByName(searchWhithOneSpace)
-      .subscribe(res => {
-        this.prices = res;
-      });
+      this.loading = true;
+
+      const searchWhithOneSpace = RemoveWhiteSpaces(searchValue);
+      this.priceService.getPriceByName(searchWhithOneSpace)
+        .subscribe(res => {
+          this.loading = false;
+          this.prices = res;
+        });
+    }
   }
 
   addSearchResult(price, event) {

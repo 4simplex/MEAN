@@ -31,7 +31,12 @@ priceCtrl.getPrice = async (req, res) => {
 
 priceCtrl.getPriceByName = async (req, res) => {
     const price = await Price.find({ "productCode": { "$regex": req.params.productCode, "$options": "i" } });
-    console.log(price);
+
+    if (price.length == 0) {
+        const name = await Price.find({ "productForm.product.name": { "$regex": req.params.productCode, "$options": "i" } });
+        res.json(name);
+        return;
+    }
     res.json(price);
 }
 
