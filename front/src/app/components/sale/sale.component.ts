@@ -4,6 +4,7 @@ import { SaleService } from '../../services/sale.service';
 import { Price } from 'src/app/models/price-model';
 import { Sale } from 'src/app/models/sale-model';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
+import { appLiterals } from '../../resources/appLiteral';
 
 @Component({
   selector: 'app-sale',
@@ -18,10 +19,13 @@ export class SaleComponent implements OnInit {
   prices;
   priceFound;
   loading = false;
+  appLiterals;
 
   constructor(
     private priceService: PriceService,
-    private saleService: SaleService) { }
+    private saleService: SaleService) {
+      this.appLiterals = appLiterals;
+    }
 
   ngOnInit() {
   }
@@ -30,7 +34,7 @@ export class SaleComponent implements OnInit {
     const searchValue = event.target.value;
     if (searchValue !== '') {
       if (searchValue.trim() === '') {
-        alert('Dato no válido. Debe escribir un nombre de producto.');
+        alert(this.appLiterals.sales.dataNotValidMsg);
         this.prices = '';
         return;
       }
@@ -42,6 +46,7 @@ export class SaleComponent implements OnInit {
         .subscribe(res => {
           this.loading = false;
           this.prices = res;
+          this.units = 1;
         });
     }
   }
@@ -51,7 +56,7 @@ export class SaleComponent implements OnInit {
     const priceId = price._id;
     if (this.priceFound) {
       if (this.priceFound._id === priceId) {
-        alert('El producto ya esta en pantalla');
+        alert(this.appLiterals.sales.alreadyInScreen);
         return;
       }
     }
@@ -59,7 +64,7 @@ export class SaleComponent implements OnInit {
     if (this.products.length > 0) {
       const isExistingProduct = this.products.find(product => product._id === priceId);
       if (isExistingProduct) {
-        alert('El producto ya esta en pantalla');
+        alert(this.appLiterals.sales.alreadyInScreen);
         return;
       }
     }
@@ -90,34 +95,35 @@ export class SaleComponent implements OnInit {
       return;
     }
     if (this.units > stock) {
-      alert('No tiene el stock suficiente para esa cantidad de unidades a vender');
+      alert(this.appLiterals.sales.insuficientStockMsg);
       this.units = 1;
     }
   }
 
   modifyProduct(product, event) {
     const currentProduct = this.products.find(item => item._id === product._id);
-    if (event.target.value < 1) {
-      currentProduct.units = 1;
-      currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
-      this.totalAmount();
-      return;
-    }
-    if (event.target.value > product.stock) {
-      alert('No tiene el stock suficiente para esa cantidad de unidades a vender');
-      currentProduct.units = 1;
-      currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
-      this.totalAmount();
-      return;
-    }
 
-    currentProduct.units = event.target.value;
+    if (event.target.value == "0") {
+      currentProduct.units = 1;
+      currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
+      this.totalAmount();
+      return;
+    }else if (event.target.value > product.stock) {
+      const currentProduct = this.products.find(item => item._id === product._id);
+      alert(this.appLiterals.sales.insuficientStockMsg);
+      currentProduct.units = 1;
+      currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
+      this.totalAmount();
+      return;
+    }else{
+      const currentProduct = this.products.find(item => item._id === product._id);
+      currentProduct.units = event.target.value;
     currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
     this.totalAmount();
+    }
   }
 
   totalAmount() {
-
     const total =
       this.products.map(item => item.priceForUnits)
         .reduce((acc, currentValue) => {
@@ -132,8 +138,9 @@ export class SaleComponent implements OnInit {
   }
 
   sell() {
-    if (confirm('Desea concretar la Venta?')) {
+    if (confirm(this.appLiterals.sales.finalizeSellMsg)) {
       this.sale = new Sale();
+      this.sale.saleDate =  new Date().toISOString();
       this.sale.saleTotal = this.total;
       this.sale.productsGroup = this.products.map(product => {
         product.stock = product.stock - product.units;
@@ -142,22 +149,17 @@ export class SaleComponent implements OnInit {
 
       this.saleService.postSale(this.sale)
         .subscribe(res => {
-          alert('Venta registrada');
+          alert(this.appLiterals.sales.soldMsg);
           this.products = [];
         });
       this.products.map(product => {
-        this.priceService.updatePrice(product)
-          .subscribe(res => {
-            if (res) {
-              console.log('Stock actualizado');
-            }
-          });
+        this.priceService.updatePrice(product).subscribe();
       });
     }
   }
 
   cancelSell() {
-    if (confirm('Desea cancelar la venta?')) {
+    if (confirm(this.appLiterals.sales.cancelSellMsg)) {
       this.products = [];
     }
   }

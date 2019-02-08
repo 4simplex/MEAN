@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 const SaleSchema = new Schema({
     productsGroup: {
     },
-    saleTotal: { type: Number, required: true }
+    saleTotal: { type: Number, required: true },
+    saleDate: {}
 });
 
 module.exports = mongoose.model('Sale', SaleSchema);

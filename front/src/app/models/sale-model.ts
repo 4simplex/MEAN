@@ -3,4 +3,5 @@ export class Sale {
     productsGroup: {
     };
     saleTotal: { type: Number };
+    saleDate: {};
 }

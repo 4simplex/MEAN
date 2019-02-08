@@ -15,6 +15,10 @@ export const appLiterals = {
     description: 'Descripción',
     labelCategory: 'Category',
     labelBrand: 'Marca',
+    labelUnits: 'Unidades',
+    labelPrice: 'Precio',
+    labelTotal: 'Total',
+    labelStock: 'Stock',
     brands: {
         brands: 'Marcas',
         createBrand: 'Crear Marca',
@@ -67,6 +71,19 @@ export const appLiterals = {
         stock: 'Stock',
         stockTitle: 'Inventario',
         registeredStock: 'Stock registrado'
+    },
+    sales: {
+        sales: 'Realizar Ventas',
+        searchProductTitle: 'Buscar Producto',
+        productsAddedTitle: 'Productos agregados al carrito',
+        btnSell: 'Realizar Venta',
+        priceUnit: 'Precio x U.',
+        dataNotValidMsg: 'Dato no válido. Debe escribir un nombre o código de producto.',
+        alreadyInScreen: 'El producto ya esta en pantalla',
+        insuficientStockMsg: 'No tiene el stock suficiente para esa cantidad de unidades a vender',
+        finalizeSellMsg: 'Desea concretar la Venta?',
+        soldMsg: 'Se realizó la Venta y se actualizó el Stock',
+        cancelSellMsg: 'Desea cancelar la venta?'
     },
     paginationTexts: {
         previous: 'Previa',
