@@ -5,6 +5,7 @@ const SaleSchema = new Schema({
     productsGroup: {
     },
     saleTotal: { type: Number, required: true },
+    purchasePriceTotal: { type: Number, required: true },
     saleDate: {}
 });
 

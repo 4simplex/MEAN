@@ -3,5 +3,6 @@ export class Sale {
     productsGroup: {
     };
     saleTotal: { type: Number };
+    purchasePriceTotal: { type: Number}
     saleDate: {};
 }

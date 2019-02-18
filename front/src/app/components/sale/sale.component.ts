@@ -20,6 +20,7 @@ export class SaleComponent implements OnInit {
   priceFound;
   loading = false;
   appLiterals;
+  purchasePriceTotal;
 
   constructor(
     private priceService: PriceService,
@@ -82,6 +83,7 @@ export class SaleComponent implements OnInit {
 
     this.products.push(productData);
     this.totalAmount();
+    this.totalPurchasePrice();
     this.priceFound = '';
   }
 
@@ -107,6 +109,7 @@ export class SaleComponent implements OnInit {
       currentProduct.units = 1;
       currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
       this.totalAmount();
+      this.totalPurchasePrice();
       return;
     }else if (event.target.value > product.stock) {
       const currentProduct = this.products.find(item => item._id === product._id);
@@ -114,12 +117,14 @@ export class SaleComponent implements OnInit {
       currentProduct.units = 1;
       currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
       this.totalAmount();
+      this.totalPurchasePrice();
       return;
     }else{
       const currentProduct = this.products.find(item => item._id === product._id);
       currentProduct.units = event.target.value;
     currentProduct.priceForUnits = currentProduct.salePrice * currentProduct.units;
     this.totalAmount();
+    this.totalPurchasePrice();
     }
   }
 
@@ -132,9 +137,19 @@ export class SaleComponent implements OnInit {
     this.total = total;
   }
 
+  totalPurchasePrice() {
+    const total =
+      this.products.map(item => item)
+        .reduce((acc, currentValue) => {
+          return acc + (currentValue.purchasePrice * currentValue.units);
+        }, 0);
+    this.purchasePriceTotal = total;
+  }
+
   deleteProduct(prod) {
     this.products = this.products.filter(item => item !== prod);
     this.totalAmount();
+    this.totalPurchasePrice();
   }
 
   sell() {
@@ -142,6 +157,7 @@ export class SaleComponent implements OnInit {
       this.sale = new Sale();
       this.sale.saleDate =  new Date().toISOString();
       this.sale.saleTotal = this.total;
+      this.sale.purchasePriceTotal = this.purchasePriceTotal;
       this.sale.productsGroup = this.products.map(product => {
         product.stock = product.stock - product.units;
         return product;

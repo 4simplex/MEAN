@@ -28,6 +28,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { StockComponent } from './components/stock/stock.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { StatsComponent } from './components/stats/stats.component';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { ChartsModule } from 'ng2-charts';
+import { ChartgraphComponent } from './components/chartgraph/chartgraph.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     ProviderDetailComponent,
     StockComponent,
     SaleComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    StatsComponent,
+    ChartgraphComponent
   ],
 
   imports: [
@@ -59,7 +65,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BsDatepickerModule.forRoot(),
+    ChartsModule
   ],
 
   providers: [

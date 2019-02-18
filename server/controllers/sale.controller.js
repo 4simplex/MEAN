@@ -7,5 +7,17 @@ saleCtrl.createSale = async (req, res) => {
     res.json({ status: 'Venta realizada' });
 }
 
+saleCtrl.getSales = async (req, res) => {
+    console.log(req.params.firstDate)
+    console.log(req.params.secondDate)
+    const sales = await Sale.find({
+        saleDate:{
+         $gte: req.params.firstDate,
+         $lte: req.params.secondDate,
+        }
+      });
+
+    res.json(sales);
+}
 
 module.exports = saleCtrl;

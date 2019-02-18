@@ -12,4 +12,8 @@ export class SaleService {
   postSale(sale: Sale) {
     return this.http.post(this.URL_API, sale);
   }
+
+  getSales(firstDate, secondDate) {
+    return this.http.get(this.URL_API + `/${firstDate}` + `/${secondDate}`);
+  }
 }
