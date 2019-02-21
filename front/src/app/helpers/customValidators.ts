@@ -11,11 +11,11 @@ export class CustomValidators {
 
     static valueExists(control: AbstractControl): Promise<ValidationErrors> | null {
         setInterval(() => {
-            if (control.value == "Anathema") {
+            if (control.value === 'Anathema') {
                 return { valueExists: true }
             };
             return null;
-        }, 2000)
+        }, 3000)
         return null;
     }
 }
