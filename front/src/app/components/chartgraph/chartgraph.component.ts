@@ -33,7 +33,7 @@ export class ChartgraphComponent implements OnInit {
       }
     }
     this.barChartData = [
-      {data: this.dataSellData, label: 'Ventas en $', borderColor: '3cba9f', fill: false}
+      {data: this.dataSellData, label: 'Ventas $', borderColor: 'rgba(33, 232, 234, 1)', fill: false}
     ]
   
     this.barChartLabels = this.barChartLabels;

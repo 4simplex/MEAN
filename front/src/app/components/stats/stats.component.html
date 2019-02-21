@@ -1,3 +1,4 @@
+<div class="container">
 <div class="row">
   <div class="col-md-12">
     <h2>Estadísticas</h2>
@@ -7,32 +8,33 @@
            placeholder="Seleccione el rango de fechas"
            class="form-control" 
            bsDaterangepicker [bsConfig]="{ rangeInputFormat: 'DD-MM-YYYY' }"
-           [(ngModel)]="bsRangeValue"/>
+           [(ngModel)]="bsRangeValue"
+           (bsValueChange)="changeDatePeriod($event)"/>
   </div>
 </div>
 <div class="row">
-  <h3 style="padding-left: 30px" class="mt-5 mb-3">Mostrando datos de: {{firstDay | date: 'dd/MM/yyyy'}} al  {{today | date: 'dd/MM/yyyy'}}</h3>
+  <h3 style="padding-left: 20px" class="mt-3 mb-5">Mostrando datos de: {{firstDay | date: 'dd/MM/yyyy'}} al  {{secondDay | date: 'dd/MM/yyyy'}}</h3>
     <div class="col-md-12" style="text-align: center; padding-top: 15px;" *ngIf="loading">
         <app-spinner>
         </app-spinner>
       </div>
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-md-3">
         <h3>Compras:</h3>
-        <h2>$ {{purchaseTotal}}</h2>
+        <h2>{{purchaseTotal | currency}}</h2>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3">
         <h3>Ventas:</h3>
-        <h2>$ {{ salesTotal }}</h2>
+        <h2>{{ salesTotal | currency}}</h2>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3">
         <h3>Ganancias:</h3>
-        <h2>$ {{ earningsTotal }}</h2>
+        <h2>{{ earningsTotal | currency}}</h2>
       </div>
     </div>
     <div class="row" *ngIf="dataSell">
-        <div class="col-md-6">
+        <div class="col-md-12">
         <app-chartgraph [chartLabels]="chartLabels" [dataSell]="dataSell"></app-chartgraph>
         </div>
     </div>
@@ -42,34 +44,39 @@
 <div class="row">
   <div class="col-md-12">
     <div class="row mb-3 mt-2">
-      <div class="col-md-12">
+      <div class="col-md-12 mt-5">
         <h5>Ventas registrados</h5>
       </div>
     </div>
 
-    <div class="row align-items-center stat-row" *ngFor="let sell of sells">
+    <div class="row align-items-center stat-row" *ngFor="let sell of sells | paginate: {itemsPerPage:10, currentPage: actualPage}">
 
       <div class="col-md-1">
-        {{sell.saleDate | date: 'dd/MM/yyyy'}}
+        <p>{{sell.saleDate | date: 'dd/MM/yyyy'}}</p>
       </div>
 
       <div class="col-md-5">
         <div *ngFor="let product of sell.productsGroup">
             <h4>{{ product.productForm.product.name }} ({{ product.productCode }})</h4>
-            <p><strong>Precio Compra x U.:</strong> {{ product.purchasePrice }} <strong>Precio Venta x U.:</strong> {{ product.salePrice }}</p>
-            <p><strong>Unidades vendidas:</strong> {{ product.units }} <strong>Total Venta Unidades:</strong> {{ product.priceForUnits }}</p>
+            <p><strong>Precio Compra x U.:</strong> {{ product.purchasePrice | currency }} <strong>Precio Venta x U.:</strong> {{ product.salePrice | currency }}</p>
+            <p><strong>Unidades vendidas:</strong> {{ product.units }} <strong>Total Venta Unidades:</strong> {{ product.priceForUnits | currency }}</p>
         </div>
       </div>
 
       <div class="col-md-2">
-        <p><strong>Compras:</strong><br> {{ sell.purchasePriceTotal }}</p>
+        <p><strong>Compras:</strong><br> {{ sell.purchasePriceTotal | currency }}</p>
       </div>
       <div class="col-md-2">
-        <p><strong>Ventas:</strong><br> {{ sell.saleTotal }}</p>
+        <p><strong>Ventas:</strong><br> {{ sell.saleTotal | currency }}</p>
       </div>
       <div class="col-md-2">
-          <p><strong>Ganancias:</strong><br> {{ sell.saleTotal - sell.purchasePriceTotal}}</p>
+          <p><strong>Ganancias:</strong><br> {{ sell.saleTotal  - sell.purchasePriceTotal | currency}}</p>
       </div>
     </div>
+    <div class="row">
+      <pagination-controls (pageChange)="actualPage = $event" autoHide="true" responsive="true" previousLabel="Previa" nextLabel="Próxima"
+        screenReaderPaginationLabel="Paginación" screenReaderPageLabel="Página" screenReaderCurrentLabel="Estas en la página"></pagination-controls>
+    </div>
   </div>
+</div>
 </div>
