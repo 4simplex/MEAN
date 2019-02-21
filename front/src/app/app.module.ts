@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrandService } from './services/brand.service';
@@ -14,7 +15,6 @@ import { ProviderComponent } from './components/provider/provider.component';
 import { ProviderService } from './services/provider.service';
 import { PriceComponent } from './components/price/price.component';
 import { PriceService } from './services/price.service';
-import { NavigationComponent } from './components/navigation/navigation.component';
 import { ProviderSelectorComponent } from './components/provider-selector/provider-selector.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { BrandsComponent } from './components/brands/brands.component';
@@ -29,9 +29,18 @@ import { StockComponent } from './components/stock/stock.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { StatsComponent } from './components/stats/stats.component';
-import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ChartsModule } from 'ng2-charts';
 import { ChartgraphComponent } from './components/chartgraph/chartgraph.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegisterComponent } from './components/register/register.component';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
+import { ValidateService } from './services/validate.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +52,6 @@ import { ChartgraphComponent } from './components/chartgraph/chartgraph.componen
     UploadImageComponent,
     ProviderComponent,
     PriceComponent,
-    NavigationComponent,
     ProviderSelectorComponent,
     BrandsComponent,
     BrandDetailComponent,
@@ -56,7 +64,12 @@ import { ChartgraphComponent } from './components/chartgraph/chartgraph.componen
     SaleComponent,
     SpinnerComponent,
     StatsComponent,
-    ChartgraphComponent
+    ChartgraphComponent,
+    HomeComponent,
+    LoginComponent,
+    NavbarComponent,
+    ProfileComponent,
+    RegisterComponent
   ],
 
   imports: [
@@ -67,14 +80,19 @@ import { ChartgraphComponent } from './components/chartgraph/chartgraph.componen
     AppRoutingModule,
     NgxPaginationModule,
     BsDatepickerModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    FlashMessagesModule.forRoot(),
+    HttpModule
   ],
 
   providers: [
     BrandService,
     CategoryService,
     ProviderService,
-    PriceService
+    PriceService,
+    ValidateService,
+    AuthService,
+    AuthGuard
   ],
 
   bootstrap: [AppComponent]

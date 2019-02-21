@@ -1,0 +1,23 @@
+<div class="jumbotron text-center">
+  <h1>{{ this.appLiterals.home.homeTitle }}</h1>
+  <p class="lead">{{ this.appLiterals.home.homeSubtitle }}</p>
+  <div *ngIf="!authService.loggedIn()">
+    <a class="btn btn-primary mr-1" [routerLink]="['/register']">{{ this.appLiterals.btnRegister }}</a>
+    <a class="btn btn-primary" [routerLink]="['/login']">{{ this.appLiterals.btnLogin }}</a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h3>{{ this.appLiterals.home.freePlanTitle }}</h3>
+    <p>{{ this.appLiterals.home.lorem }}</p>
+  </div>
+  <div class="col-md-4">
+    <h3>{{ this.appLiterals.home.premiumPlanTitle }}</h3>
+    <p>{{ this.appLiterals.home.lorem }}</p>
+  </div>
+  <div class="col-md-4">
+    <h3>{{ this.appLiterals.home.goldPlanTitle }}</h3>
+    <p>{{ this.appLiterals.home.lorem }}</p>
+  </div>
+</div>

@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server/app.js"
   },
   "repository": {
@@ -19,12 +18,17 @@
   },
   "homepage": "https://github.com/4simplex/MEAN#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "mongoose": "^5.3.9",
-    "morgan": "^1.9.1",
-    "multer": "^1.4.1",
-    "parsejson": "0.0.3"
+    "express": "*",
+    "mongoose": "*",
+    "bcryptjs": "*",
+    "cors": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "morgan": "*",
+    "multer": "*",
+    "parsejson": "*"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"

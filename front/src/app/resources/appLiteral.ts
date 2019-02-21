@@ -5,6 +5,8 @@ export const appLiterals = {
     btnDelete: 'Eliminar',
     btnEdit: 'Editar',
     btnBack: 'Volver',
+    btnLogin: 'Iniciar sesión',
+    btnRegister: 'Registrar usuario',
     editTitle: 'Editar',
     placeholderName: 'Nombre',
     selectImage: 'Seleccionar imagen',
@@ -91,5 +93,50 @@ export const appLiterals = {
         pagination: 'Paginación',
         page: 'Página',
         currentPage: 'Estas en la página'
+    },
+    user: {
+        username: 'Nombre de usuario',
+        email: 'Correo electrónico',
+        profile: 'Página de perfil',
+        password: 'Contraseña',
+        account: 'Datos de la cuenta',
+        name: 'Nombre y apellido'
+    },
+    login: {
+        loginTitle: 'Inicio de sesión',
+        loginConfirmationMsg: 'Has iniciado sesión',
+        logoutConfirmationMsg: 'Has cerrado sesión'
+    },
+    register: {
+        registerTitle: 'Página de registración',
+        registerSubtitle: 'Registrar usuario',
+        registerConfirmationMsg: 'Ahora estás registrado y puedes iniciar sesión',
+        cannotRegisterMsg: 'Algo ha ido mal en la registración',
+        useValidEmailMsg: 'Por favor use un email válido',
+        fillAllFieldsMsg: 'Todos los campos son requeridos',
+    },
+    menu: {
+      login: 'Ingresar',
+      profile: 'Perfil',
+      register: 'Registrarse',
+      logout: 'Salir',
+      home: 'Inicio',
+      brand: 'Marcas',
+      category: 'Categorías',
+      provider: 'Proveedores',
+      product: 'Productos',
+      price: 'Precios',
+      stock: 'Inventario',
+      sale: 'Ventas',
+      statistic: 'Estadísticas'
+    },
+    home: {
+        homeTitle: 'MEAN Sales',
+        homeSubtitle: 'Bienvenido a mean sales!',
+        freePlanTitle: 'Versión gratuita!',
+        premiumPlanTitle: 'Versión Premium',
+        goldPlanTitle: 'Versión Gold',
+        // tslint:disable-next-line:max-line-length
+        lorem: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo',
     }
 };
