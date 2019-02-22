@@ -111,8 +111,7 @@ export const appLiterals = {
         registerTitle: 'Página de registración',
         registerSubtitle: 'Registrar usuario',
         registerConfirmationMsg: 'Ahora estás registrado y puedes iniciar sesión',
-        cannotRegisterMsg: 'Algo ha ido mal en la registración',
-        useValidEmailMsg: 'Por favor use un email válido',
+        useValidEmailMsg: 'Por favor use un correo electrónico válido',
         fillAllFieldsMsg: 'Todos los campos son requeridos',
     },
     menu: {

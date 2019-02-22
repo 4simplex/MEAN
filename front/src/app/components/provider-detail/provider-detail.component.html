@@ -15,8 +15,8 @@
           <form #providerForm="ngForm" (ngSubmit)="save(providerForm)" class="form-group">
             <input [(ngModel)]="provider.name" type="text" name="name" class="form-control mb-3" required/>
             <input [(ngModel)]="provider.info" type="text" name="info" class="form-control mb-3" />
-            <button (click)="goBack()" class="mr-2 btn btn-primary">Volver</button>
-            <button [disabled]="!providerForm.valid" class="btn btn-primary">Guardar</button>
+            <button type="button" (click)="goBack()" class="mr-2 btn btn-primary">Volver</button>
+            <button type="submit" [disabled]="!providerForm.valid" class="btn btn-primary">Guardar</button>
           </form>
         </div>
       </div>

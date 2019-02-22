@@ -14,15 +14,21 @@ router.post('/register', (req, res, next) => {
         password: req.body.password
     });
 
-    User.addUser(newUser, (err, user) => {
-        if (err) {
-            res.json({success: false, msg:'Falló la registración del usuario'});
-        } else {
-            res.json({success: true, msg:'Usuario registrado'});
+    User.getUserByEmail(newUser.email, (err, user) => {
+        if(err) throw err;
+        if(user) {
+            return res.json({success: false, msg: 'El correo electrónico ya ha sido registrado.'})
         }
+
+        User.addUser(newUser, (err, user) => {
+            if (err) {
+                res.json({success: false, msg:'Falló la registración del usuario'});
+            } else {
+                res.json({success: true, msg:'Ahora estás registrado y puedes iniciar sesión'});
+            }
+        });
     });
 });
-
 
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
@@ -58,7 +64,6 @@ router.post('/authenticate', (req, res, next) => {
         });
     });
 });
-
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
