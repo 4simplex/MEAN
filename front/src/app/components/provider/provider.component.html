@@ -27,7 +27,7 @@
               <h5>Proveedores Creados</h5>
             </div>
           </div>
-          <div class="row align-items-center provider-row" *ngFor="let provider of providers | paginate: {itemsPerPage:3, currentPage: actualPage}">
+          <div class="row align-items-center provider-row" *ngFor="let provider of providers | paginate: {itemsPerPage:10, currentPage: actualPage}">
             <div class="col-md-6 ">
               <h4>{{ provider.name }}</h4>
             </div>

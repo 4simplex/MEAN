@@ -26,7 +26,7 @@
               <h5>{{ appLiterals.brands.registeredBrands }}</h5>
             </div>
           </div>
-          <div class="row align-items-center brand-row" *ngFor="let brand of brands | paginate: {itemsPerPage:3, currentPage: actualPage}">
+          <div class="row align-items-center brand-row" *ngFor="let brand of brands | paginate: {itemsPerPage:10, currentPage: actualPage}">
             <div class="col-md-10">
               <h4>{{ brand.name }}</h4>
             </div>

@@ -43,7 +43,7 @@
           <h5>Productos registrados</h5>
         </div>
       </div>
-      <div class="row align-items-center product-row" *ngFor="let product of productService.products | paginate: {itemsPerPage:3, currentPage: actualPage}">
+      <div class="row align-items-center product-row" *ngFor="let product of productService.products | paginate: {itemsPerPage:10, currentPage: actualPage}">
         <div class="col-md-1">
           <div *ngIf="product.fileImg">
             <img [src]="'data:image/jpg;base64,'+product.fileImg" class="img-fluid" />

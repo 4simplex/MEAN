@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-12">
 
-          <div class="row align-items-center price-row" *ngFor="let price of priceService.prices | paginate: {itemsPerPage:3, currentPage: actualPage}">
+          <div class="row align-items-center price-row" *ngFor="let price of priceService.prices | paginate: {itemsPerPage:10, currentPage: actualPage}">
 
             <div class="col-md-1">
               <div *ngIf="price.productForm.product.fileImg">
