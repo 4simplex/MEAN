@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { getNoImage } from '../../../assets/noimage';
 import { PriceService } from '../../services/price.service';
 import { Price } from 'src/app/models/price-model';
+import { ValidateService } from './../../services/validate.service';
 
 @Component({
   selector: 'app-price',
@@ -18,7 +19,8 @@ export class PriceComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private priceService: PriceService
+    private priceService: PriceService,
+    private validateService: ValidateService
   ) {
     this.priceForm = fb.group({
       'productForm': fb.group({
@@ -38,7 +40,7 @@ export class PriceComponent implements OnInit {
   }
 
   addPrice() {
-    if (!this.makeValidations()) {
+    if (!this.validateService.validatePriceForm(this.priceForm)) {
       return;
     }
 
@@ -73,38 +75,6 @@ export class PriceComponent implements OnInit {
   getFormattedPrice(price: number) {
     const currencyPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
     return currencyPrice;
-  }
-
-  makeValidations(): Boolean {
-    if (!this.priceForm.get('productForm').value.product) {
-      alert('Debe ingresar un Producto');
-      return false;
-    }
-
-    if (!this.priceForm.get('provider').value._id) {
-      alert('Debe ingresar un Proveedor');
-      return false;
-    }
-
-    const purchasePrice = this.priceForm.get('purchasePrice').value;
-    const salePrice = this.priceForm.get('salePrice').value;
-
-    if (!purchasePrice || !salePrice) {
-      alert('Debe ingresar valores para Precio de Compra y Precio de Venta');
-      return false;
-    }
-
-    if (this.getFormattedPrice(purchasePrice) === '$ NaN') {
-      alert('Precio de Compra, valor incorreto');
-      return false;
-    }
-
-    if (this.getFormattedPrice(salePrice) === '$ NaN') {
-      alert('Precio de Venta, valor incorreto');
-      return false;
-    }
-
-    return true;
   }
 
 }

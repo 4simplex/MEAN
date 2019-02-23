@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { getNoImage } from '../../../assets/noimage';
 import { Price } from '../../models/price-model';
 import { PriceService } from '../../services/price.service';
+import { ValidateService } from './../../services/validate.service';
 
 @Component({
   selector: 'app-price-detail',
@@ -23,7 +24,8 @@ export class PriceDetailComponent implements OnInit {
     private fb: FormBuilder,
     private priceService: PriceService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private validateService: ValidateService
   ) { }
 
   ngOnInit(): void {
@@ -85,6 +87,10 @@ export class PriceDetailComponent implements OnInit {
   }
 
   save(): void {
+    if (!this.validateService.validatePriceForm(this.priceForm)) {
+      return;
+    }
+
     this.priceService.updatePrice(this.priceForm.value)
       .subscribe(() => this.goBack());
   }
