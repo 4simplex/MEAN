@@ -5,6 +5,7 @@ import { Price } from 'src/app/models/price-model';
 import { Sale } from 'src/app/models/sale-model';
 import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 import { appLiterals } from '../../resources/appLiteral';
+import { getNoImage } from '../../../assets/noimage';
 
 @Component({
   selector: 'app-sale',
@@ -21,6 +22,7 @@ export class SaleComponent implements OnInit {
   loading = false;
   appLiterals;
   purchasePriceTotal;
+  noImage = getNoImage();
 
   constructor(
     private priceService: PriceService,
@@ -75,6 +77,10 @@ export class SaleComponent implements OnInit {
   }
 
   addProduct(product) {
+    if (this.units < 1) {
+      alert(this.appLiterals.sales.zeroStockMsg);
+      return;
+    }
     const productData = { ...product };
     const totalPriceByUnits = this.calculatePriceByUnits(productData.salePrice);
 
@@ -92,10 +98,6 @@ export class SaleComponent implements OnInit {
   }
 
   changeUnits(stock) {
-    if (this.units < 1) {
-      this.units = 1;
-      return;
-    }
     if (this.units > stock) {
       alert(this.appLiterals.sales.insuficientStockMsg);
       this.units = 1;

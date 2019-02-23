@@ -52,7 +52,7 @@
     <div class="row align-items-center stat-row" *ngFor="let sell of sells | paginate: {itemsPerPage:10, currentPage: actualPage}">
 
       <div class="col-md-1">
-        <p>{{sell.saleDate | date: 'dd/MM/yyyy'}}</p>
+        <p>{{sell.saleDate }}</p>
       </div>
 
       <div class="col-md-5">

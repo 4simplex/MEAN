@@ -15,8 +15,12 @@
           </app-spinner>
         </div>
         <ul *ngIf="prices" class="searchResult">
-          <li *ngFor="let price of prices"><a href="" (click)="addSearchResult(price, $event)">{{ price.productCode }} -
-              {{ price.productForm.product.name }} - {{ price.salePrice | currency }}</a></li>
+          <li *ngFor="let price of prices">
+            <p *ngIf="price.stock < 1">{{ price.productCode }} -
+              {{ price.productForm.product.name }} - {{ price.salePrice | currency }} - <strong>Stock: {{price.stock}}</strong></p>
+            <a href="" *ngIf="price.stock >= 1 " (click)="addSearchResult(price, $event)">{{ price.productCode }} -
+                  {{ price.productForm.product.name }} - {{ price.salePrice | currency }} - Stock: {{price.stock}}</a>
+          </li>
         </ul>
       </div>
       <div class="row mb-5">

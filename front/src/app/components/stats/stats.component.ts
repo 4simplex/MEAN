@@ -32,34 +32,43 @@ export class StatsComponent implements OnInit {
   initialValues() {
     this.secondDay = new Date();
     this.firstDay = this.calculateFirstDayMonth(this.secondDay);
-
     this.saleService.getSales(this.firstDay.toISOString(), this.secondDay.toISOString())
     .subscribe(res => {
       this.loading = false;
       this.purchaseTotal = this.sumPurchaseTotal(res);
       this.salesTotal = this.sumSellTotal(res);
       this.earningsTotal = this.salesTotal - this.purchaseTotal;
-      this.sells = res;
+      this.sells = this.convertDateTime(res);
+      const results = this.getDataForDates(this.sells);
 
-      this.dataSell = this.getDataForDates(this.sells);
+      this.dataSell = results.dataSales;
 
-      this.chartLabels = this.getDates(this.sells);
+      this.chartLabels = results.dataDates;
     })
   }
 
   changeDatePeriod(event) {
     if(event !== null) {
-      this.saleService.getSales(event[0].toISOString(), event[1].toISOString())
+      let firstDate = event[0];
+      firstDate.setHours(0);
+      firstDate.setMinutes(0);
+      firstDate.setSeconds(0);
+
+      let secondDate = event[1];
+      secondDate.setHours(20);
+      secondDate.setMinutes(59);
+      secondDate.setSeconds(59);
+
+      this.saleService.getSales(firstDate.toISOString(), secondDate.toISOString())
       .subscribe(res => {
         this.loading = false;
         this.purchaseTotal = this.sumPurchaseTotal(res);
         this.salesTotal = this.sumSellTotal(res);
         this.earningsTotal = this.salesTotal - this.purchaseTotal;
-        this.sells = res;
-
-        this.dataSell = this.getDataForDates(this.sells);
-
-        this.chartLabels = this.getDates(this.sells);
+        this.sells = this.convertDateTime(res);
+        const results = this.getDataForDates(this.sells);
+        this.dataSell = results.dataSales;
+        this.chartLabels = results.dataDates;
       })
 
       this.secondDay = event[1];
@@ -67,43 +76,71 @@ export class StatsComponent implements OnInit {
     }
   }
 
+  convertDateTime(res) {
+    for (let i=0; i < res.length; i++) {
+      let currentDate = new Date(res[i].saleDate);
+      res[i].saleDate = new Date(currentDate.getTime() + Math.abs(currentDate.getTimezoneOffset()*60000) );
+    }
+
+    return res
+  }
+
+  convertDateTimeToString(res) {
+    for (let i=0; i < res.length; i++) {
+      let year = res[i].saleDate.getFullYear();
+      let month = res[i].saleDate.getMonth()+1;
+      let dt = res[i].saleDate.getDate();
+
+      if (dt < 10) {
+        dt = 0 + dt;
+      }
+      if (month < 10) {
+        month = 0 + month;
+      }
+
+      res[i].saleDate = dt + '/' + month + '/' + year;
+    }
+
+    return res
+  }
+
   getDataForDates(sells) {
-    let temp = this.filterDates(sells);
+    let filterDates = this.filterDates(sells);
+    let convertedDates = this.getSimpleDate([...filterDates]);
+    let convertedObjectsDates = this.convertDateTimeToString(filterDates);
+
     const dataSales = [];
     const dataDates = [];
 
-    for (let i=0; i < temp.length; i++){
-
-      let existingDate = dataDates.includes(temp[i].saleDate.substring(0,10));
+    for (let i=0; i < convertedObjectsDates.length; i++){
+      let existingDate = dataDates.includes(convertedDates[i]);
 
       if (!existingDate) {
         let sumData;
-        sumData = sells.filter(item => item.saleDate.substring(0,10) ===  temp[i].saleDate.substring(0,10))
+        sumData = convertedObjectsDates.filter(item => item.saleDate ===  convertedDates[i])
         .reduce((acc, product) => {
           return acc + product.saleTotal
         }, 0);
 
-        let collectDates = temp[i].saleDate.substring(0,10);
+        let collectDates = convertedDates[i];
 
         dataDates.push(collectDates);
         dataSales.push(sumData);
       }
     }
 
-    return dataSales
+    return {dataSales: dataSales, dataDates: dataDates}
   }
 
   filterDates(allDates){
     return allDates.filter((v,i) => allDates.indexOf(v) === i);
   }
 
-  getDates(sells) {
-    const allDates = sells.map(sale => {
-      let getSaleDate = new Date(sale.saleDate);
-      let year = getSaleDate.getFullYear();
-      let month = getSaleDate.getMonth()+1;
-      let dt = getSaleDate.getDate();
-
+  getSimpleDate(tempDates) {
+    const allDates = tempDates.map(sale => {
+      let year = sale.saleDate.getFullYear();
+      let month = sale.saleDate.getMonth()+1;
+      let dt = sale.saleDate.getDate();
       if (dt < 10) {
         dt = 0 + dt;
       }
@@ -115,9 +152,7 @@ export class StatsComponent implements OnInit {
       return dt + '/' + month + '/' + year 
     });
 
-    let x = allDates.filter((v,i) => allDates.indexOf(v) === i);
-
-    return x;
+    return allDates
   }
 
   calculateFirstDayMonth(today) {

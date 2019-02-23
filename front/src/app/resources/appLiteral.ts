@@ -85,7 +85,8 @@ export const appLiterals = {
         insuficientStockMsg: 'No tiene el stock suficiente para esa cantidad de unidades a vender',
         finalizeSellMsg: 'Desea concretar la Venta?',
         soldMsg: 'Se realizó la Venta y se actualizó el Stock',
-        cancelSellMsg: 'Desea cancelar la venta?'
+        cancelSellMsg: 'Desea cancelar la venta?',
+        zeroStockMsg: 'No se pueden agregar 0 unidades, escriba una cantidad.'
     },
     paginationTexts: {
         previous: 'Previa',
