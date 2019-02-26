@@ -49,4 +49,15 @@ productCTRL.categoryhasProducts = async (req, res) => {
     res.json(productFind);
 }
 
+productCTRL.searchProductByName = async (req, res) => {
+    const prod = await Product.find({ "brand.name": { "$regex": req.params.character, "$options": "i" } });
+
+    if (prod.length == 0) {
+        const name = await Product.find({ "name": { "$regex": req.params.character, "$options": "i" } });
+        res.json(name);
+        return;
+    }
+    res.json(prod);
+}
+
 module.exports = productCTRL;

@@ -4,6 +4,8 @@ import { getNoImage } from '../../../assets/noimage';
 import { PriceService } from '../../services/price.service';
 import { Price } from 'src/app/models/price-model';
 import { ValidateService } from './../../services/validate.service';
+import { ProductService } from '../../services/product.service';
+import { RemoveWhiteSpaces } from '../../helpers/customValidators';
 
 @Component({
   selector: 'app-price',
@@ -16,11 +18,15 @@ export class PriceComponent implements OnInit {
   prodCode: string;
   actualPage: Number = 1;
   productFileImage = '';
+  loading = false;
+  searchResult;
+  inputSearch = '';
 
   constructor(
     private fb: FormBuilder,
     private priceService: PriceService,
-    private validateService: ValidateService
+    private validateService: ValidateService,
+    private productService: ProductService
   ) {
     this.priceForm = fb.group({
       'productForm': fb.group({
@@ -37,6 +43,15 @@ export class PriceComponent implements OnInit {
 
   ngOnInit() {
     this.getAllPriceItems();
+  }
+
+  addSearchResult(product, event) {
+    event.preventDefault();
+    this.priceForm.get('productForm.product').setValue('');
+    this.priceForm.get('productForm.product').setValue(product);
+    this.displayProductImage(product);
+    this.inputSearch = product.brand.name + ' - ' + product.name;
+    this.searchResult = '';
   }
 
   addPrice() {
@@ -75,6 +90,28 @@ export class PriceComponent implements OnInit {
   getFormattedPrice(price: number) {
     const currencyPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(price);
     return currencyPrice;
+  }
+
+  searchProduct(event) {
+    const searchValue = event.target.value;
+    
+    if (searchValue !== '') {
+      if (searchValue.trim() === '') {
+        alert("dato no valido");
+        this.searchResult = '';
+        return;
+      }
+
+      this.loading = true;
+
+      const searchWhithOneSpace = RemoveWhiteSpaces(searchValue);
+      console.log(searchWhithOneSpace)
+      this.productService.searchProductByName(searchWhithOneSpace)
+        .subscribe(res => {
+          this.loading = false;
+          this.searchResult = res;
+        });
+    }
   }
 
 }

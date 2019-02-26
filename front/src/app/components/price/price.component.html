@@ -11,7 +11,18 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <app-product-selector [parentForm]="priceForm.get('productForm')" (productChange)='displayProductImage($event)'></app-product-selector>
+            <div class="form-group searchContainer">
+              <input type="text" class="form-control" (keyup)="searchProduct($event)" capitalize placeholder="Buscar Producto...." [value]="inputSearch" />
+              <div class="col-md-12" style="text-align: center; padding-top: 15px;" *ngIf="loading">
+                <app-spinner>
+                </app-spinner>
+              </div>
+              <ul *ngIf="searchResult" class="searchResult">
+                <li *ngFor="let result of searchResult">
+                  <a href="" (click)="addSearchResult(result, $event)">{{ result.brand.name }} - {{ result.name }} </a>
+                </li>
+              </ul>
+            </div>
 
           <app-provider-selector [parentForm]="priceForm.get('provider')"></app-provider-selector>
 
