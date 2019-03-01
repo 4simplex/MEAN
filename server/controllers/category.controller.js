@@ -1,4 +1,6 @@
 const Category = require('../models/category');
+const Product = require('../models/product');
+const Price = require('../models/price');
 const categoryCtrl = {};
 
 
@@ -19,10 +21,10 @@ categoryCtrl.getCategory = async (req, res) => {
 }
 
 categoryCtrl.editCategory = async (req, res) => {
-    const category = {
-        name: req.body.name
-    };
-    await Category.findByIdAndUpdate(req.params.id, { $set: category });
+    await Category.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name } });
+    await Product.updateMany({ "category._id": req.body._id}, { $set: { "category.name": req.body.name } });   
+    await Price.updateMany({"productForm.product.category._id": req.body._id}, { $set: { "productForm.product.category.name": req.body.name}});
+    
     res.json({ status: 'Category updated' });
 }
 

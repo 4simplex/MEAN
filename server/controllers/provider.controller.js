@@ -1,4 +1,5 @@
 const Provider = require('../models/provider');
+const Price = require('../models/price');
 const providerCtrl = {};
 
 
@@ -24,6 +25,9 @@ providerCtrl.editProvider = async (req, res) => {
         info: req.body.info
     };
     await Provider.findByIdAndUpdate(req.params.id, { $set: provider });
+
+    await Price.updateMany({"provider._id": req.body._id}, { $set: { "provider.name": req.body.name}});
+
     res.json({ status: 'Provider updated' });
 }
 

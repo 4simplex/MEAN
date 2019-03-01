@@ -6,7 +6,7 @@
   <div class="col-xs-12 col-12 col-md-4 form-group">
     <input type="text"
            placeholder="Seleccione el rango de fechas"
-           class="form-control" 
+           class="form-control"
            bsDaterangepicker [bsConfig]="{ rangeInputFormat: 'DD-MM-YYYY' }"
            [(ngModel)]="bsRangeValue"
            (bsValueChange)="changeDatePeriod($event)"/>
@@ -30,7 +30,7 @@
       </div>
       <div class="col-md-3">
         <h3>Ganancias:</h3>
-        <h2>{{ earningsTotal | currency}}</h2>
+        <h2 [ngStyle]="{'color': 'Chartreuse '}">{{ earningsTotal | currency}}</h2>
       </div>
     </div>
     <div class="row" *ngIf="dataSell">
@@ -45,7 +45,7 @@
   <div class="col-md-12">
     <div class="row mb-3 mt-2">
       <div class="col-md-12 mt-5">
-        <h5>Ventas registrados</h5>
+        <h5>Ventas registradas</h5>
       </div>
     </div>
 
@@ -57,7 +57,7 @@
 
       <div class="col-md-5">
         <div *ngFor="let product of sell.productsGroup">
-            <h4>{{ product.productForm.product.name }} ({{ product.productCode }})</h4>
+            <h4><strong>{{ product.productForm.product.brand.name }}</strong> - {{ product.productForm.product.name }} ({{ product.productCode }})</h4>
             <p><strong>Precio Compra x U.:</strong> {{ product.purchasePrice | currency }} <strong>Precio Venta x U.:</strong> {{ product.salePrice | currency }}</p>
             <p><strong>Unidades vendidas:</strong> {{ product.units }} <strong>Total Venta Unidades:</strong> {{ product.priceForUnits | currency }}</p>
         </div>

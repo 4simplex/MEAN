@@ -1,4 +1,6 @@
 const Brand = require('../models/brand');
+const Product = require('../models/product');
+const Price = require('../models/price');
 const brandCtrl = {};
 
 brandCtrl.getBrands = async (req, res) => {
@@ -18,11 +20,11 @@ brandCtrl.getBrand = async (req, res) => {
 }
 
 brandCtrl.editBrand = async (req, res) => {
-    const brand = {
-        name: req.body.name
-    };
-    await Brand.findByIdAndUpdate(req.body._id, { $set: brand });
-    res.json({ status: 'Brand updated' });
+    await Brand.findByIdAndUpdate(req.body._id, { $set: { name: req.body.name } });
+    await Product.updateMany({ "brand._id": req.body._id}, { $set: { "brand.name": req.body.name } });   
+    await Price.updateMany({"productForm.product.brand._id": req.body._id}, { $set: { "productForm.product.brand.name": req.body.name}});
+    
+    res.json({ status: 'Brand updated' });     
 }
 
 brandCtrl.deleteBrand = async (req, res) => {
