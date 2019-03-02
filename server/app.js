@@ -26,7 +26,8 @@ app.use(express.json({ extended: true, limit: '50mb' }));
 app.use(logger('dev'));
 
 //CORS Middleware
-app.use(cors({ origin: 'http://localhost:4200' }));
+// app.use(cors({ origin: 'http://localhost:4200' }));
+app.use(cors());
 
 //Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
