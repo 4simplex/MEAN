@@ -17,7 +17,8 @@ const app = express();
 const users = require('./routes/user.routes');
 
 //Port Number
-const PORT = 3000;
+// const PORT = 3000; // DEV
+const PORT = 8080; // PROD
 app.set('port', process.env.PORT || PORT);
 
 app.use(express.json({ extended: true, limit: '50mb' }));
@@ -26,8 +27,8 @@ app.use(express.json({ extended: true, limit: '50mb' }));
 app.use(logger('dev'));
 
 //CORS Middleware
-// app.use(cors({ origin: 'http://localhost:4200' }));
-app.use(cors());
+// app.use(cors({ origin: 'http://localhost:4200' })); // DEV
+app.use(cors()); // PROD
 
 //Set static folder
 app.use(express.static(path.join(__dirname, 'public')));

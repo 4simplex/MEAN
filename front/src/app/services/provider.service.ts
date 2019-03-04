@@ -10,7 +10,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class ProviderService {
   selectedProvider: Provider;
   providers: Provider[];
-  readonly URL_API = 'http://localhost:3000/api/provider';
+  // readonly URL_API = 'http://localhost:3000/api/provider';
+  readonly URL_API = 'api/provider';
 
   constructor(private http: HttpClient) {
     this.selectedProvider = new Provider();
