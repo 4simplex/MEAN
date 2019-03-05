@@ -29,7 +29,6 @@ app.use(logger('dev'));
 //CORS Middleware
 // app.use(cors({ origin: 'http://localhost:4200' })); // DEV
 app.use(cors()); // PROD
-app.use(allowCrossDomain);
 
 //Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
