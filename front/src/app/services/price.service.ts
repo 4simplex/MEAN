@@ -14,8 +14,8 @@ const httpOptions = {
 export class PriceService {
   selectedPrice: Price;
   prices: Price[];
-  readonly URL_API = 'http://localhost:3000/api/price';
-  // readonly URL_API = 'api/price';
+  // readonly URL_API = 'http://localhost:3000/api/price';
+  readonly URL_API = 'api/price';
 
   constructor(private http: HttpClient) {
     this.selectedPrice = new Price();
