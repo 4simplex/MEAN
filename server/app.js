@@ -55,9 +55,9 @@ app.use('/api/sale', require('./routes/sale.routes'));
 //     res.send('Invalid Endpoint');
 // });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../public/index.html'));
+// });
 
 //Start server
 app.listen(app.get('port'), () => {
