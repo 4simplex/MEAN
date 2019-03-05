@@ -52,7 +52,7 @@ app.use('/api/sale', require('./routes/sale.routes'));
 
 //Index Route
 app.get('/', (req, res) => {
-    res.send('Invalid Endpoint');
+    res.send('Invalid Endpoint1');
 });
 
 app.get('*', (req, res) => {
