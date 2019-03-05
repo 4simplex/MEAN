@@ -6,8 +6,8 @@ import { Sale } from 'src/app/models/sale-model';
   providedIn: 'root'
 })
 export class SaleService {
-  // readonly URL_API = 'http://localhost:3000/api/sale';
-  readonly URL_API = 'api/sale';
+  readonly URL_API = 'http://localhost:3000/api/sale';
+  // readonly URL_API = 'api/sale';
   constructor(private http: HttpClient) { }
 
   postSale(sale: Sale) {
