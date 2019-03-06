@@ -12,6 +12,7 @@ export class CategoryService {
   categories: Category[];
   selectedCategory: Category;
   readonly URL_API = 'http://localhost:3000/api/category';
+  // readonly URL_API = 'api/category';
 
   constructor(private http: HttpClient) {
     this.selectedCategory = new Category();

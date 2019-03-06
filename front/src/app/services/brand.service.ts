@@ -14,6 +14,7 @@ const httpOptions = {
 export class BrandService {
   brands: Brand[];
   private URL_API = 'http://localhost:3000/api/brand';
+  // private URL_API = 'api/brand';
 
   constructor(private http: HttpClient) { }
 

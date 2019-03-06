@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ProductService {
   readonly URL_API = 'http://localhost:3000/api/product';
+  // readonly URL_API = 'api/product';
   products: Product[];
   selectedProduct: Product;
 
