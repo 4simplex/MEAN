@@ -41,6 +41,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages/module';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AuthGuard } from './guards/auth.guard';
     LoginComponent,
     NavbarComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    SubscriptionComponent
   ],
 
   imports: [

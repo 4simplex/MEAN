@@ -18,6 +18,7 @@ import { CategoryDetailComponent } from './components/category-detail/category-d
 import { ProviderDetailComponent } from './components/provider-detail/provider-detail.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { StatsComponent } from './components/stats/stats.component';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent, canActivate: [AuthGuard] },
   { path: 'stock', component: StockComponent, canActivate: [AuthGuard] },
   { path: 'sale', component: SaleComponent, canActivate: [AuthGuard] },
-  { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] }
+  { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
+  { path: 'subscription', component: SubscriptionComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

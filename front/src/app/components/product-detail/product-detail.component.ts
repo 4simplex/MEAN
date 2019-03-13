@@ -86,7 +86,7 @@ export class ProductDetailComponent implements OnInit {
     }
     const nameWhithOneSpace = RemoveWhiteSpaces(name);
     const localId = this.productForm.get('_id').value;
-
+    
     this.productService.getProductByName(nameWhithOneSpace, id)
       .subscribe(res => {
         if (res != null) {

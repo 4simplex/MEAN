@@ -19,17 +19,18 @@
   },
   "homepage": "https://github.com/4simplex/MEAN#readme",
   "dependencies": {
-    "express": "*",
-    "mongoose": "*",
     "bcryptjs": "*",
-    "cors": "*",
-    "jsonwebtoken": "*",
     "body-parser": "*",
-    "passport": "*",
-    "passport-jwt": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mercadopago": "^1.0.22",
+    "mongoose": "*",
     "morgan": "*",
     "multer": "*",
-    "parsejson": "*"
+    "parsejson": "*",
+    "passport": "*",
+    "passport-jwt": "*"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"
