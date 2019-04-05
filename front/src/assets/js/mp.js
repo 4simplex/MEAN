@@ -1,5 +1,4 @@
 Mercadopago.setPublishableKey("TEST-ba92d932-3b5c-46c4-9b32-097c5edfe7da");
-console.log(Mercadopago);
 /*
 $.get("https://api.mercadopago.com/v1/payments/18196278?access_token=TEST-4038437526022988-100215-a0ccbdb999d932aa1c452bb1eb548bea__LA_LB__-24703927",function(data){
     console.log(data)
@@ -30,7 +29,7 @@ var setPaymentMethodInfo = (status, response) => {
         document.querySelector("input[name=paymentMethodId]").value = response[0].id;
     }
 }
-
+/* PAGO SIMPLE
 function sendPlan(payment_data) {
     fetch("http://localhost:3000/api/mp", {
             method: 'POST',
@@ -43,12 +42,96 @@ function sendPlan(payment_data) {
             return response.json();
         })
         .then(function(response){
-            planMessages (response)
+            planMessages (response);
+            return response;
+        })
+        .then(function(response){
+            var bb = document.querySelector("input[name=email]").value;
+            registerUser(bb, payment_data.token)
+        })
+}*/
+
+function registerUser(userData) {
+    const userEmail = document.querySelector("input[name=email]").value;
+    fetch("http://localhost:3000/api/mp/register/", {
+            method: 'POST',
+            body: JSON.stringify({email: userEmail, token: userData.token}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            console.log(response);
+            subscribeUser(response)
+        })
+}
+
+function subscribeUser(response) {
+    fetch("http://localhost:3000/api/mp/subscribe/", {
+            method: 'POST',
+            body: JSON.stringify({user: response.status.body.id }),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            console.log(response);
+            if(response.status.status === "authorized"){
+                updateUser(response);
+                alert("Bienvenido a premium! registrado con exito.");
+            }
+        })
+}
+
+function updateUser(userResponse){
+    let currentUserLog = JSON.parse(window.localStorage.getItem('user'));
+    let userRegistered = userResponse.status.payer.id;
+    let userSubscription = userResponse.status.id;
+    let premium = true;
+    let userData = {
+        "current": currentUserLog.id,
+        "userRegistered": userRegistered,
+        "userSubscription": userSubscription,
+        "premium": premium
+    }
+
+    console.log(userData);
+
+    fetch("http://localhost:3000/api/mp/user/", {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then((response) => {
+        return response.json()
+    }).then((response) => {
+        console.log(response)
+    })
+}
+
+var createPlan = () => {
+    fetch("http://localhost:3000/api/mp/registerc/", {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response){
+            console.log(response);
         })
 }
 
 function planMessages (data) {
-    console.log(data.status);
     if(data.status.status === 201){
         if(data.status.response.status === "approved" && data.status.response.status_detail === "accredited"){
             alert("Listo, se acreditó tu pago! En tu resumen verás el cargo de amount como statement_descriptor.")
@@ -140,11 +223,11 @@ $(document).ready(function() {
         });
     }); 
     
+    $("#createPlan").bind("click", createPlan);
     
     $("#pay").submit(function( event ) {
         var $form = $(this);
         if(mpFormValNull($form)){
-            console.log($form);
             Mercadopago.createToken($form, mpResponseHandler);
         }
         event.preventDefault();
@@ -269,7 +352,6 @@ $(document).ready(function() {
         } else {
             var card_token_id = response.id;
             $form.append($('<input type="hidden" id="card_token_id" name="card_token_id"/>').val(card_token_id));
-            console.log(response);
 
             //Mercadopago.configurations.setAccessToken(config.access_token);
             const checkPlan = $("input[name='plan']:checked");
@@ -285,7 +367,7 @@ $(document).ready(function() {
                     email: document.querySelector("input[name=email]").value
                     }
                 };
-                sendPlan(premium_data);
+                registerUser(premium_data);
             }else if(checkPlan.val() === "advanced"){
                 let advanced_data = {
                     transaction_amount: 399,
@@ -297,7 +379,7 @@ $(document).ready(function() {
                     email:  document.querySelector("input[name=email]").value
                     }
                 };
-                sendPlan(advanced_data);
+                registerUser(advanced_data);
             }else{
                 alert("El plan no es valido, debera recargar la pagina");
                 return;

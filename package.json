@@ -28,6 +28,7 @@
     "mongoose": "*",
     "morgan": "*",
     "multer": "*",
+    "node-fetch": "^2.3.0",
     "parsejson": "*",
     "passport": "*",
     "passport-jwt": "*"

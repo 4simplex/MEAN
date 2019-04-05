@@ -18,6 +18,15 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    premium: {
+        type: Boolean
+    },
+    suscription: {
+        type: String
+    },
+    customer: {
+        type: String
     }
 });
 

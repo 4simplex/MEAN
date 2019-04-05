@@ -14,7 +14,24 @@
           <ul class="list-group">
             <li class="list-group-item"> <strong>{{ appLiterals.user.username }}: </strong> {{user.username}}</li>
             <li class="list-group-item"> <strong>{{ appLiterals.user.email }}: </strong> {{user.email}}</li>
+            <li class="list-group-item" *ngIf="user.premium"> <strong>Plan: </strong> Premium</li>
+            <li class="list-group-item" *ngIf="!user.premium"> <strong>Plan: </strong> Gratuito</li>
+            <li class="list-group-item" *ngIf="user.premium"><button type="button" (click)="cancelSuscription('paused')">Cancelar suscripcion Premium</button></li>
+            <li class="list-group-item" *ngIf="!user.premium"><button type="button" (click)="cancelSuscription('authorized')">Reactivar suscripcion Premium</button></li>
           </ul>
+           <h3>Datos de pago</h3>
+           <ul *ngIf="user.premium">
+              <li class="list-group-item"><strong>Tarjeta: </strong>{{cardName }} <img src="{{cardThumbnail}}" /></li>
+              <li class="list-group-item"><strong>Tipo: </strong>{{cardType }}</li>
+              <li class="list-group-item"><strong>Ultimos 4 digitos: </strong>{{cardDigits }}</li>
+              <li class="list-group-item"><button>Cambiar tarjeta</button></li>
+           </ul>
+           <h3>Pagos</h3>
+           <ul *ngIf="user.premium">
+            <li class="list-group-item"><strong>Proximo pago: : </strong>{{ nextPayment | date: short }}</li>
+            <li class="list-group-item"><strong>Pagos realizados: </strong></li>
+            <li class="list-group-item" *ngFor="let invoice of invoices"><strong>{{invoice.period}}</strong></li>
+           </ul>
         </div>
       </div>
     </div>

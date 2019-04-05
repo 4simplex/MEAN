@@ -16,6 +16,9 @@ export class RegisterComponent implements OnInit {
   email: String;
   password: String;
   appLiterals;
+  premium = false;
+  suscription: '';
+  customer: '';
 
   constructor(
     private validateService: ValidateService,
@@ -34,7 +37,10 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       username: this.username,
       email: this.email,
-      password: this.password
+      password: this.password,
+      premium: this.premium,
+      suscription: this.suscription,
+      customer: this.customer
     };
 
     // Required fields

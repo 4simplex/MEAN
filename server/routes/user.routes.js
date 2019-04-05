@@ -11,7 +11,10 @@ router.post('/register', (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        premium: req.body.premium,
+        suscription: '',
+        customer: ''
     });
 
     User.getUserByEmail(newUser.email, (err, user) => {
@@ -55,7 +58,10 @@ router.post('/authenticate', (req, res, next) => {
                         id: user._id,
                         name: user.name,
                         username: user.username,
-                        email: user.email
+                        email: user.email,
+                        premium: user.premium,
+                        suscription: user.suscription ? user.suscription : '',
+                        customer: user.customer ? user.customer : ''
                     }
                 });
             } else {
