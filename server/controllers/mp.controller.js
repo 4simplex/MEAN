@@ -134,14 +134,45 @@ mpCtrl.cancelUserSuscription = async(req, res) => {
           return error
       });
   let cancelSubscriptionResult = await cancelSubscription.json();
-  const updateU = await mpCtrl.userUpdate(req.body.current, req.body.status);
+  const updateU = await mpCtrl.userUpdateSubs(req.body.current, req.body.status);
   return res.json({status: cancelSubscriptionResult})
 }
 
-mpCtrl.userUpdate = async (currentUser, status) => {
+mpCtrl.userUpdateSubs = async (currentUser, status) => {
     console.log(currentUser)
     let isSubscribed = status === "paused" ? false : true;
     return User.findByIdAndUpdate(currentUser, { $set: { premium: isSubscribed } });
 }
+
+mpCtrl.changeCard = async(req, res) => {
+    console.log(req.body);
+    const addCard = await fetch("https://api.mercadopago.com/v1/customers/"+req.body.customer+"/cards?access_token=" + actualToken, {
+            method: 'POST',
+            body: JSON.stringify({"token": req.body.token, "customer": req.body.customer})
+        })
+        .then(function(response) {
+            return response
+        }).catch(function (error) {
+          return error
+      });
+  let addCardResult = await addCard.json();
+  let setCards = mpCtrl.setCardAsDefault(addCardResult.id, req.body.customer);
+  return res.json({status: "Se realizo el cambio de tarjeta. Va a ser redirigido a la pagina de perfil."})
+}
+
+mpCtrl.setCardAsDefault = async(card, customer) => {
+    const setCard = await fetch("https://api.mercadopago.com/v1/customers/"+customer+"?access_token=" + actualToken, {
+            method: 'PUT',
+            body: JSON.stringify({"default_card": card})
+        })
+        .then(function(response) {
+            return response
+        }).catch(function (error) {
+          return error
+      });
+  let setCardResult = await setCard.json();
+}
+
+
 
 module.exports = mpCtrl;

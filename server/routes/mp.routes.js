@@ -11,6 +11,7 @@ router.post('/user/', mp.userUpdate);
 router.get('/usercards/:id', mp.getUserCards);
 router.get('/usersuscription/:id', mp.getUserSuscription);
 router.put('/usercancelsuscription/', mp.cancelUserSuscription);
+router.post('/changecard/', mp.changeCard);
 //router.post('/registerc/', mp.createPlan);
 
 module.exports = router;

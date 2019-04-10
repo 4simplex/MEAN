@@ -42,6 +42,7 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
+import { ChangeCardComponent } from './components/change-card/change-card.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { SubscriptionComponent } from './components/subscription/subscription.co
     NavbarComponent,
     ProfileComponent,
     RegisterComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    ChangeCardComponent
   ],
 
   imports: [

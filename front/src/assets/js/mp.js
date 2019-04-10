@@ -51,6 +51,24 @@ function sendPlan(payment_data) {
         })
 }*/
 
+function addNewCard(token) {
+    let currentUserLocal = JSON.parse(window.localStorage.getItem('user'));
+    fetch("http://localhost:3000/api/mp/changecard/", {
+            method: 'POST',
+            body: JSON.stringify({token: token, customer: currentUserLocal.customer}),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            alert(response.status);
+            window.location.href = '/profile';
+        })
+}
+
 function registerUser(userData) {
     const userEmail = document.querySelector("input[name=email]").value;
     fetch("http://localhost:3000/api/mp/register/", {
@@ -353,10 +371,13 @@ $(document).ready(function() {
             var card_token_id = response.id;
             $form.append($('<input type="hidden" id="card_token_id" name="card_token_id"/>').val(card_token_id));
 
-            //Mercadopago.configurations.setAccessToken(config.access_token);
+            let isChangeCard = $('input[type="submit"]').attr("id");
             const checkPlan = $("input[name='plan']:checked");
 
-            if(checkPlan.val() === "premium"){
+            if(isChangeCard === "card"){
+                addNewCard(card_token_id);
+                console.log("tarjeta")
+            }else if(isChangeCard === "subs"){
                 let premium_data = {
                     transaction_amount: 990,
                     token: response.id,
@@ -367,24 +388,11 @@ $(document).ready(function() {
                     email: document.querySelector("input[name=email]").value
                     }
                 };
+                
                 registerUser(premium_data);
-            }else if(checkPlan.val() === "advanced"){
-                let advanced_data = {
-                    transaction_amount: 399,
-                    token: response.id,
-                    description: 'Okay Advanced',
-                    installments: 1,
-                    payment_method_id: document.querySelector("input[name=paymentMethodId]").value,
-                    payer: {
-                    email:  document.querySelector("input[name=email]").value
-                    }
-                };
-                registerUser(advanced_data);
             }else{
-                alert("El plan no es valido, debera recargar la pagina");
-                return;
+                alert("Ocurrio un problema")
             }
-
         }   
     }  
 })
